@@ -2,9 +2,9 @@ function Footer () {
 
     return (
         <>
-        <div>
+        <h1>
             여기는 푸터러러어어어
-        </div>
+        </h1>
         </>
     )
 }

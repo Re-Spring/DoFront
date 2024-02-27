@@ -1,9 +1,9 @@
 function Header() {
     return (
         <>
-        <div>
+        <h1>
             여기는 헤더어어어어
-        </div>
+        </h1>
         </>
     )
 }
