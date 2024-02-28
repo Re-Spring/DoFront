@@ -1,11 +1,10 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { thunk } from 'redux-thunk'; // 명명된 임포트로 변경
-import rootReducer from './modules';
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './modules'; // 루트 리듀서
 
-const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk)) // 변경된 사용
-);
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(), // 기본 미들웨어 사용
+  // Redux DevTools Extension은 자동으로 활성화됩니다.
+});
 
 export default store;
