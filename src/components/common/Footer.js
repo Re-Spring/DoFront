@@ -1,10 +1,15 @@
+import footercss from "../../styles/mains/footer.css";
+
 function Footer () {
 
     return (
         <>
-        <h1>
-            여기는 푸터러러어어어
-        </h1>
+        <div className="footercss">
+            <img src="../images/footerlogo.png" alt="" className={"footerLogo"}/>
+            <div>
+                
+            </div>
+        </div>
         </>
     )
 }

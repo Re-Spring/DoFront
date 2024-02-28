@@ -4,6 +4,7 @@ import Main from './pages/fairytale/Main'
 import Login from './pages/user/login';
 import Enroll from './pages/user/enroll';
 import './App.css';
+import Dubing from './pages/fairytale/dubing';
 
 function App() {
 
@@ -15,7 +16,9 @@ function App() {
         <Route path='/' element={<Layout/>}>
           <Route index element={ <Main/> }/>
           <Route path='login' element={ <Login/> }/>
+          <Route path='dubing' element={ <Dubing/> }/>
           <Route path='enroll' element={ <Enroll/> }/>
+
         </Route>
 
       </Routes>

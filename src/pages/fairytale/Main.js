@@ -1,8 +1,12 @@
+import maincss from "../../styles/mains/main.css";
+
 function Main() {
 
     return (
         <>
-        <div>메인페이지 꾸며주세요 현진님</div>
+        <div className="main">
+           
+        </div>
         </>
     )
 }
