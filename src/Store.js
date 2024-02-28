@@ -1,11 +1,11 @@
-import rootReducer from './modules';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { legacy_createStore as createStore, applyMiddleware } from 'redux';
-import ReduxThunk from 'redux-thunk';
+import { thunk } from 'redux-thunk'; // 명명된 임포트로 변경
+import rootReducer from './modules';
 
 const store = createStore(
     rootReducer,
-    composeWithDevTools(applyMiddleware(ReduxThunk))
-)
+    composeWithDevTools(applyMiddleware(thunk)) // 변경된 사용
+);
 
 export default store;

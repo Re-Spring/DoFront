@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import memberReducer from './MemberModule';
+
+import chatbot from "./ChatbotModule";
 
 const rootReduceer = combineReducers({
-    memberReducer
+    chatbot
 });
 
 export default rootReduceer;
