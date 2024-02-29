@@ -1,9 +1,14 @@
 import { useCallback, useContext, useState } from "react";
 import AuthContext from "../../components/auth/authContext";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { userEnrollAPI } from "../../apis/authAPI";
+
 
 function Enroll() { 
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     // 컨텍스트를 통해 인증 관련 상태와 함수에 접근
     const authCtx = useContext(AuthContext);
@@ -94,22 +99,23 @@ function Enroll() {
     const validateEnroll = validateId && validateName && validatePhone && validatePwd && validatePwdConfirm
 
     // 회원가입 요청을 처리하는 함수
-    const enrollHandler = (e) => {
+    const enrollHandler = async (e) => {
         // 폼 제출 이벤트 방지
         e.preventDefault();
+        console.log(userId, pwd, userName, phone);
 
-        // 회원가입 로직 실행
-        authCtx.enroll(userId, pwd, userName, phone);
-
-        if(authCtx.isSuccess){
-            navigate("/login", {replace: true});
-        }
-    }
+        const userData = {
+            userName, userId, pwd, phone
+        };
+        dispatch(userEnrollAPI({
+            userData, navigate
+        }));
+    };
 
     // JSX에서 form 요소와 입력 필드를 렌더링, 각 핸들러 함수와 상태 연결
     return (
         <>
-            <img src="dorering_logo.png"/>
+            <img src="images/dorering_logo.png"/>
             <div>
                 <h1>회원가입</h1>
                 <form onSubmit={enrollHandler}>
