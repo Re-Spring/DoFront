@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/chatbots/Chatbot.css';
 // useSelector 사용이 주석 처리되어 있으므로, 필요한 경우 해당 코드를 활성화해야 합니다.
 // import { useSelector } from 'react-redux';
@@ -9,9 +9,14 @@ function Chatbot() {
     const [messages, setMessages] = useState([]);
     const [isSending, setIsSending] = useState(false); // 메시지 전송 중 상태 추가
 
-
-    // OpenAI 인스턴스는 API 호출 시마다 새로 생성하는 것이 좋습니다.
-    // const openai = new OpenAI(process.env.REACT_APP_OPENAI_API_KEY);
+        // 챗봇이 열릴 때 초기 메시지를 설정합니다.
+        useEffect(() => {
+            if (isOpen) {
+                // 챗봇이 열리면 "무엇을 도와드릴까요?" 메시지를 보냅니다.
+                setMessages([{ type: 'bot', text: '무엇을 도와드릴까요?' }]);
+            }
+        }, [isOpen]); // isOpen이 변경될 때마다 이 효과를 실행합니다.
+    
 
     const toggleChatbot = () => setIsOpen(!isOpen);
 
@@ -87,7 +92,11 @@ function Chatbot() {
                 {isOpen && (
                     <div className="chat-content chatContentStyle" style={{width: "400px", height:"500px"}}>
                         <div className="message-container">
-                            <div>도와줘요리링~~</div>
+                            <div className="chatBoxTitle">
+                                <div className="boxTitle">도와줘요리링~~</div>
+                                <div className="boxExit">X</div>
+                            </div>
+                            <hr />
                             {messages.map((msg, index) => (
                                 <div className="line" key={index}>
                                     {msg.type === 'user' ? (
@@ -118,7 +127,7 @@ function Chatbot() {
                             onKeyUp={onEnterKeyHandler}
                             disabled={isSending} // 전송 중에는 입력 비활성화
                         />
-                        <button id="send" onClick={handleSend} className="sendButtonStyle">전송</button>
+                        <button id="send" onClick={handleSend} className="sendButtonStyle"><img src='/images/arrow.png'/></button>
                     </div>
                 </div>
             )}
