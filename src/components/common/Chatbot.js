@@ -85,7 +85,7 @@ function Chatbot() {
                     <img src={isOpen ? '/images/chatbot.png' : '/images/chatbot.png'} alt="Toggle" className="iconStyle"/>
                 </button>
                 {isOpen && (
-                    <div className="chat-content chatContentStyle">
+                    <div className="chat-content chatContentStyle" style={{width: "400px", height:"500px"}}>
                         <div className="message-container">
                             <div>도와줘요리링~~</div>
                             {messages.map((msg, index) => (
@@ -93,13 +93,17 @@ function Chatbot() {
                                     {msg.type === 'user' ? (
                                         <>
                                         {/* // User message bubble */}
-                                        <img src='/images/chatboxUser.png'/>
+                                        <div className="message-item">
+                                        <img src='/images/chatboxUser.png' alt="User" className="message-icon"/>
+                                        </div>
                                         <span className="chat-box user"><div>사용자</div>{msg.text}</span>
                                         </>
                                     ) : (
                                         <>
                                         {/* // Bot message bubble */}
-                                        <img src='/images/chatbotboxBot.png'/>
+                                        <div className="message-item">
+                                        <img src='/images/chatbotboxBot.png' alt="Bot" className='message-icon'/>
+                                        </div>
                                         <span className="chat-box bot"><div>리링</div>{msg.text}</span>
                                         </>
                                     )}

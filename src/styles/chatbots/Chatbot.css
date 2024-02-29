@@ -28,8 +28,8 @@
     position: fixed;
     bottom: 80px;
     right: 20px;
-    width: 300px;
-    height: 400px;
+    width: 450px;
+    height: 600px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -160,4 +160,18 @@
     padding: 5px 10px; /* Padding inside the bubble */
     max-width: 200px; /* Maximum bubble width */
     word-wrap: break-word; /* Ensure long words do not overflow */
+}
+.message-icon {
+    width: 50px; /* 이미지 크기 설정 */
+    height: 50px; /* 이미지 크기 설정 */
+    margin-right: 10px; /* 사용자 메시지와의 간격 */
+}
+.message-item {
+    display: flex; /* Flex 컨테이너로 만듦 */
+    flex-direction: column; /* 요소들을 수직으로 정렬 */
+    align-items: flex-end; /* 사용자 메시지는 오른쪽 정렬 */
+}
+
+.message-item .bot {
+    align-items: flex-start; /* 봇 메시지는 왼쪽 정렬 */
 }

@@ -3,7 +3,7 @@ import AuthContext from "../../components/auth/authContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { userEnrollAPI } from "../../apis/AuthAPI";
+import { userEnrollAPI } from "../../apis/authAPI";
 
 
 function Enroll() { 
@@ -108,7 +108,7 @@ function Enroll() {
             userName, userId, pwd, phone
         };
         dispatch(userEnrollAPI({
-            userData: userData
+            userData, navigate
         }));
     };
 
