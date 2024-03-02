@@ -1,9 +1,4 @@
 
-*{
-    margin: 0;
-    padding: 0;
-}
-
 .footerBox {
     /* footer를 aside위에 올리기 위해 사용(부유객체) */
     position: absolute;
@@ -33,7 +28,6 @@
 }
 
 .listBox{
-    list-style: none;
     line-height:130%;
     margin-right: 500px;
 }
