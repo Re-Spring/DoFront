@@ -13,11 +13,13 @@ function Login() {
     const loginHandler = async (e) => {
         e.preventDefault();
 
-        const enteredId = idInputRef.current.value;
-        const enteredPwd = pwdInputRef.current.value;
+        const userId = idInputRef.current.value;
+        const password = pwdInputRef.current.value;
+
+        console.log(userId, password);
 
         dispatch(userLoginAPI({
-            enteredId, enteredPwd, navigate
+            userId, password, navigate
         }));
     }
 

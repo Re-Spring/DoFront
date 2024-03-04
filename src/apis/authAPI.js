@@ -40,15 +40,27 @@ export const userEnrollAPI = ({userData, navigate}) => {
     }
 }
 
-export const userLoginAPI = ({id, password, navigate}) => {
+export const userLoginAPI = ({userId, password, navigate}) => {
     const requestURL = 'http://localhost:8001/auth/login';
-
+    let logoutTimer;
+    console.log("api 전 : ", userId, password);
     return async (dispatch, getState) => {
-        await axios.post(requestURL, id, password)
+        await axios.post(requestURL, {userId, password}, 
+            {
+                headers: {
+                    'Content-Type': 'application/json' // 명시적으로 Content-Type 설정
+                }
+            })
             .then(function (response) {
                 console.log(response);
-                // 성공적으로 가입 처리된 경우
+                // 성공적으로 로그인 처리된 경우
                 if(response.status === 200){
+                    // 토큰을 상태로 저장하거나 로컬/세션 스토리지에 저장하는 로직 추가
+                    const token = response.data.token;
+                    // 로컬 스토리지에 토큰 저장
+                    localStorage.setItem('token', token);
+                    console.log("토큰 확인 : ", token);
+
                     dispatch({type: postLogin, payload: response.data});
                     Swal.fire({
                         icon: 'success',
