@@ -9,8 +9,8 @@ function Layout() {
                 <div>
                     <Header />
                     <Outlet />
-                    <Chatbot />
                 </div>
+                <Chatbot />
                 <Footer />
             </div>
         </>

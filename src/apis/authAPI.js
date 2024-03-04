@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 import axios from "axios";
 import { postEnroll, postLogin } from '../modules/AuthModule';
 
+
 export const userEnrollAPI = ({userData, navigate}) => {
     const requestURL = 'http://localhost:8001/auth/enroll';
 
