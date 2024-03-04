@@ -3,15 +3,13 @@ import AuthContext from "../../components/auth/authContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { userEnrollAPI } from "../../apis/authAPI";
+import { userEnrollAPI } from "../../apis/AuthAPI";
 
 
 function Enroll() { 
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // 컨텍스트를 통해 인증 관련 상태와 함수에 접근
-    const authCtx = useContext(AuthContext);
 
     // 입력 값과 유효성 검사 메시지에 대한 상태 관리
     const [userName, setUserName] = useState('');
@@ -105,7 +103,10 @@ function Enroll() {
         console.log(userId, pwd, userName, phone);
 
         const userData = {
-            userName, userId, pwd, phone
+            userName: userName, 
+            userId: userId, 
+            password: pwd, 
+            phone: phone
         };
         dispatch(userEnrollAPI({
             userData, navigate
