@@ -16,18 +16,19 @@
 }
 
 .footerLogo{
-    width: 250px;
-    height: 250px;
-    margin-top: 20px;
-    margin-right: 50px;
+    width: 220px;
+    height: 220px;
+    margin-top: 40px;
     
 }
 
 .footerName{
     font-size: 26px;
+    margin-left: 40px;
 }
 
 .listBox{ 
+    font-size: 14px;
     line-height:130%;
     margin-right: 500px;
 }

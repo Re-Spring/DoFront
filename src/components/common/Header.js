@@ -5,16 +5,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
-    // 전체 서브메뉴 표시 상태를 관리하기 위한 상태
-    const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
+    // 각 메뉴에 대한 서브메뉴 표시 상태를 관리하기 위한 상태
+    const [subMenuStates, setSubMenuStates] = useState({
+        myBook: false,
+        voice: false,
+        myPage: false
+    });
 
-    // 전체 메인 메뉴에 마우스를 올렸을 때 모든 서브메뉴를 표시하는 로직
-    const handleMouseEnter = () => setIsSubMenuVisible(true);
-    const handleMouseLeave = () => setIsSubMenuVisible(false);
+    // 메뉴에 마우스를 올렸을 때 해당 서브메뉴를 표시하는 로직
+    const handleMouseEnter = (menu) => {
+        setSubMenuStates(prevState => ({
+            ...prevState,
+            [menu]: true
+        }));
+    };
+
+    // 메뉴에서 마우스를 떼었을 때 해당 서브메뉴를 숨기는 로직
+    const handleMouseLeave = (menu) => {
+        setSubMenuStates(prevState => ({
+            ...prevState,
+            [menu]: false
+        }));
+    };
 
     return (
         <>
-            <div className="headerBox" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <div className="headerBox">
                 <div className="headerWrap">
                     <a href="/" style={{ height: "30px" }}>
                         <img src="../images/logo.png" alt="" className="logo" />
@@ -29,26 +45,26 @@ function Header() {
                 <div className="mainWrap">
                     <div className="mainMenuBox">
                         <ul className="mainMenu">
-                            <li>
+                            <li onMouseEnter={() => handleMouseEnter('myBook')} onMouseLeave={() => handleMouseLeave('myBook')}>
                                 <a href="/">MyBook</a>
-                                {isSubMenuVisible && (
+                                {subMenuStates.myBook && (
                                     <ul className="subMenu">
                                         <li><a href="/">동화 만들기</a></li>
                                         <li><a href="/">내 동화</a></li>
                                     </ul>
                                 )}
                             </li>
-                            <li>
+                            <li onMouseEnter={() => handleMouseEnter('voice')} onMouseLeave={() => handleMouseLeave('voice')}>
                                 <a href="/">목소리</a>
-                                {isSubMenuVisible && (
+                                {subMenuStates.voice && (
                                     <ul className="subMenu">
                                         <li><a href="/">목소리 등록</a></li>
                                     </ul>
                                 )}
                             </li>
-                            <li>
+                            <li onMouseEnter={() => handleMouseEnter('myPage')} onMouseLeave={() => handleMouseLeave('myPage')}>
                                 <a href="/">마이페이지</a>
-                                {isSubMenuVisible && (
+                                {subMenuStates.myPage && (
                                     <ul className="subMenu">
                                         <li><a href="/">내 정보</a></li>
                                     </ul>
@@ -58,7 +74,7 @@ function Header() {
                     </div>
                     <div className="homeLogin">
                         <a href="/login">로그인 |</a>
-                        <a href="/enroll"> 회원가입</a>
+                        <a href="/enroll">회원가입</a>
                     </div>
                 </div>
             </div>
