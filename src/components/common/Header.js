@@ -58,7 +58,7 @@ function Header() {
                     </div>
                     <div className="homeLogin">
                         <a href="/login">로그인 |</a>
-                        <a href="/enroll">회원가입</a>
+                        <a href="/enroll"> 회원가입</a>
                     </div>
                 </div>
             </div>
