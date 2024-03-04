@@ -49,7 +49,7 @@
 /* 메인 메뉴 및 로그인 영역 스타일 */
 .mainWrap{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly; 
     width: 100%;
 }
 
@@ -65,36 +65,21 @@
     text-align: center;
 }
 
-
 .homeLogin{
     line-height: 45px;
 }
 
-/* 서브 메뉴(하위 메뉴) 스타일 */
+/* 서브 메뉴(하위 메뉴) 스타일 수정 */
 .mainMenu li .subMenu {
-    display: block; /* 마우스 오버 시 표시 */
-    animation: slideDown 0.5s ease-out forwards;
+    display: none; /* 기본적으로 숨김, 마우스 오버 시에만 표시 */
     background-color: #F1D993; /* 메인 메뉴의 배경색과 동일하게 설정 */
-    width: 100%; /* headerBox의 너비로 설정 */
-    position: absolute;
-    top: 100%;
-    left: 0; /* 서브메뉴를 메뉴 항목의 왼쪽 끝과 정렬 */
+    position: absolute; /* 메뉴 항목에 상대적으로 위치 */
+    top: 100%; /* 메뉴 항목의 바로 아래에 위치 */
+    left: 0; /* 메뉴 항목의 왼쪽 끝과 정렬 */
     z-index: 1;
     white-space: nowrap; /* 서브메뉴 항목이 줄바꿈 되지 않도록 설정 */
+    width: auto; /* 서브메뉴의 너비를 내용에 맞게 조정 */
 }
-
-/* 서브 메뉴(하위 메뉴) 스타일 */
-.subMenu {
-    display: none; /* 기본적으로 숨김 */
-    position: fixed; /* 뷰포트에 상대적으로 위치 */
-    top: 0; /* 화면 상단에 위치 */
-    left: 0; /* 화면 왼쪽 끝부터 시작 */
-    width: 900px; /* 뷰포트의 전체 너비 */
-    background-color: #F1D993; /* 배경색 설정 */
-    z-index: 999; /* 다른 요소들 위에 표시되도록 z-index 설정 */
-    white-space: nowrap; /* 서브메뉴 항목이 줄바꿈 되지 않도록 설정 */
-}
-
 
 .mainMenu li:hover .subMenu {
     display: block; /* 마우스 오버 시 표시 */
@@ -102,7 +87,7 @@
 
 /* 서브 메뉴 아이템 스타일 */
 .subMenu li {
-    display: block; /* 이 부분을 추가/수정 */
+    display: block;
     padding: 10px;
     border-bottom: 1px solid #eee;
 }
