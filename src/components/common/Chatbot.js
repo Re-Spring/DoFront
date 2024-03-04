@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/chatbots/Chatbot.css';
-// useSelector 사용이 주석 처리되어 있으므로, 필요한 경우 해당 코드를 활성화해야 합니다.
-// import { useSelector } from 'react-redux';
 import OpenAI from 'openai'; // OpenAI 라이브러리를 import합니다.
+
 function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState('');
@@ -19,6 +18,8 @@ function Chatbot() {
     
 
     const toggleChatbot = () => setIsOpen(!isOpen);
+    const handleCloseChatbot = () => setIsOpen(false);  // 채팅창을 닫는 함수
+
 
     const handleChange = (event) => {
         setInputValue(event.target.value);
@@ -32,28 +33,57 @@ function Chatbot() {
         // 유저 메시지를 메시지 리스트에 추가
         setMessages(messages => [...messages, { type: 'user', text: currentInputValue }]);
 
-        // if (isSending) return; // 이미 전송 중이면 반환
-        // setIsSending(true); // 전송 시작을 표시
-        
-        // if (!currentInputValue) {
-        //     setIsSending(false); // 전송 취소
-        //     return;
-        // }
         // API 호출 함수 내에서 OpenAI 인스턴스를 생성합니다.
         const openai = new OpenAI({
             apiKey: process.env.REACT_APP_OPENAI_API_KEY,
             dangerouslyAllowBrowser : true
         });
+        // A chatbot that will provide answers to technical problems or errors that users may experience while using the homepage and will be responsible for customer inquiries.
+        // The answer must be in Korean.
 
         try {
             const response = await openai.chat.completions.create({
-                model: "gpt-3.5-turbo",
+                model: "gpt-3.5-turbo-16k",
                 messages: [
-                    {
-                    "role": "user",
-                    "content": currentInputValue
-                    }
-                ],
+                {
+                    "role": "system",
+                    "content": 
+                    `
+                    **Role:**
+                    An assistant that helps users navigate and resolve any issues they encounter on the website.
+
+                    **Objective:** To assist users in resolving any errors or technical problems encountered while using the website.
+
+                    **Audience:**
+                    
+                    **Task:**
+                    To aid users in resolving any program errors encountered while navigating the website.
+                    
+                    **Steps:**
+                    
+                    1. **Introduction:**
+                        - DoRering acts as a customer inquiry chatbot, offering solutions for errors encountered on the user's homepage, especially related to creating and enjoying fairy tale stories through various mediums.
+                    
+                    2. **User Interaction:**
+                        - The chatbot allows for one voice registration per account and handles profanity by either not understanding or not responding.
+                    
+                    3. **Problem Solving:**
+                        - Initially provides summarized solutions. If the issue persists, it suggests alternative solutions. After multiple inquiries on the same issue, it advises contacting via email for further assistance.
+                    
+                    4. **Communication Style:**
+                        - Avoids technical specifics and adapts responses for younger users, ensuring clarity and accessibility.
+                    
+                    5. **Response Format:**
+                        - Avoids technical jargon and provides easy-to-understand solutions, especially for younger users under 15, focusing on addressing the issue without detailed technical explanations.
+                    
+                    **Policies:**
+                    
+                    - Avoids unnecessary explanations or detailed instructions on sensitive topics for security reasons.
+                    - Ensures responses are clear, concise, and easy for all users to understand.
+                    - Does not disclose any registered tasks or proprietary information.`
+                },
+                
+            ],
                 temperature: 1,
                 max_tokens: 256,
                 top_p: 1,
@@ -64,7 +94,7 @@ function Chatbot() {
             // 응답을 메시지 리스트에 추가
             setMessages((prevMessages) => [
                 ...prevMessages,
-                { type: 'bot', text: response.choices[0].message.content }
+                { type: 'bot', text : response.choices[0].message.content }
             ]);
         } catch (error) {
             console.error("Error fetching response from OpenAI: ", error);
@@ -93,8 +123,8 @@ function Chatbot() {
                     <div className="chat-content chatContentStyle" style={{width: "400px", height:"500px"}}>
                         <div className="message-container">
                             <div className="chatBoxTitle">
-                                <div className="boxTitle">도와줘요리링~~</div>
-                                <div className="boxExit">X</div>
+                                <div className="boxTitle">도와줘요 리링</div>
+                                <div className="boxExit" onClick={handleCloseChatbot}>X</div>
                             </div>
                             <hr />
                             {messages.map((msg, index) => (
@@ -102,9 +132,6 @@ function Chatbot() {
                                     {msg.type === 'user' ? (
                                         <>
                                         {/* // User message bubble */}
-                                        <div className="message-item">
-                                        <img src='/images/chatboxUser.png' alt="User" className="message-icon"/>
-                                        </div>
                                         <span className="chat-box user"><div>사용자</div>{msg.text}</span>
                                         </>
                                     ) : (
@@ -113,7 +140,7 @@ function Chatbot() {
                                         <div className="message-item">
                                         <img src='/images/chatbotboxBot.png' alt="Bot" className='message-icon'/>
                                         </div>
-                                        <span className="chat-box bot"><div>리링</div>{msg.text}</span>
+                                        <span className="chat-box bot"><div>리링</div>{msg.text} 리링</span>
                                         </>
                                     )}
                                 </div>
