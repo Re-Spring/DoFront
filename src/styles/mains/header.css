@@ -1,28 +1,28 @@
 /* 기본 레이아웃 설정 */
-.headerWrap{
+.headerWrap {
     display: flex;
     justify-content: center;
 }
 
-.headerBox{
+.headerBox {
     width: 100%;
     height: 150px;
     background-color: #F1D993;
 }
 
 /* 로고 및 검색 박스 스타일 */
-.logo{
+.logo {
     display: inline-block;
     width: 145px;
     height: 130px;
     object-fit: cover;
 }
 
-.searchBox{
+.searchBox {
     margin: 30px 60px 40px;
 }
 
-.searchInput{
+.searchInput {
     position: relative;
     width: 800px;
     height: 40px;
@@ -34,7 +34,7 @@
     padding: 0 20px;
 }
 
-.searchBtn{
+.searchBtn {
     width: 20px;
     height: 20px;
     border: none;
@@ -47,38 +47,40 @@
 }
 
 /* 메인 메뉴 및 로그인 영역 스타일 */
-.mainWrap{
+.mainWrap {
     display: flex;
-    justify-content: space-evenly; 
+    justify-content: space-around;
     width: 100%;
 }
 
-.mainMenuBox{
-    margin-left: 340px;
+.mainMenuBox {
+    margin-left: 400px;
 }
 
-.mainMenu li{
+.mainMenu li {
     display: inline-block;
-    padding-left: 50px;
-    position: relative; /* 하위 메뉴를 위한 기준점 설정 */
+    padding: 0 50px;
+    position: relative;
     width: 150px;
     text-align: center;
+    transition: background-color 0.3s ease; /* 배경색 변경 시 부드럽게 전환 */
 }
 
-.homeLogin{
+.homeLogin {
     line-height: 45px;
 }
 
-/* 서브 메뉴(하위 메뉴) 스타일 수정 */
-.mainMenu li .subMenu {
-    display: none; /* 기본적으로 숨김, 마우스 오버 시에만 표시 */
-    background-color: #F1D993; /* 메인 메뉴의 배경색과 동일하게 설정 */
-    position: absolute; /* 메뉴 항목에 상대적으로 위치 */
-    top: 100%; /* 메뉴 항목의 바로 아래에 위치 */
-    left: 0; /* 메뉴 항목의 왼쪽 끝과 정렬 */
+/* 서브 메뉴(하위 메뉴) 스타일 */
+.subMenu {
+    display: none; /* 기본적으로 숨김 */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 150px;
+    padding: 0 43px;
+    background-color: #F1D993;
     z-index: 1;
-    white-space: nowrap; /* 서브메뉴 항목이 줄바꿈 되지 않도록 설정 */
-    width: auto; /* 서브메뉴의 너비를 내용에 맞게 조정 */
+    white-space: nowrap;
 }
 
 .mainMenu li:hover .subMenu {
