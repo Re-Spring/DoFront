@@ -1,6 +1,6 @@
 import React, { useCallback ,useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { MakeAPI } from "../../apis/Makebook";
+import { MakeAPI } from "../../apis/MakeAPI";
 
 
 function Make(){
@@ -14,6 +14,7 @@ function Make(){
     const [keyword, setKeyword] = useState('');
     const [lesson, setLesson] = useState('');
     const [page, setPage] = useState('6');
+    const [voice, setVoice] = useState('echo');
 
     const titleHandler = useCallback(async (e) => {
         const entTitle = e.target.value;
@@ -45,10 +46,15 @@ function Make(){
         setPage(entPage)
     });
 
+    const voiceHandler = useCallback(async (e) => {
+        const entVoice = e.target.value;
+        setVoice(entVoice)
+    });
+
     const makeHandler = async (e) => {
             // 폼 제출 이벤트 방지
             e.preventDefault();
-            console.log("test",title, character, genre, keyword, lesson, page);
+            console.log("test",title, character, genre, keyword, lesson, page, voice);
 
             const makeData = {
                 title: title,
@@ -56,7 +62,8 @@ function Make(){
                 genre: genre,
                 keyword:keyword,
                 lesson:lesson,
-                page:page
+                page:page,
+                voice:voice
             }
             dispatch(MakeAPI({
                 makeData
@@ -91,6 +98,17 @@ function Make(){
 
                     <label htmlFor="lesson">교훈</label>
                     <input type="text" id="lesson" placeholder="교훈을 입력해주세요." value={lesson} onChange={lessonHandler}/><br/>
+
+                    <label htmlFor="voice">목소리 선택</label>
+                    <select id="voice" value={voice} onChange={voiceHandler}>
+                        <option value="echo" default>Echo</option>
+                        <option value="alloy">Alloy</option>
+                        <option value="fable">Fable</option>
+                        <option value="onyx">Onyx</option>
+                        <option value="nova">Nova</option>
+                        <option value="shimmer">Shimmer</option>
+                        <option value="myVoice">내 목소리</option>
+                    </select>
 
                     <label htmlFor="page">페이지 수</label>
                     <select id="page" value={page} onChange={pageHandler}>
