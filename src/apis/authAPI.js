@@ -28,11 +28,10 @@ export const userEnrollAPI = ({userData, navigate}) => {
             })
             .catch(function (error) {
                 // 백엔드에서 보낸 에러 메시지 처리
-                console.log(error);
-                console.log("회원 가입 중 오류 발생: ", error.response.data);
+                console.log("회원 가입 중 오류 발생: ", error.response);
                 Swal.fire({
                     icon: 'error',
-                    title: error.response.data, // 백엔드에서 보낸 에러 메시지를 여기에 표시
+                    title: error.response.status == 400 ? error.response.data : "가입 시도 중 오류가 발생했습니다",
                     text: "문제가 지속될 경우 고객센터로 문의 바랍니다.",
                     confirmButtonText: "확인"
                 });
@@ -76,10 +75,10 @@ export const userLoginAPI = ({userId, password, navigate}) => {
             })
             .catch(function (error) {
                 // 백엔드에서 보낸 에러 메시지 처리
-                console.log("로그인 중 오류 발생: ", error.response.data);
+                console.log("로그인 중 오류 발생: ", error.response);
                 Swal.fire({
                     icon: 'error',
-                    title: error.response.data, // 백엔드에서 보낸 에러 메시지를 여기에 표시
+                    title: error.response.status == 400 ? error.response.data : "로그인 시도 중 오류가 발생했습니다",
                     text: "문제가 지속될 경우 고객센터로 문의 바랍니다.",
                     confirmButtonText: "확인"
                 });
