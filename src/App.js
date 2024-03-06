@@ -5,6 +5,7 @@ import Login from './pages/user/login';
 import Enroll from './pages/user/enroll';
 import './App.css';
 import Dubing from './pages/fairytale/dubing';
+import Make from './pages/fairytale/Make'
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
           <Route path='login' element={ <Login/> }/>
           <Route path='dubing' element={ <Dubing/> }/>
           <Route path='enroll' element={ <Enroll/> }/>
-
+          <Route path="make" element={ <Make/> }/>
         </Route>
 
       </Routes>
