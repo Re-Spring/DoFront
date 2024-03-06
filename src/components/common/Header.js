@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import "../../styles/mains/header.css";
-import "../../styles/common/common.css";
+import "../../styles/mains/Header.css";
+import "../../styles/common/Common.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import "../../styles/mains/main.css";
-import "../../styles/common/common.css";
+import "../../styles/mains/Main.css";
+import "../../styles/common/Common.css";
 
 function Main() {
     // 상태를 관리하기 위한 Hooks
