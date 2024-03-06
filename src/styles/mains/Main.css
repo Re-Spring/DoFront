@@ -1,40 +1,54 @@
-.mainBox{
-    height: 1800px; /* 기존에 고정된 높이를 auto로 변경하여 컨텐츠에 맞게 높이 조절 */
+.mainBox {
+    /* 높이를 auto로 변경하여 컨텐츠에 맞게 높이가 조절되도록 함 */
+    height: 1500px;
+    padding-bottom: 50px; /* 컨텐츠 하단에 패딩 추가 */
 }
 
-.mainBanner{
+.mainBanner {
     width: 100%;
     height: auto; /* 이미지의 높이를 자동으로 조절하여 원본 비율 유지 */
 }
 
-.mainFariyTale{
+.mainFariyTale {
     font-size: 32px;
     color: #824600;
-    margin-left: 300px;
-    margin-top: 50px; /* 상단 마진을 줄여서 공간을 확보 */
+    margin-left: 300px; /* 왼쪽 마진 조정 */
+    margin-top: 50px; /* 상단 마진을 조정하여 공간 확보 */
 }
 
-.fairytalesContainer{
-    width: 100%;
+.fairytalesContainer {
+    width: 60%; /* 컨테이너 너비를 줄여 가운데 정렬 효과를 강화 */
+    margin: auto; /* 가운데 정렬을 위해 자동 마진 사용 */
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap; /* 동화 목록을 가로로 나열하고 넘치는 경우 다음 줄로 넘어가도록 설정 */
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap; /* 아이템이 넘칠 경우 다음 줄로 넘김 */
+    /* border: solid 1px black; */
+    align-content: space-between;
 }
 
 .fairytaleItem {
-    margin: 20px; /* 동화 아이템 사이의 간격 설정 */
-    width: calc(25% - 40px); /* 동화 아이템 너비를 설정. 여기서 25%는 가로 4개의 아이템을 나란히 보여주기 위함 */
-    display: flex; /* 동화 아이템을 가로로 정렬하기 위함 */
+    width: 15%; /* 3개의 아이템이 한 줄에 들어가도록 너비 설정 */
+    flex-direction: column; /* 아이템 내부를 세로로 정렬 */
+    align-items: center; /* 세로축 중앙 정렬 */
+    margin: 45px 25px 15px 25px;
+    /* border: solid 1px black; */
 }
 
-.fairytaleThumbnail{
-    width: 100px; /* 이미지의 너비를 설정 */
-    height: auto; /* 이미지의 높이를 자동으로 조절하여 원본 비율 유지 */
-    margin-right: 10px; /* 이미지와 텍스트 사이 간격 설정 */
+.fairytaleThumbnail {
+    width: 100%; /* 이미지의 너비를 자동으로 설정하여 비율 유지 */
+    max-width: 100%; /* 이미지가 컨테이너를 벗어나지 않도록 설정 */
+    height: 200px; /* 이미지의 높이를 자동으로 조절 */
 }
 
 .fairytaleContent {
-    flex-grow: 1; /* 텍스트 영역이 남은 공간을 채우도록 함 */
+    text-align: center; /* 텍스트를 가운데 정렬 */
+    width: 100%; /* 텍스트 영역이 아이템 너비 전체를 차지하도록 설정 */
+    font-size: 12px;
 }
 
-/* 추가적인 스타일링은 필요에 따라 적용하세요 */
+.line{
+    border: solid 1px #F1D993;
+    width: 80%;
+    margin: auto;
+}
