@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2';
 import axios from "axios";
 import { postEnroll, postLogin } from '../modules/AuthModule';
+import { jwtDecode } from 'jwt-decode';
 
 
 export const userEnrollAPI = ({userData, navigate}) => {
@@ -55,12 +56,13 @@ export const userLoginAPI = ({userId, password, navigate}) => {
                 // 성공적으로 로그인 처리된 경우
                 if(response.status === 200){
                     // 토큰을 상태로 저장하거나 로컬/세션 스토리지에 저장하는 로직 추가
-                    const token = response.data.token;
+                    const accessToken = response.data.accessToken;
                     // 로컬 스토리지에 토큰 저장
-                    localStorage.setItem('token', token);
-                    console.log("토큰 확인 : ", token);
+                    localStorage.setItem('accessToken', accessToken);
+                    console.log("토큰 확인 : ", accessToken);
+                    console.log("토큰 디코딩 확인 : ", jwtDecode(accessToken));
 
-                    dispatch({type: postLogin, payload: response.data});
+                    dispatch(postLogin(response.data));
                     Swal.fire({
                         icon: 'success',
                         title: "로그인 되었습니다",
@@ -75,6 +77,7 @@ export const userLoginAPI = ({userId, password, navigate}) => {
             })
             .catch(function (error) {
                 // 백엔드에서 보낸 에러 메시지 처리
+                console.log("로그인 중 오류 발생: ", error);
                 console.log("로그인 중 오류 발생: ", error.response);
                 Swal.fire({
                     icon: 'error',
