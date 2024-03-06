@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './layouts/Layout';
 import Main from './pages/fairytale/Main'
-import Login from './pages/user/login';
-import Enroll from './pages/user/enroll';
+import Login from './pages/user/Login';
+import Enroll from './pages/user/Enroll';
 import './App.css';
-import Dubing from './pages/fairytale/dubing';
+import Dubing from './pages/fairytale/Dubing';
 import Make from './pages/fairytale/Make'
 
 function App() {

@@ -1,5 +1,5 @@
 import { useCallback, useContext, useState } from "react";
-import AuthContext from "../../components/auth/authContext";
+import AuthContext from "../../components/auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
