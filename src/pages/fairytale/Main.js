@@ -3,26 +3,25 @@ import "../../styles/mains/Main.css";
 import "../../styles/common/Common.css";
 
 function Main() {
-    // 상태를 관리하기 위한 Hooks
-    const [fairytales, setFairytales] = useState([]); // 동화 목록을 저장할 상태
+    const [stories, setStories] = useState([]); // 동화 목록을 저장할 상태 이름 변경: fairytales -> stories
 
-    // 컴포넌트가 마운트되면 동화 목록을 불러옵니다.
     useEffect(() => {
-        // API 요청을 통해 동화 목록을 가져오는 함수
-        fetchFairytales();
+        fetchStories();
     }, []);
 
-    const fetchFairytales = async () => {
+    const fetchStories = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/fairytales'); // URL 수정
+            // 백엔드 엔드포인트 URL을 수정해야 합니다. localhost 포트는 백엔드가 실행되는 포트로 변경해야 합니다.
+            // 예시에서는 Spring Boot 기본 포트인 8080을 사용합니다. 또한, 요청 경로를 /stories로 변경합니다.
+            const response = await fetch('http://localhost:8001/stories'); // URL 수정: 포트와 경로
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            setFairytales(data);
+            setStories(data); // 상태 업데이트 함수 이름 변경: setFairytales -> setStories
             console.log(data);
         } catch (error) {
-            console.error('Failed to fetch fairytales:', error);
+            console.error('Failed to fetch stories:', error);
         }
     };
 
@@ -34,14 +33,16 @@ function Main() {
             <div className="fariytaleBox">
                 <p className="mainFariyTale">동화</p>
             </div>
+            <div className='line'></div>
             <div className="fairytalesContainer">
-                {/* 데이터베이스에서 불러온 동화 목록을 표시합니다. */}
-                {fairytales.map(fairytale => (
-                    <div key={fairytale.fairytale_file_code} className="fairytaleItem">
-                        <img src={fairytale.fairytale_thumb} alt="Fairytale Thumbnail" className="fairytaleThumbnail" />
-                        <div className="fairytaleContent">
-                            <h3>{fairytale.fairytale_title}</h3>
-                        </div>
+                {stories.map(story => (
+                    <div key={story.fairytaleFileCode} className="fairytaleItem">
+                        <a href='/'>
+                            <img src={story.fairytaleThumb} alt="Story Thumbnail" className="fairytaleThumbnail" />
+                            <div className="fairytaleContent">
+                                <h3>{story.fairytaleTitle}</h3>
+                            </div>
+                        </a>
                     </div>
                 ))}
             </div>
