@@ -1,0 +1,50 @@
+
+.footerBox {
+    /* footer를 aside위에 올리기 위해 사용(부유객체) */
+    position: absolute;
+    height: 300px;
+    width: 100%;
+    line-height: 60px;
+    background-color: #B0B493;
+    color: #8B702C;
+}
+
+.footerWrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footerLogo{
+    width: 220px;
+    height: 220px;
+    margin-top: 40px;
+    
+}
+
+.footerName{
+    font-size: 26px;
+    margin-left: 40px;
+}
+
+.listBox{ 
+    font-size: 14px;
+    line-height:130%;
+    margin-right: 500px;
+}
+
+.iconBox{
+    margin-bottom: 120px;
+}
+
+.footerIcon{
+    width: 25px;
+    height: 25px;
+    padding-left: 10px;
+}
+
+.footerLeft{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

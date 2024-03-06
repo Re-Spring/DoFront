@@ -1,0 +1,199 @@
+/* Chatbot.css */
+/* 챗봇 토글 버튼 스타일 */
+.toggleButtonStyle {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 60px; /* 버튼 크기 */
+    height: 60px; /* 버튼 크기 */
+    border-radius: 50%; /* 원형으로 만들기 */
+    border: none;
+    cursor: pointer;
+    background-color: transparent; /* 배경색 투명 */
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 이미지 스타일 */
+.iconStyle {
+    width: 100%; /* 이미지를 버튼 크기에 맞게 조절 */
+    height: 100%; /* 이미지를 버튼 크기에 맞게 조절 */
+    border-radius: 50%; /* 이미지를 원형으로 만들기 */
+    object-fit: cover; /* 이미지 비율 유지 */
+    margin-top: 20px;
+}
+
+.chatContentStyle {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 450px;
+    height: 600px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 1000; /* Chatbot 위에 표시되도록 z-index 설정 */
+    display: flex;
+    flex-direction: column; /* 내용을 수직으로 정렬 */
+}
+
+.chat-content {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 콘텐츠와 입력 필드를 위아래로 분리 */
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.line {
+    display: flex;
+    width: 100%; /* Take the full width to allow alignment */
+}
+
+.chat-box { 
+    background-color: #eee; 
+    padding: 5px; 
+    max-width: 500px;
+    border-radius: 20px; /* 말풍선 모양으로 만들기 */
+}
+.chat-box.user {
+    /* User message bubble style */
+    background-color: #daf8cb; /* Light green */
+    margin-left: auto; /* Push the bubble to the right */
+    border-radius: 20px; /* Rounded corners for the bubble */
+    padding: 5px 10px; /* Padding inside the bubble */
+    max-width: 200px; /* Maximum bubble width */
+    word-wrap: break-word; /* Ensure long words do not overflow */
+    margin-bottom: 10px; /* Space between messages */
+}
+.chat-box.bot {
+    /* Bot message bubble style */
+    background-color: #f0f0f0; /* Light gray */
+    margin-right: auto; /* Push the bubble to the left */
+    border-radius: 20px; /* Rounded corners for the bubble */
+    padding: 5px 10px; /* Padding inside the bubble */
+    max-width: 400px; /* Maximum bubble width */
+    word-wrap: break-word; /* Ensure long words do not overflow */
+    margin-bottom: 10px; /* Space between messages */
+}
+.mine {
+    margin-left: auto;
+}
+
+/* 입력 필드와 전송 버튼 스타일 */
+.inputStyle {
+    width: calc(100% - 60px); /* 전송 버튼의 너비를 고려한 너비 조정 */
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 0 15px;
+    margin: 10px 30px; /* 채팅창 하단 여백 */
+    flex-grow: 1; /* 인풋 박스가 컨테이너의 남은 공간을 모두 차지하도록 설정 */
+    margin-right: 10px; /* 인풋 박스와 전송 버튼 사이의 간격 설정 */
+}
+.sendButtonStyle {
+    width: 50px; /* 버튼의 너비 설정 */
+    height: 40px; /* 버튼의 높이 설정 */
+    background-color: #47cbe8; /* 버튼 색상 */
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: -10px;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-top-color: #daf8cb;
+    border-bottom: 0;
+    border-right: 0;
+    margin-left: -15px;
+    margin-bottom: -15px;
+}
+.message-container {
+    overflow-y: auto; /* 메시지가 많아지면 스크롤 */
+    padding: 10px;
+    flex-grow: 1; /* 메시지 영역이 가능한 많은 공간을 차지하도록 */
+    display: flex;
+    flex-direction: column; /* 메시지를 수직 방향으로 정렬 */
+}
+.input-container {
+    display: flex; /* Flexbox 사용 */
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: space-between; /* 내부 요소 사이의 공간을 균등하게 분배 */
+    padding: 10px; /* 패딩 추가 */
+}
+/* User message bubble style */
+.user {
+    background-color: #daf8cb; /* Light green */
+    align-self: flex-end; /* Align to the right */
+    border-radius: 20px; /* Rounded corners for the bubble */
+    margin-bottom: 10px; /* Space between messages */
+    padding: 5px 10px; /* Padding inside the bubble */
+    max-width: 200px; /* Maximum bubble width */
+    word-wrap: break-word; /* Ensure long words do not overflow */
+}
+/* Bot message bubble style */
+.bot {
+    background-color: #f0f0f0; /* Light gray */
+    align-self: flex-start; /* Align to the left */
+    border-radius: 20px; /* Rounded corners for the bubble */
+    margin-bottom: 10px; /* Space between messages */
+    padding: 5px 10px; /* Padding inside the bubble */
+    max-width: 200px; /* Maximum bubble width */
+    word-wrap: break-word; /* Ensure long words do not overflow */
+}
+.message-icon {
+    width: 50px; /* 이미지 크기 설정 */
+    height: 50px; /* 이미지 크기 설정 */
+    margin-right: 10px; /* 사용자 메시지와의 간격 */
+}
+.message-item {
+    display: flex; /* Flex 컨테이너로 만듦 */
+    flex-direction: column; /* 요소들을 수직으로 정렬 */
+    align-items: flex-end; /* 사용자 메시지는 오른쪽 정렬 */
+}
+
+.message-item .bot {
+    align-items: flex-start; /* 봇 메시지는 왼쪽 정렬 */
+}
+.chatBoxTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.boxTitle {
+    flex-grow: 1; /* 제목이 공간을 최대한 차지하도록 합니다. */
+}
+.boxExit {
+    cursor: pointer; /* 마우스를 올렸을 때 포인터로 변경합니다. */
+}
+
+/* chatBoxTitle 아래에 줄을 그립니다. */
+.chatBoxTitle + hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc; /* 줄의 색상입니다. */
+    margin: 0; /* 줄 주변의 여백을 제거합니다. */
+    margin-bottom: 20px; /* 아래쪽 여백을 20px로 설정합니다. */
+}
