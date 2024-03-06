@@ -49,7 +49,7 @@ function Header() {
                                 <a href="/">MyBook</a>
                                 {subMenuStates.myBook && (
                                     <ul className="subMenu">
-                                        <li><a href="/">동화 만들기</a></li>
+                                        <li><a href="/Make">동화 만들기</a></li>
                                         <li><a href="/">내 동화</a></li>
                                     </ul>
                                 )}
