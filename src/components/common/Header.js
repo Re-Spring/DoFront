@@ -1,10 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../../styles/mains/Header.css";
 import "../../styles/common/Common.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { jwtDecode } from 'jwt-decode';
 
 function Header() {
+
+    //로그인 상태인지 토큰으로 확인
+    let accessToken = localStorage.getItem("accessToken");
+    let user = null;
+    if(accessToken){
+        user = jwtDecode(accessToken);
+    }
+    console.log(accessToken);
+    console.log(user);
+
+    // 로그아웃 함수
+    const handleLogout = () => {
+        // 로컬 스토리지에서 토큰 제거
+        user = null;
+        localStorage.removeItem('accessToken');
+        // 사용자를 로그인 페이지로 리디렉션
+        window.location.href = '/';
+    };
+
+
+
     // 각 메뉴에 대한 서브메뉴 표시 상태를 관리하기 위한 상태
     const [subMenuStates, setSubMenuStates] = useState({
         myBook: false,
@@ -58,7 +80,7 @@ function Header() {
                                 <a href="/">목소리</a>
                                 {subMenuStates.voice && (
                                     <ul className="subMenu">
-                                        <li><a href="/">목소리 등록</a></li>
+                                        <li><a href="/Clone">목소리 등록</a></li>
                                     </ul>
                                 )}
                             </li>
@@ -66,15 +88,26 @@ function Header() {
                                 <a href="/">마이페이지</a>
                                 {subMenuStates.myPage && (
                                     <ul className="subMenu">
-                                        <li><a href="/">내 정보</a></li>
+                                        <li><a href="/Info">내 정보</a></li>
                                     </ul>
                                 )}
                             </li>
                         </ul>
                     </div>
                     <div className="homeLogin">
-                        <a href="/login">로그인 |</a>
-                        <a href="/enroll">회원가입</a>
+                        {user ? (
+                            // 토큰이 있는 경우 사용자 이름과 로그아웃 표시
+                            <>
+                                <a>{user.userName}님 환영합니다 |</a>
+                                <a onClick={handleLogout}> 로그아웃</a>
+                            </>
+                        ) : (
+                            // 토큰이 없는 경우 로그인 및 회원가입 링크 표시
+                            <>
+                                <a href="/login">로그인 |</a>
+                                <a href="/enroll"> 회원가입</a>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

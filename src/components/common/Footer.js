@@ -12,7 +12,7 @@ function Footer () {
                     <div className="Information">
                         <p className="footerName">(주)Re:Spring</p>
                         <ul className="listBox">
-                            <li style={{lineHeight:"500%"}}>회사 소개 | 이용약관 | 개인정보처리방침 | 대량주문안내</li>
+                            <li style={{lineHeight:"500%"}}>회사 소개 | 이용약관 | 개인정보처리방침 | 리링이란?</li>
                             <li>주소 : 서울특별시 서초구 서초대로77길 13</li>
                             <li>대표자 : 박지영, 이동주, 조현진, 이선호, 신주현</li>
                             <li>eMail : respring01@gmail.com</li>
