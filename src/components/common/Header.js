@@ -102,7 +102,7 @@ function Header() {
                     <div className="mainMenuBox">
                         <ul className="mainMenu">
                             <li onMouseEnter={() => handleMouseEnter('myBook')} onMouseLeave={() => handleMouseLeave('myBook')}>
-                                <a href="/">MyBook</a>
+                                <p>MyBook</p>
                                 {subMenuStates.myBook && (
                                     <ul className="subMenu">
                                         <li><a href="/Make">동화 만들기</a></li>
@@ -111,7 +111,7 @@ function Header() {
                                 )}
                             </li>
                             <li onMouseEnter={() => handleMouseEnter('voice')} onMouseLeave={() => handleMouseLeave('voice')}>
-                                <a href="/">목소리</a>
+                                <p>목소리</p>
                                 {subMenuStates.voice && (
                                     <ul className="subMenu">
                                         <li><a href="/Clone">목소리 등록</a></li>
@@ -119,7 +119,7 @@ function Header() {
                                 )}
                             </li>
                             <li onMouseEnter={() => handleMouseEnter('myPage')} onMouseLeave={() => handleMouseLeave('myPage')}>
-                                <a href="/">마이페이지</a>
+                                <p>마이페이지</p>
                                 {subMenuStates.myPage && (
                                     <ul className="subMenu">
                                         <li><a href="/Info">내 정보</a></li>

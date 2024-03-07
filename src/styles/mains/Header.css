@@ -43,7 +43,7 @@
     background-color: white;
     position: absolute;
     top: 40px;
-    right: 56vh;
+    right: 50vh;
 }
 
 /* 메인 메뉴 및 로그인 영역 스타일 */
@@ -56,6 +56,12 @@
 .mainMenuBox {
     margin-left: 400px;
 }
+
+
+.mainMenu p{
+    margin: 0;
+}
+
 
 .mainMenu li {
     display: inline-block;
