@@ -7,23 +7,57 @@ import { jwtDecode } from 'jwt-decode';
 
 function Header() {
 
-    //로그인 상태인지 토큰으로 확인
-    let accessToken = localStorage.getItem("accessToken");
-    let user = null;
-    if(accessToken){
-        user = jwtDecode(accessToken);
-    }
-    console.log(accessToken);
-    console.log(user);
+    // 로그인 상태 확인 및 업데이트
+    const [user, setUser] = useState(null);
+
+    // 로그인 상태 업데이트를 위한 함수
+    const updateLoginState = () => {
+        const accessToken = localStorage.getItem("accessToken");
+        if (accessToken) {
+            const decoded = jwtDecode(accessToken);
+            setUser(decoded);
+        } else {
+            setUser(null);
+        }
+    };
+
+    useEffect(() => {
+        // 컴포넌트 마운트 시 로그인 상태 업데이트
+        updateLoginState();
+
+        // 로그인 상태 변경을 감지하는 이벤트 리스너 추가
+        window.addEventListener('storage', updateLoginState);
+
+        // 컴포넌트 언마운트 시 이벤트 리스너 제거
+        return () => window.removeEventListener('storage', updateLoginState);
+    }, []);
 
     // 로그아웃 함수
     const handleLogout = () => {
-        // 로컬 스토리지에서 토큰 제거
-        user = null;
         localStorage.removeItem('accessToken');
-        // 사용자를 로그인 페이지로 리디렉션
+        // 로컬 스토리지 변경 후 상태 업데이트
+        updateLoginState();
         window.location.href = '/';
     };
+
+    // useEffect(() => {
+    //     const accessToken = localStorage.getItem("accessToken");
+    //     if (accessToken) {
+    //         const decodedUser = jwtDecode(accessToken);
+    //         setUser(decodedUser);
+    //     } else {
+    //         setUser(null);
+    //     }
+    // }, []); // 의존성 배열을 비워 컴포넌트가 마운트될 때만 실행
+
+    // // 로그아웃 함수
+    // const handleLogout = () => {
+    //     // 로컬 스토리지에서 토큰 제거
+    //     localStorage.removeItem('accessToken');
+    //     setUser(null);
+    //     // 사용자를 메인 페이지로 리디렉션
+    //     window.location.href = '/';
+    // };
 
 
 
