@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 
 
 export const userEnrollAPI = ({userData, navigate}) => {
-    const requestURL = 'http://localhost:8001/auth/enroll';
+    const requestURL = 'http://192.168.0.172:8001/auth/enroll';
 
     return async (dispatch, getState) => {
         await axios.post(requestURL, userData)
@@ -41,7 +41,7 @@ export const userEnrollAPI = ({userData, navigate}) => {
 }
 
 export const userLoginAPI = ({userId, password, navigate}) => {
-    const requestURL = 'http://localhost:8001/auth/login';
+    const requestURL = 'http://192.168.0.172:8001/auth/login';
     let logoutTimer;
     console.log("api 전 : ", userId, password);
     return async (dispatch, getState) => {

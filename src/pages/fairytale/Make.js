@@ -90,6 +90,7 @@ function Make(){
                         <option value="fantasy">판타지</option>
                         <option value="adventure">모험</option>
                         <option value="fable">우화</option>
+                        <option value="family">가족</option>
                     </select>
                     <br/>
 

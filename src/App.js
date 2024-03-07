@@ -6,14 +6,15 @@ import Enroll from './pages/user/Enroll';
 import './App.css';
 import Dubing from './pages/fairytale/Dubing';
 import Make from './pages/fairytale/Make'
-import Deelp from './pages/fairytale/Deelp';
-import Clone from './pages/clone/Clone';
 import Info from './pages/mypage/Info'
 import { AuthProvider } from './components/auth/AuthContext';
+import Voice from './pages/voiceCloning/Voice';
+
 
 function App() {
 
   return (
+
     <AuthProvider>
       <BrowserRouter>
 
@@ -34,6 +35,7 @@ function App() {
 
       </BrowserRouter>
     </AuthProvider>
+
   );
 }
 
