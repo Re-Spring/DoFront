@@ -11,7 +11,12 @@ function Main() {
 
     const fetchAllStories = async () => {
         try {
+            
+            // 백엔드 엔드포인트 URL을 수정해야 합니다. 192.168.0.172 포트는 백엔드가 실행되는 포트로 변경해야 합니다.
+            // 예시에서는 Spring Boot 기본 포트인 8080을 사용합니다. 또한, 요청 경로를 /stories로 변경합니다.
             const response = await fetch('http://localhost:8001/stories'); // 모든 동화 목록을 불러오는 요청
+            
+
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

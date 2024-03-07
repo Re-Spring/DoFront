@@ -1,0 +1,14 @@
+.infoBox {
+    border: 1px solid black;
+    padding: 20px;
+    width: fit-content;
+    border-radius: 10px; /* 테두리를 둥글게 설정 */
+
+}
+.recodingBox {
+    border: 1px solid black;
+    padding: 20px;
+    width: fit-content;
+    border-radius: 10px; /* 테두리를 둥글게 설정 */
+
+}
