@@ -9,6 +9,12 @@ function Login() {
     const navigate = useNavigate();
     const idInputRef = useRef(null);
     const pwdInputRef = useRef(null);
+
+    const handleKeyPress = (e) => {
+        if(e.key == 'Enter'){
+            loginHandler(e);
+        }
+    }
     
     const loginHandler = async (e) => {
         e.preventDefault();
@@ -30,7 +36,7 @@ function Login() {
         <h1>로그인</h1>
         <div>
             <input type="text" id="userId" placeholder="아이디를 입력해 주세요." ref={idInputRef} required /><br/>
-            <input type="password" id="password" placeholder="비밀번호를 입력해 주세요." ref={pwdInputRef} required />
+            <input type="password" id="password" placeholder="비밀번호를 입력해 주세요." ref={pwdInputRef} onKeyPress={handleKeyPress} required />
         </div>
         <button onClick={loginHandler}>로그인</button>
         <div>
