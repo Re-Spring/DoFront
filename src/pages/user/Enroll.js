@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { userEnrollAPI } from "../../apis/AuthAPI";
 
-
 function Enroll() { 
 
     const dispatch = useDispatch();
