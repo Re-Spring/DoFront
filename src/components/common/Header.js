@@ -114,7 +114,7 @@ function Header() {
                                 <p>목소리</p>
                                 {subMenuStates.voice && (
                                     <ul className="subMenu">
-                                        <li><a href="/Clone">목소리 등록</a></li>
+                                        <li><a href="/voice">목소리 등록</a></li>
                                     </ul>
                                 )}
                             </li>
