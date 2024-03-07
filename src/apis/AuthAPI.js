@@ -61,7 +61,7 @@ export const userLoginAPI = ({userId, password, navigate}) => {
                     localStorage.setItem('accessToken', accessToken);
                     console.log("토큰 확인 : ", accessToken);
                     console.log("토큰 디코딩 확인 : ", jwtDecode(accessToken));
-
+                    // 상태 업데이트
                     dispatch(postLogin(response.data));
                     Swal.fire({
                         icon: 'success',
@@ -71,6 +71,8 @@ export const userLoginAPI = ({userId, password, navigate}) => {
                     }).then(result => {
                         if(result.isConfirmed){
                             navigate("/", { replace: true });
+                            // 로그인 성공 이벤트 발생
+                            window.dispatchEvent(new CustomEvent("loginSuccess"));
                         }
                     });
                 }   

@@ -3,39 +3,48 @@ import "../../styles/mains/Header.css";
 import "../../styles/common/Common.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { jwtDecode } from 'jwt-decode';
+import { useAuth } from '../auth/AuthContext';
 
 function Header() {
 
-    // 로그인 상태 확인 및 업데이트
-    const [user, setUser] = useState(null);
+    // 로그인 상태와 업데이트 함수 사용
+    const { user, updateLoginState } = useAuth(); 
 
-    // 로그인 상태 업데이트를 위한 함수
-    const updateLoginState = () => {
-        const accessToken = localStorage.getItem("accessToken");
-        if (accessToken) {
-            const decoded = jwtDecode(accessToken);
-            setUser(decoded);
-        } else {
-            setUser(null);
-        }
-    };
+    // const [user, setUser] = useState(null);
+    // console.log("헤더 테스트", user);
 
-    useEffect(() => {
-        // 컴포넌트 마운트 시 로그인 상태 업데이트
-        updateLoginState();
+    // // 로컬 스토리지에서 로그인 상태를 업데이트하는 함수
+    // const updateLoginState = () => {
+    //     const accessToken = localStorage.getItem("accessToken");
+    //     if (accessToken) {
+    //         const decoded = jwtDecode(accessToken);
+    //         console.log(decoded);
+    //         setUser(decoded);
+    //     } else {
+    //         setUser(null);
+    //     }
+    // };
 
-        // 로그인 상태 변경을 감지하는 이벤트 리스너 추가
-        window.addEventListener('storage', updateLoginState);
-
-        // 컴포넌트 언마운트 시 이벤트 리스너 제거
-        return () => window.removeEventListener('storage', updateLoginState);
-    }, []);
+    // useEffect(() => {
+    //     // 로그인 성공 시 발생하는 커스텀 이벤트를 감지하고 처리하는 함수
+    //     const handleLoginSuccess = () => {
+    //         // 로그인 상태를 업데이트하는 기존 함수 호출
+    //         updateLoginState(); 
+    //     };
+    //     window.addEventListener("loginSuccess", handleLoginSuccess);
+    //     // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    //     return () => {
+    //         window.removeEventListener("loginSuccess", handleLoginSuccess);
+    //     };
+    // }, []);
 
     // 로그아웃 함수
-    const handleLogout = () => {
+    const handleLogout = (event) => {
+        // 이벤트 기본 동작 방지
+        event.preventDefault(); 
+        // 로컬 스토리지에서 토큰 제거
         localStorage.removeItem('accessToken');
-        // 로컬 스토리지 변경 후 상태 업데이트
+        // // 로그인 상태 업데이트
         updateLoginState();
         window.location.href = '/';
     };
@@ -49,17 +58,6 @@ function Header() {
     //         setUser(null);
     //     }
     // }, []); // 의존성 배열을 비워 컴포넌트가 마운트될 때만 실행
-
-    // // 로그아웃 함수
-    // const handleLogout = () => {
-    //     // 로컬 스토리지에서 토큰 제거
-    //     localStorage.removeItem('accessToken');
-    //     setUser(null);
-    //     // 사용자를 메인 페이지로 리디렉션
-    //     window.location.href = '/';
-    // };
-
-
 
     // 각 메뉴에 대한 서브메뉴 표시 상태를 관리하기 위한 상태
     const [subMenuStates, setSubMenuStates] = useState({
