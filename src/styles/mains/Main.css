@@ -4,44 +4,79 @@
     padding-bottom: 50px; /* 컨텐츠 하단에 패딩 추가 */
 }
 
+/* 배너 */
 .mainBanner {
     width: 100%;
     height: auto; /* 이미지의 높이를 자동으로 조절하여 원본 비율 유지 */
 }
 
-.mainFariyTale {
+/* 카테고리 */
+.categoryBox{
+    display: flex;
+}
+
+.categoryList li{
+    display: inline-block;
+    margin: 50px 10px 0 10px;
+}
+
+.categoryBtn{
+    border: none;
+    background-color: white;
+}
+
+
+.mainFairyTale {
     font-size: 32px;
     color: #824600;
     margin-left: 300px; /* 왼쪽 마진 조정 */
     margin-top: 50px; /* 상단 마진을 조정하여 공간 확보 */
 }
 
-.fairytalesContainer {
-    width: 60%; /* 컨테이너 너비를 줄여 가운데 정렬 효과를 강화 */
-    margin: auto; /* 가운데 정렬을 위해 자동 마진 사용 */
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    flex-wrap: wrap; /* 아이템이 넘칠 경우 다음 줄로 넘김 */
-    /* border: solid 1px black; */
-    align-content: space-between;
+.mainBox {
+    height: auto; /* 높이를 auto로 변경하여 컨텐츠에 맞게 높이가 조절되도록 함 */
+    padding-bottom: 50px; /* 컨텐츠 하단에 패딩 추가 */
 }
 
-.fairytaleItem {
+/* 중략 */
+
+.fairyTalesContainer {
+    width: 60%; /* 컨테이너 너비를 100%로 변경 */
+    max-width: 1200px; /* 최대 너비 설정 */
+    margin: auto; /* 가운데 정렬을 위해 자동 마진 사용 */
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; /* 중앙 정렬로 변경 */
+    flex-wrap: wrap; /* 아이템이 넘칠 경우 다음 줄로 넘김 */
+    align-content: space-between;
+
+}
+
+.fairyTaleItem {
     width: 15%; /* 3개의 아이템이 한 줄에 들어가도록 너비 설정 */
     flex-direction: column; /* 아이템 내부를 세로로 정렬 */
     align-items: center; /* 세로축 중앙 정렬 */
-    margin: 45px 25px 15px 25px;
+    margin: 10px 25px;
     /* border: solid 1px black; */
 }
 
-.fairytaleThumbnail {
+
+/* 반응형 미디어 쿼리 */
+@media (max-width: 768px) {
+    .fairytaleItem {
+        min-width: 150px; /* 모바일 기기에서는 아이템의 최소 너비를 줄임 */
+    }
+    /* 기타 모바일 레이아웃 조정 사항 추가 */
+}
+
+.fairyTaleThumbnail {
     width: 100%; /* 이미지의 너비를 자동으로 설정하여 비율 유지 */
     max-width: 100%; /* 이미지가 컨테이너를 벗어나지 않도록 설정 */
     height: 200px; /* 이미지의 높이를 자동으로 조절 */
 }
 
-.fairytaleContent {
+.fairyTaleContent {
     text-align: center; /* 텍스트를 가운데 정렬 */
     width: 100%; /* 텍스트 영역이 아이템 너비 전체를 차지하도록 설정 */
     font-size: 12px;
