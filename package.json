@@ -1,6 +1,6 @@
 {
   "name": "dofront",
-  "version": "0.1.6",
+  "version": "0.1.9",
   "private": true,
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
