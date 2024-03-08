@@ -9,6 +9,7 @@ import Make from './pages/fairytale/Make'
 import Info from './pages/mypage/Info'
 import { AuthProvider } from './components/auth/AuthContext';
 import Voice from './pages/voiceCloning/Voice';
+import BookContent from './pages/fairytale/BookContent';
 
 
 function App() {
@@ -19,16 +20,17 @@ function App() {
       <BrowserRouter>
 
         <Routes>
+          <Route>
+            <Route path='login' element={ <Login/> }/>
+            <Route path='enroll' element={ <Enroll/> }/>
+          </Route>
 
           <Route path='/' element={<Layout/>}>
             <Route index element={ <Main/> }/>
-            <Route path='login' element={ <Login/> }/>
             <Route path='dubing' element={ <Dubing/> }/>
-            <Route path='enroll' element={ <Enroll/> }/>
             <Route path="make" element={ <Make/> }/>
-            <Route path="deelp" element={ <Deelp/> }/>
-            <Route path="clone" element={ <Clone/> }/>
             <Route path="info" element={ <Info/> }/>
+            <Route path="bookContent" element={ <BookContent/> }/>
           </Route>
 
         </Routes>

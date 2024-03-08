@@ -1,0 +1,53 @@
+.makeBox{
+    height: auto;
+}
+
+.fairyTaleMake{
+    font-size: 32px;
+    color: #824600;
+    margin-left: 300px; /* 왼쪽 마진 조정 */
+    margin-top: 50px; /* 상단 마진을 조정하여 공간 확보 */
+}
+
+.promptBox{
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    width: 45%;
+}
+
+.textName{
+    text-align: right;
+    width: 100px;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.inputBox{
+    width: 550px;
+    height: 30px;
+    border-radius: 10px;
+    border: solid 1px gray;
+    padding: 0 10px;
+    outline: none;
+}
+
+.makeBtnBox{
+    float: right;
+    margin-right: 10%;
+}
+
+.makeBtn{
+    padding: 5px 30px;
+    border-radius: 5px;
+    outline: none;
+    border: solid 1px #EB9A0E;
+    background-color: #EB9A0E;
+    font-size: 15px;
+}
+
+.optionBox{
+    padding: 5px 25px;
+    border-radius: 10px;
+    outline: none;
+}
