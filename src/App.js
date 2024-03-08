@@ -9,6 +9,7 @@ import Make from './pages/fairytale/Make'
 import Info from './pages/mypage/Info'
 import { AuthProvider, useAuth } from './components/auth/AuthContext';
 import Voice from './pages/voiceCloning/Voice';
+import BookContent from './pages/fairytale/BookContent';
 import { PublicRoute, RequireAuth } from './components/auth/AuthPath';
 
 
@@ -20,9 +21,14 @@ function App() {
       <BrowserRouter>
 
         <Routes>
+          <Route>
+            <Route path='login' element={ <Login/> }/>
+            <Route path='enroll' element={ <Enroll/> }/>
+          </Route>
 
           <Route path='/' element={<Layout/>}>
             <Route index element={ <Main/> }/>
+            <Route path="bookContent" element={ <BookContent/> }/>
             <Route path='login' element={ <PublicRoute><Login/></PublicRoute> }/>
             <Route path='dubing' element={ <RequireAuth><Dubing/></RequireAuth> }/>
             <Route path='enroll' element={ <PublicRoute><Enroll/></PublicRoute> }/>

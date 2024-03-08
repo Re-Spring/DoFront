@@ -1,6 +1,8 @@
 import React, { useCallback ,useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { MakeAPI } from "../../apis/MakeAPI";
+import "../../styles/common/Common.css";
+import "../../styles/mybook/Make.css";
 
 
 function Make(){
@@ -72,54 +74,64 @@ function Make(){
 
     return (
         <>
-             <div>
-                <h2>동화 만들기</h2>
+             <div className='makeBox'>
+                <p className='fairyTaleMake'>동화 만들기</p>
                 <form onSubmit={makeHandler}>
-
-                    <label htmlFor="title">제목</label>
-                    <input type="text" id="title" placeholder="원하는 제목을 입력해주세요." value={title} onChange={titleHandler}/><br/>
-
-                    <label htmlFor="character">주인공</label>
-                    <input type="text" id="character" placeholder="원하는 주인공을 입력해주세요." value={character} onChange={characterHandler}/><br/>
-
-                    <label htmlFor="genre">장르</label>
-                    <select id="genre" value={genre} onChange={genreHandler}>
-                        <option value="" default>선택안함</option>
-                        <option value="romance">로맨스</option>
-                        <option value="folktale">전래동화</option>
-                        <option value="fantasy">판타지</option>
-                        <option value="adventure">모험</option>
-                        <option value="fable">우화</option>
-                        <option value="family">가족</option>
-                    </select>
-                    <br/>
-
-                    <label htmlFor="keyword">키워드</label>
-                    <input type="text" id="keyword" value={keyword} placeholder="원하는 키워드를 입력해주세요." onChange={keywordHandler}/><br/>
-
-                    <label htmlFor="lesson">교훈</label>
-                    <input type="text" id="lesson" placeholder="교훈을 입력해주세요." value={lesson} onChange={lessonHandler}/><br/>
-
-                    <label htmlFor="voice">목소리 선택</label>
-                    <select id="voice" value={voice} onChange={voiceHandler}>
-                        <option value="echo" default>Echo</option>
-                        <option value="alloy">Alloy</option>
-                        <option value="fable">Fable</option>
-                        <option value="onyx">Onyx</option>
-                        <option value="nova">Nova</option>
-                        <option value="shimmer">Shimmer</option>
-                        <option value="myVoice">내 목소리</option>
-                    </select>
-
-                    <label htmlFor="page">페이지 수</label>
-                    <select id="page" value={page} onChange={pageHandler}>
-                        <option value="6" default>6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select><br/>
-                    <button type="submit">만들기</button>
+                    <div className='promptBox'>
+                        <div>
+                            <p className='textName'><label htmlFor="title">제목</label></p>
+                            <input type="text" className='inputBox' id="title" placeholder="원하는 제목을 입력해주세요." value={title} onChange={titleHandler}/>
+                        </div>
+                        <div>
+                        <p className='textName'><label htmlFor="character">주인공</label></p>
+                            <input type="text" className='inputBox' id="character" placeholder="원하는 주인공을 입력해주세요." value={character} onChange={characterHandler}/>
+                        </div>
+                        <div>
+                            <p className='textName'><label htmlFor="genre">장르</label></p>
+                            <select id="genre" className='optionBox' value={genre} onChange={genreHandler}>
+                                <option value="" default>선택안함</option>
+                                <option value="romance">로맨스</option>
+                                <option value="folktale">전래동화</option>
+                                <option value="fantasy">판타지</option>
+                                <option value="adventure">모험</option>
+                                <option value="fable">우화</option>
+                                <option value="family">가족</option>
+                            </select>
+                        </div>
+                        <div>
+                            <p className='textName'><label htmlFor="keyword">키워드</label></p>
+                            <input type="text" className='inputBox' id="keyword" value={keyword} placeholder="원하는 키워드를 입력해주세요." onChange={keywordHandler}/>
+                        </div>
+                        <div>
+                            <p className='textName'><label htmlFor="lesson">교훈</label></p>
+                            <input type="text" className='inputBox' id="lesson" placeholder="교훈을 입력해주세요." value={lesson} onChange={lessonHandler}/>
+                        </div>
+                        <div>
+                            <p className='textName'><label htmlFor="voice">목소리 선택</label></p>
+                            <select id="voice" className='optionBox' value={voice} onChange={voiceHandler}>
+                                <option value="echo" default>Echo</option>
+                                <option value="alloy">Alloy</option>
+                                <option value="fable">Fable</option>
+                                <option value="onyx">Onyx</option>
+                                <option value="nova">Nova</option>
+                                <option value="shimmer">Shimmer</option>
+                                <option value="myVoice">내 목소리</option>
+                            </select>
+                        </div>
+                        <div>
+                            <p className='textName'><label htmlFor="page">페이지 수</label></p>
+                            <select id="page" className='optionBox' value={page} onChange={pageHandler}>
+                                <option value="6" default>6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                        <div className='makeBtnBox'>
+                            <button type="submit" className='makeBtn'>만들기</button>
+                        </div>
+                    </div>
                 </form>
              </div>
         </>
