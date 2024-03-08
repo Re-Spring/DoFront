@@ -72,7 +72,7 @@ function Main() {
             <div className="fairyTalesContainer">
                 {stories.map(story => (
                     <div key={story.fairytaleFileCode} className="fairyTaleItem">
-                        <a href='/BookContent'>
+                        <a href='/bookContent'>
                             <img src={story.fairytaleThumb} alt="Story Thumbnail" className="fairyTaleThumbnail" />
                             <div className="fairyTaleContent">
                                 <h3>{story.fairytaleTitle}</h3>
