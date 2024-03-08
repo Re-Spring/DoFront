@@ -36,61 +36,50 @@ function Enroll() {
     const validatePhone = phoneRule.test(phone);
 
     // 입력 필드 값이 변경될 때마다 유효성 검사 메시지 업데이트
-    const nameHandler = useCallback(async (e) => {
+    const nameHandler = useCallback((e) => {
         const entName = e.target.value;
         setUserName(entName);
 
-        // 이름 유효성 검사 후 메시지 설정
-        if(!validateName){
-            setNameMsg("이름을 한글로 입력해 주세요. 10자를 초과할 수 없습니다.")
-        } else {
-            setNameMsg("✅")
-        }
-    });
+        // 입력값에 대한 유효성 검사를 여기에서 수행
+        const isValid = nameRule.test(entName);
+        setNameMsg(isValid ? "✅" : "이름을 한글로 입력해 주세요. 10자를 초과할 수 없습니다.");
+    }, []);
 
-    const idHandler = useCallback(async (e) => {
+    const idHandler = useCallback((e) => {
         const entId = e.target.value;
         setUserId(entId);
 
-        if(!validateId){
-            setIdMsg("아이디를 영문과 숫자를 포함해 6~12자로 입력해 주세요.")
-        } else {
-            setIdMsg("✅")
-        }
-    });
+        // 입력값에 대한 유효성 검사를 여기에서 수행
+        const isValid = idRule.test(entId);
+        setIdMsg(isValid ? "✅" : "아이디를 영문과 숫자를 포함해 6~12자로 입력해 주세요.");
+    }, []);
 
-    const pwdHandler = useCallback(async (e) => {
+    const pwdHandler = useCallback((e) => {
         const entPwd = e.target.value;
         setPwd(entPwd);
 
-        if(!validatePwd){
-            setPwdMsg("비밀번호를 영문과 숫자, 특수문자를 포함해 8~20자로 입력해 주세요.")
-        } else {
-            setPwdMsg("✅")
-        }
-    });
+        // 입력값에 대한 유효성 검사를 여기에서 수행
+        const isValid = pwdRule.test(entPwd);
+        setPwdMsg(isValid ? "✅" : "비밀번호를 영문과 숫자, 특수문자를 포함해 8~20자로 입력해 주세요.");
+    }, []);
 
-    const pwdConfirmHandler = useCallback(async (e) => {
+    const pwdConfirmHandler = useCallback((e) => {
         const entPwdConfirm = e.target.value;
         setPwdConfirm(entPwdConfirm);
 
-        if(!validatePwdConfirm){
-            setPwdConfirmMsg("비밀번호를 동일하게 입력해 주세요.")
-        } else {
-            setPwdConfirmMsg("✅")
-        }
-    });
+        // 입력값에 대한 유효성 검사를 여기에서 수행
+        const isValid = pwd === entPwdConfirm;
+        setPwdConfirmMsg(isValid ? "✅" : "비밀번호를 동일하게 입력해 주세요.");
+    }, [pwd]); // pwd를 의존성 배열에 추가하여 pwd 상태가 변경될 때마다 함수가 업데이트됨
 
-    const phoneHandler = useCallback(async (e) => {
+    const phoneHandler = useCallback((e) => {
         const entPhone = e.target.value;
         setPhone(entPhone);
 
-        if(!validatePhone){
-            setPhoneMsg("휴대폰번호를 숫자로만 입력해 주세요.")
-        } else {
-            setPhoneMsg("✅")
-        }
-    });
+        // 입력값에 대한 유효성 검사를 여기에서 수행
+        const isValid = phoneRule.test(entPhone);
+        setPhoneMsg(isValid ? "✅" : "휴대폰번호를 숫자로만 입력해 주세요.");
+    }, []);
 
     const validateEnroll = validateId && validateName && validatePhone && validatePwd && validatePwdConfirm
 

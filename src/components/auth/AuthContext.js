@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     // 로컬 스토리지에서 로그인 토큰(accessToken)을 읽어와 디코딩한 후, 사용자 상태를 업데이트하는 함수입니다.
-    const updateLoginState = () => {
+    const updateLoginState = async () => {
         const accessToken = localStorage.getItem("accessToken");
         console.log("AuthContext accessToken : ", accessToken);
         if (accessToken) {

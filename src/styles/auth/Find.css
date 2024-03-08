@@ -1,0 +1,115 @@
+/* Find.css */
+.find-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 40px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.find-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.find-logo {
+  /* 로고 이미지 크기 조절 */
+  width: 120px;
+  margin: 0 auto; /* 좌우 여백을 자동으로 조절하여 가운데 정렬 */
+}
+
+.find-options {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.find-option {
+  color: #333;
+  font-size: 24px;
+  cursor: pointer;
+  flex-grow: 1;
+  text-align: center;
+  margin: 0;
+  position: relative; /* for pseudo-elements */
+}
+
+.find-option:not(:last-child)::after {
+  content: '|';
+  position: absolute;
+  right: 0;
+  color: #ccc; /* 세로선 색상 조정 */
+  padding: 0 10px;
+}
+
+#find-password {
+  text-align: center;
+}
+
+.find-subtitle {
+  text-align: center;
+  margin: 20px 0;
+  color: #555;
+  font-size: 18px;
+}
+
+.find-form {
+  width: 100%;
+}
+
+.find-input-group {
+  margin-bottom: 15px;
+}
+
+.find-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.find-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f0ad4e;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.find-button:hover {
+  background-color: #ec971f;
+}
+
+/* 반응형 디자인 추가 */
+@media (max-width: 768px) {
+  .find-header {
+    flex-direction: column;
+  }
+
+  .find-option {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .find-option:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    padding: 0;
+  }
+
+  #find-password {
+    text-align: center;
+  }
+}

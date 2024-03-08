@@ -20,7 +20,7 @@ function Header() {
         return () => {
             window.removeEventListener("loginSuccess", handleLoginSuccess);
         };
-    }, []);
+    }, [updateLoginState]);
 
     // 로그아웃 함수
     const handleLogout = (event) => {

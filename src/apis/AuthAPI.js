@@ -72,6 +72,11 @@ export const userLoginAPI = ({userId, password, navigate}) => {
                             navigate("/", { replace: true });
                             // 로그인 성공 이벤트 발생
                             window.dispatchEvent(new CustomEvent("loginSuccess"));
+                            // 헤더 수정에 너무 많은 시간이 소요되고 있는 까닭으로 navigate 직후 새로고침을 실행하는 편법을 사용했습니다. 테스트 기간에 고칠게요........
+                            // navigate 후에 페이지 새로고침
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 100); // 100ms 후에 페이지를 새로고침합니다. 이 값은 조정 가능합니다.
                         }
                     });
                 }   
