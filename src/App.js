@@ -7,8 +7,9 @@ import './App.css';
 import Dubing from './pages/fairytale/Dubing';
 import Make from './pages/fairytale/Make'
 import Info from './pages/mypage/Info'
-import { AuthProvider } from './components/auth/AuthContext';
+import { AuthProvider, useAuth } from './components/auth/AuthContext';
 import Voice from './pages/voiceCloning/Voice';
+import { PublicRoute, RequireAuth } from './components/auth/AuthPath';
 
 
 function App() {
@@ -22,13 +23,11 @@ function App() {
 
           <Route path='/' element={<Layout/>}>
             <Route index element={ <Main/> }/>
-            <Route path='login' element={ <Login/> }/>
-            <Route path='dubing' element={ <Dubing/> }/>
-            <Route path='enroll' element={ <Enroll/> }/>
-            <Route path="make" element={ <Make/> }/>
-            <Route path="deelp" element={ <Deelp/> }/>
-            <Route path="clone" element={ <Clone/> }/>
-            <Route path="info" element={ <Info/> }/>
+            <Route path='login' element={ <PublicRoute><Login/></PublicRoute> }/>
+            <Route path='dubing' element={ <RequireAuth><Dubing/></RequireAuth> }/>
+            <Route path='enroll' element={ <PublicRoute><Enroll/></PublicRoute> }/>
+            <Route path="make" element={ <RequireAuth><Make/></RequireAuth> }/>
+            <Route path="info" element={ <RequireAuth><Info/></RequireAuth> }/>
           </Route>
 
         </Routes>
