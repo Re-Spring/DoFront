@@ -7,36 +7,20 @@ import { useAuth } from '../auth/AuthContext';
 
 function Header() {
 
-    // 로그인 상태와 업데이트 함수 사용
     const { user, updateLoginState } = useAuth(); 
 
-    // const [user, setUser] = useState(null);
-    // console.log("헤더 테스트", user);
-
-    // // 로컬 스토리지에서 로그인 상태를 업데이트하는 함수
-    // const updateLoginState = () => {
-    //     const accessToken = localStorage.getItem("accessToken");
-    //     if (accessToken) {
-    //         const decoded = jwtDecode(accessToken);
-    //         console.log(decoded);
-    //         setUser(decoded);
-    //     } else {
-    //         setUser(null);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     // 로그인 성공 시 발생하는 커스텀 이벤트를 감지하고 처리하는 함수
-    //     const handleLoginSuccess = () => {
-    //         // 로그인 상태를 업데이트하는 기존 함수 호출
-    //         updateLoginState(); 
-    //     };
-    //     window.addEventListener("loginSuccess", handleLoginSuccess);
-    //     // 컴포넌트 언마운트 시 이벤트 리스너 제거
-    //     return () => {
-    //         window.removeEventListener("loginSuccess", handleLoginSuccess);
-    //     };
-    // }, []);
+    useEffect(() => {
+        // 로그인 성공 시 발생하는 커스텀 이벤트를 감지하고 처리하는 함수
+        const handleLoginSuccess = () => {
+            // 로그인 상태를 업데이트하는 기존 함수 호출
+            updateLoginState();
+        };
+        window.addEventListener("loginSuccess", handleLoginSuccess);
+        // 컴포넌트 언마운트 시 이벤트 리스너 제거
+        return () => {
+            window.removeEventListener("loginSuccess", handleLoginSuccess);
+        };
+    }, []);
 
     // 로그아웃 함수
     const handleLogout = (event) => {
@@ -48,16 +32,6 @@ function Header() {
         updateLoginState();
         window.location.href = '/';
     };
-
-    // useEffect(() => {
-    //     const accessToken = localStorage.getItem("accessToken");
-    //     if (accessToken) {
-    //         const decodedUser = jwtDecode(accessToken);
-    //         setUser(decodedUser);
-    //     } else {
-    //         setUser(null);
-    //     }
-    // }, []); // 의존성 배열을 비워 컴포넌트가 마운트될 때만 실행
 
     // 각 메뉴에 대한 서브메뉴 표시 상태를 관리하기 위한 상태
     const [subMenuStates, setSubMenuStates] = useState({
