@@ -3,7 +3,7 @@ import axios from "axios";
 import { postMake } from '../modules/MakeModule';
 
 export const Voice = ({ makeData }) => {
-    const requestURL = 'http://192.168.0.172:8002/generateStory';
+    const requestURL = 'http://localhost:8002/generateStory';
 
     return async (dispatch, getState) => {
         await axios.post(requestURL, makeData)
