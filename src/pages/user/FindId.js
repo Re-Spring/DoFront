@@ -1,10 +1,13 @@
 import { useCallback, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
-import { userLoginAPI } from "../../apis/AuthAPI";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { findIdAPI, userLoginAPI } from "../../apis/AuthAPI";
 import "../../styles/auth/Find.css"
 
 function FindId() { 
+
+    const dispatch = useDispatch();
+
     const [userName, setUserName] = useState('');
     const [phoneNum, setPhoneNum] = useState('');
 
@@ -29,12 +32,20 @@ function FindId() {
 
         // 입력값에 대한 유효성 검사를 여기에서 수행
         const isValid = phoneRule.test(entPhone);
-        setPhoneMsg(isValid ? "✅" : "휴대폰번호를 숫자로만 입력해 주세요.");
+        setPhoneMsg(isValid ? "✅" : "휴대폰번호를 정확하게 입력해 주세요.");
     }, []);
     
     const findIdHandler = async (e) => {
         e.preventDefault();
-    }
+
+        dispatch(findIdAPI({
+            userName, phoneNum
+        }));
+    };
+      
+    // document.getElementById('find-password').addEventListener('click', function() {
+    //     window.location.href = '/findPw'; // 비밀번호 찾기 페이지 URL
+    // });
 
     return (
         <>
@@ -45,7 +56,7 @@ function FindId() {
                 <div className="find-header">
                     <div className="find-options">
                         <h2 className="find-option" id="find-id">아이디 찾기</h2>
-                        <h2 className="find-option" id="find-password" href="/findPw">비밀번호 찾기</h2>
+                        <h2 className="find-option" id="find-password"><Link to="/findPw">비밀번호 찾기</Link></h2>
                     </div>
                 </div>
                 <h3 className="find-subtitle">휴대폰번호로 아이디 찾기</h3>
@@ -59,6 +70,7 @@ function FindId() {
                             placeholder="이름을 입력해 주세요."
                             value={userName}
                             onChange={nameHandler}
+                            required
                         />
                         <div className="ruleMsg">{nameMsg}</div>
                     </div>
@@ -71,6 +83,7 @@ function FindId() {
                             placeholder="숫자만 입력해 주세요."
                             value={phoneNum}
                             onChange={phoneHandler}
+                            required
                         />
                         <div className="ruleMsg">{phoneMsg}</div>
                     </div>
