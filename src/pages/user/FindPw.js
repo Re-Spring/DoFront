@@ -1,10 +1,14 @@
 import { useCallback, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
-import { userLoginAPI } from "../../apis/AuthAPI";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { findPwAPI, userLoginAPI } from "../../apis/AuthAPI";
 import "../../styles/auth/Find.css"
 
 function FindPw() { 
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [userName, setUserName] = useState('');
     const [userId, setUserId] = useState('');
     const [phoneNum, setPhoneNum] = useState('');
@@ -41,10 +45,21 @@ function FindPw() {
 
         // 입력값에 대한 유효성 검사를 여기에서 수행
         const isValid = phoneRule.test(entPhone);
-        setPhoneMsg(isValid ? "✅" : "휴대폰번호를 숫자로만 입력해 주세요.");
+        setPhoneMsg(isValid ? "✅" : "휴대폰번호를 정확하게 입력해 주세요.");
     }, []);
-    
 
+    const findPwHandler = async (e) => {
+        e.preventDefault();
+
+        dispatch(findPwAPI({
+            userName, userId, phoneNum, navigate
+        }));
+    };
+
+    // document.getElementById('find-id').addEventListener('click', function() {
+    //     window.location.href = '/findId'; // 아이디 찾기 페이지 URL
+    // });
+    
     return (
         <>
             <div className="find-logo">
@@ -53,12 +68,12 @@ function FindPw() {
             <div className="find-container">
                 <div className="find-header">
                     <div className="find-options">
-                        <h2 className="find-option" id="find-id">아이디 찾기</h2>
+                        <h2 className="find-option" id="find-id"><Link to="/findId">아이디 찾기</Link></h2>
                         <h2 className="find-option" id="find-password">비밀번호 찾기</h2>
                     </div>
                 </div>
                 <h3 className="find-subtitle">휴대폰번호로 비밀번호 찾기</h3>
-                <form className="find-form">
+                <form className="find-form" onSubmit={findPwHandler}>
                     <div className="find-input-group">
                         <label htmlFor="userId">아이디</label>
                         <input
@@ -68,6 +83,7 @@ function FindPw() {
                             placeholder="아이디를 입력해 주세요."
                             value={userId}
                             onChange={idHandler}
+                            required
                         />
                         <div className="ruleMsg">{idMsg}</div>
                     </div>
@@ -80,6 +96,7 @@ function FindPw() {
                             placeholder="이름을 입력해 주세요."
                             value={userName}
                             onChange={nameHandler}
+                            required
                         />
                         <div className="ruleMsg">{nameMsg}</div>
                     </div>
@@ -92,6 +109,7 @@ function FindPw() {
                             placeholder="숫자만 입력해 주세요."
                             value={phoneNum}
                             onChange={phoneHandler}
+                            required
                         />
                         <div className="ruleMsg">{phoneMsg}</div>
                     </div>
