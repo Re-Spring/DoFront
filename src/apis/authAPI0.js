@@ -3,7 +3,7 @@
 // import axios from 'axios';
 // import Swal from "sweetalert2";
 
-// const DOMAIN = 'http://192.168.0.172:8001'
+// const DOMAIN = 'http://localhost:8001'
 
 // // HTTP 요청을 추상화한 함수
 // const fetchAuth = async (fetchData) => {

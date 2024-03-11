@@ -3,12 +3,12 @@ import axios from "axios";
 import { postMake } from '../modules/MakeModule';
 
 export const MakeAPI = ({ makeData }) => {
-    const requestURL = 'http://192.168.0.172:8002/generateStory';
+    const requestURL = 'http://localhost:8002/generateStory';
 
     return async (dispatch, getState) => {
         await axios.post(requestURL, makeData)
             .then(function (response) {
-                console.log(response);
+                console.log("test",response);
                 // 성공적으로 동화를 생성한 경우
                 if(response.status === 200){
                     // 액션 생성자 함수를 호출하여 액션 객체 생성 및 디스패치
@@ -17,7 +17,7 @@ export const MakeAPI = ({ makeData }) => {
                         icon: 'success',
                         title: "동화 생성이 완료되었습니다.",
                         text: "즐거운 동화 감상하세요!",
-                        confirmButtonText: "O"
+                        confirmButtonText: "✓"
                     }).then(result => {
                         if(result.isConfirmed){
 //                            navigate("/Create", { replace: true });
@@ -39,7 +39,7 @@ export const MakeAPI = ({ makeData }) => {
 }
 
 //export const userLoginAPI = ({userId, password, navigate}) => {
-//    const requestURL = 'http://192.168.0.172:8001/auth/login';
+//    const requestURL = 'http://localhost:8001/auth/login';
 //    let logoutTimer;
 //    console.log("api 전 : ", userId, password);
 //    return async (dispatch, getState) => {
