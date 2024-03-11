@@ -1,39 +1,43 @@
 import Swal from 'sweetalert2';
-import axios from "axios";
-import { postMake } from '../modules/MakeModule';
+import axios from 'axios';
+import { postVoice } from "../modules/VoiceModule";
 
-export const Voice = ({ makeData }) => {
-    const requestURL = 'http://localhost:8002/generateStory';
+// 비동기 액션 생성자
+export const callVoiceCloningAPI = (voiceData) => async (dispatch) => {
+    console.log(voiceData.get('audio_data'));
+    const requestURL = 'http://localhost:8002/voiceCloning';
 
-    return async (dispatch, getState) => {
-        await axios.post(requestURL, makeData)
-            .then(function (response) {
-                console.log(response);
-                // 성공적으로 동화를 생성한 경우
-                if(response.status === 200){
-                    // 액션 생성자 함수를 호출하여 액션 객체 생성 및 디스패치
-                    dispatch(postMake(response.data));
-                    Swal.fire({
-                        icon: 'success',
-                        title: "동화 생성이 완료되었습니다.",
-                        text: "즐거운 동화 감상하세요!",
-                        confirmButtonText: "O"
-                    }).then(result => {
-                        if(result.isConfirmed){
-//                            navigate("/Create", { replace: true });
-                        }
-                    });
+    try {
+        const response = await axios.post(requestURL, voiceData);
+
+        console.log(response);
+        if (response.status === 200) {
+            // 성공 액션 디스패치, postVoice 액션 생성자를 사용
+            dispatch(postVoice(response.data));
+            
+            // 추가적인 성공 처리 (예: SweetAlert2 사용)
+            Swal.fire({
+                icon: 'success',
+                title: '음성 녹음이 완료되었습니다.',
+                text: '즐거운 감상하세요!',
+                confirmButtonText: '확인',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 성공 후 처리, 예: 페이지 이동
+                    // navigate('/Create', { replace: true });
                 }
-            })
-            .catch(function (error) {
-                // 백엔드에서 보낸 에러 메시지 처리
-                console.log(error);
-                Swal.fire({
-                    icon: 'error',
-                    title: error.response.data, // 백엔드에서 보낸 에러 메시지를 여기에 표시
-                    text: "문제가 지속될 경우 고객센터로 문의 바랍니다.",
-                    confirmButtonText: "확인"
-                });
             });
+        }
+    } catch (error) {
+        console.error(error);
+
+        // 실패 처리, 여기에서는 단순 에러 메시지를 보여주고 있습니다.
+        // 실패에 대한 상태 업데이트가 필요한 경우, 별도의 액션을 정의하고 사용할 수 있습니다.
+        Swal.fire({
+            icon: 'error',
+            title: error.response?.data || '오류 발생',
+            text: '문제가 지속될 경우 고객센터로 문의 바랍니다.',
+            confirmButtonText: '확인',
+        });
     }
-}
+};
