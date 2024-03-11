@@ -26,7 +26,7 @@ function App() {
 
           <Route path='/' element={<Layout/>}>
             <Route index element={ <Main/> }/>
-            <Route path="bookContent" element={<BookContent />} />
+            <Route path="bookContent/:fairytaleCode" element={<BookContent />} />
             <Route path='dubing' element={ <RequireAuth><Dubing/></RequireAuth> }/>
             <Route path="make" element={ <RequireAuth><Make/></RequireAuth> }/>
             <Route path="info" element={ <RequireAuth><Info/></RequireAuth> }/>
