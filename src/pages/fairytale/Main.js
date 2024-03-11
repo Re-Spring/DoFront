@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Link 컴포넌트를 임포트합니다.
 import "../../styles/mains/Main.css";
 import "../../styles/common/Common.css";
 
 function Main() {
-    const [stories, setStories] = useState([]); // 동화 목록을 저장할 상태
+    const [stories, setStories] = useState([]);
 
     useEffect(() => {
-        fetchAllStories(); // 컴포넌트가 마운트될 때 모든 동화 목록을 불러옵니다.
+        fetchAllStories();
     }, []);
 
     const fetchAllStories = async () => {
         try {
-            
-            // 백엔드 엔드포인트 URL을 수정해야 합니다. localhost 포트는 백엔드가 실행되는 포트로 변경해야 합니다.
-            // 예시에서는 Spring Boot 기본 포트인 8080을 사용합니다. 또한, 요청 경로를 /stories로 변경합니다.
-            const response = await fetch('http://localhost:8001/stories'); // 모든 동화 목록을 불러오는 요청
-            
-
+            const response = await fetch('http://localhost:8001/stories');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -27,9 +23,8 @@ function Main() {
         }
     };
 
-    const fetchStoriesByGenre = async (genre) => { // 장르별 동화 목록을 불러오는 함수
+    const fetchStoriesByGenre = async (genre) => {
         try {
-            // "전체보기" 선택 시 모든 동화 목록을 불러옵니다.
             if (genre === '전체보기') {
                 fetchAllStories();
                 return;
@@ -40,7 +35,7 @@ function Main() {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            setStories(data); // 불러온 동화 목록으로 상태 업데이트
+            setStories(data);
         } catch (error) {
             console.error(`Failed to fetch stories by genre ${genre}:`, error);
         }
@@ -56,7 +51,6 @@ function Main() {
                     <p className="mainFairyTale">동화</p>
                 </div>
                 <div>
-                    {/* "전체보기" 버튼을 포함한 장르 목록 */}
                     <ul className='categoryList'>
                         <li><button onClick={() => fetchStoriesByGenre('전체보기')} className='categoryBtn'>전체보기</button></li>
                         <li><button onClick={() => fetchStoriesByGenre('로맨스')} className='categoryBtn'>로맨스</button></li>
@@ -69,15 +63,16 @@ function Main() {
                 </div>
             </div>
             <div className='line'></div>
-            <div className="fairyTalesContainer">
+             <div className="fairyTalesContainer">
                 {stories.map(story => (
-                    <div key={story.fairytaleFileCode} className="fairyTaleItem">
-                        <a href='/bookContent'>
+                    <div key={story.fairytaleCode} className="fairyTaleItem">
+                        {/* 여기에서 Link 컴포넌트를 사용하여 동화의 상세 페이지로의 링크를 생성합니다. */}
+                        <Link to={`/bookContent/${story.fairytaleCode}`}>
                             <img src={story.fairytaleThumb} alt="Story Thumbnail" className="fairyTaleThumbnail" />
                             <div className="fairyTaleContent">
                                 <h3>{story.fairytaleTitle}</h3>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 ))}
             </div>

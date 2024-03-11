@@ -1,26 +1,32 @@
-.contentBox{
-    height: 1000px;
-}
-
 /* BookContent.css */
 
-.book-content {
+.book-content { /*메인 box*/
+    display: flex;
     margin: 20px;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    justify-content: center;
+  }
+
+  .contentImgBox{ /* 이미지 표지 box */
+    width: 20%;
+  }
+
+  .contentImg{ /* 이미지 표지 그림 */
+    width: 300px;
+  }
+
+  .contentListBox{ /* 상세 내용 리스트 */
+    margin-top: 30px;
+  }
+
+  .fairytaleName{ /* 동화 제목 */
+    font-size: 21px;
   }
   
-  .book-content h1 {
-    margin-bottom: 20px;
-    color: #333;
-    font-size: 24px;
+  .contentList p{
+    display: inline-block;
   }
-  
-  .book-content p {
-    margin-bottom: 10px;
-    color: #666;
-    font-size: 16px;
+
+  .listName{
+    width: 100px;
   }
-  

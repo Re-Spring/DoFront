@@ -4,21 +4,23 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 function BookContent() {
-    const [bookDetail, setBookDetail] = useState({ 
-      fairytaleTitle: '', 
-      summary: '', 
-      fairytaleThumb: '' 
+    const [bookDetail, setBookDetail] = useState({
+        fairytaleSummary: '',
+        fairytaleTitle: '',
+        fairytaleGenre: '',
+        fairytaleThumb: '',
+        userId: ''
     });
-    const { detailCode } = useParams();
+    const { fairytaleCode } = useParams();
 
     useEffect(() => {
         const fetchBookDetail = async () => {
             try {
-                if (!detailCode) { // detailCode가 없거나 유효하지 않은 경우 early return
-                    console.error("detailCode is null or invalid.");
+                if (!fairytaleCode) {
+                    console.error("fairytaleCode is null or invalid.");
                     return;
                 }
-                const response = await fetch(`http://localhost:8001/api/details/${detailCode}`);
+                const response = await fetch(`http://localhost:8001/stories/${fairytaleCode}`);
                 if (!response.ok) {
                     throw new Error(`Failed to fetch book detail, status: ${response.status}`);
                 }
@@ -29,19 +31,34 @@ function BookContent() {
             }
         };
     
-        if (detailCode) {
+        if (fairytaleCode) {
             fetchBookDetail();
         }
-    }, [detailCode]);
+    }, [fairytaleCode]);
     
-
     return (
         <div className="book-content">
-            <h1>{bookDetail.fairytaleTitle}</h1>
-            <p>Summary: {bookDetail.summary}</p>
-            <img src={bookDetail.fairytaleThumb} alt="Fairytale Thumbnail" />
+            <div className="contentImgBox">
+                <img src={bookDetail.fairytaleThumb} className="contentImg" alt="Fairytale Thumbnail" />
+            </div>
+            <div className="contentListBox">
+                <p className="fairytaleName">{bookDetail.fairytaleTitle}</p>
+                <div className="contentList">    
+                    <p className="listName">장르</p>
+                    <input type="text" value={bookDetail.fairytaleGenre} />
+                </div>
+                <div className="contentList">
+                    <p className="listName">줄거리</p>
+                    <input type="text" value={bookDetail.fairytaleSummary} />
+                </div>
+                <div className="contentList">
+                    <p className="listName">저자</p>
+                    <input type="text" value={bookDetail.userId} />
+                </div>
+            </div>
         </div>
     );
 }
 
 export default BookContent;
+
