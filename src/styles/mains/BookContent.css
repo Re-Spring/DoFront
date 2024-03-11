@@ -1,3 +1,26 @@
 .contentBox{
     height: 1000px;
 }
+
+/* BookContent.css */
+
+.book-content {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .book-content h1 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .book-content p {
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 16px;
+  }
+  
