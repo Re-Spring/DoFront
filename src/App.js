@@ -30,6 +30,7 @@ function App() {
             <Route path='dubing' element={ <RequireAuth><Dubing/></RequireAuth> }/>
             <Route path="make" element={ <RequireAuth><Make/></RequireAuth> }/>
             <Route path="info" element={ <RequireAuth><Info/></RequireAuth> }/>
+            <Route path="voice" element={ <RequireAuth><Voice/></RequireAuth> }/>
           </Route>
 
           <Route path='login' element={ <PublicRoute><Login/></PublicRoute> }/>
