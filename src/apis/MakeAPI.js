@@ -3,8 +3,10 @@ import axios from "axios";
 import { postMake } from '../modules/MakeModule';
 
 export const MakeAPI = ({ makeData }) => {
+    console.log("makeData : " + makeData)
     const requestURL = 'http://localhost:8002/generateStory';
 
+    console.log("요청후 : " + requestURL)
     return async (dispatch, getState) => {
         await axios.post(requestURL, makeData)
             .then(function (response) {

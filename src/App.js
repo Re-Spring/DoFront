@@ -38,7 +38,7 @@ function App() {
 
           <Route path='findId' element={ <FindId/> }/>
           <Route path='findPw' element={ <FindPw/> }/>
-          
+
         </Routes>
 
       </BrowserRouter>

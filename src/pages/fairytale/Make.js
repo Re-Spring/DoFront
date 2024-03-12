@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { MakeAPI } from "../../apis/MakeAPI";
 import "../../styles/common/Common.css";
 import "../../styles/mybook/Make.css";
+import { jwtDecode } from "jwt-decode";
 
 
 function Make(){
@@ -53,23 +54,36 @@ function Make(){
         setVoice(entVoice)
     });
 
+    const user  = jwtDecode(localStorage.getItem("accessToken"));
+    const userId = user.userId
+    const userCode = user.userCode
+    console.log(userId)
+
     const makeHandler = async (e) => {
             // 폼 제출 이벤트 방지
             e.preventDefault();
             console.log("test",title, character, genre, keyword, lesson, page, voice);
 
-            const makeData = {
-                title: title,
-                character: character,
-                genre: genre,
-                keyword:keyword,
-                lesson:lesson,
-                page:page,
-                voice:voice
+
+            if(genre === ''){
+                alert('장르를 선택해주세요');
+            }else{
+
+                const makeData = {
+                    title: title,
+                    character: character,
+                    genre: genre,
+                    keyword:keyword,
+                    lesson:lesson,
+                    page:page,
+                    voice:voice,
+                    userId:userId,
+                    userCode:userCode
             }
             dispatch(MakeAPI({
                 makeData
         }));
+        }
     }
 
     return (
@@ -89,7 +103,7 @@ function Make(){
                         <div>
                             <p className='textName'><label htmlFor="genre">장르</label></p>
                             <select id="genre" className='optionBox' value={genre} onChange={genreHandler}>
-                                <option value="" default>선택안함</option>
+                                <option value='' default>선택안함</option>
                                 <option value="romance">로맨스</option>
                                 <option value="folktale">전래동화</option>
                                 <option value="fantasy">판타지</option>
