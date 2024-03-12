@@ -1,3 +1,53 @@
-.Info{
+.info{
+    margin: auto;
     height: 600px;
+    text-align: center;
+}
+
+.myInfo{
+    margin: auto;
+    margin-top: 50px;
+    width: 20%;
+    height: 400px;
+    border: solid 1px #874900;
+    border-radius: 10px;
+}
+
+.welcomeMessage{
+    width: 27%;
+    height: 80px;
+    line-height: 45px;
+    margin: auto;
+    border-radius: 10px;
+    border: solid 1px #CCB396;
+    background-color: #CCB396;
+    margin-top: 70px;
+}
+
+.infoList{
+    width: 300px;
+}
+
+.infoName{
+    width: 100px;
+    text-align: left;
+    margin-left: 40px;
+}
+
+.infoInput{
+    width: 270px;
+    margin-left: 40px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: solid 1px #927b61;
+    outline: none;
+}
+
+.modify{
+    margin-top: 50px;
+    padding: 12px 100px;
+    background-color: #CCB396;
+    border: solid 1px #CCB396;
+    border-radius: 10px;
+    font-size: 16px;
 }

@@ -1,0 +1,60 @@
+.login{
+    margin: auto;
+    margin-top: 100px;
+    text-align: center;
+}
+
+.loginLogo{
+    width: 150px;
+    margin-bottom: 10px;
+}
+
+.loginBox{
+    margin: auto;
+    width: 400px;
+    height: 450px;
+    border: solid 1px #c78b47;
+    border-radius: 10px;
+}
+
+.loginName{
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+
+.idInpput, .passwordInput{
+    width: 300px;
+    padding: 12px 8px;
+    margin: 5px 0;
+    border-radius: 10px;
+    border: solid 1px #c28e52;
+    outline: none;
+    font-size: 16px;
+}
+
+.loginBtn{
+    width: 315px;
+    padding: 12px;
+    font-size: 18px;
+    background-color: #BC9F7D;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.loginEnrollBtn{
+    width: 315px;
+    padding: 12px;
+    font-size: 18px;
+    background-color: white;
+    border: solid 1px #BC9F7D;
+    color: #a07e58;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.findInfo{
+    text-align: right;
+    margin-right: 45px;
+}

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { userEnrollAPI } from "../../apis/AuthAPI";
+import "../../styles/user/Enroll.css";
 
 function Enroll() { 
 
@@ -42,7 +43,7 @@ function Enroll() {
 
         // 입력값에 대한 유효성 검사를 여기에서 수행
         const isValid = nameRule.test(entName);
-        setNameMsg(isValid ? "✅" : "이름을 한글로 입력해 주세요. 10자를 초과할 수 없습니다.");
+        setNameMsg(isValid ? "✅" : "한글로만 입력해 주세요. 10자를 초과할 수 없습니다.");
     }, []);
 
     const idHandler = useCallback((e) => {
@@ -51,7 +52,7 @@ function Enroll() {
 
         // 입력값에 대한 유효성 검사를 여기에서 수행
         const isValid = idRule.test(entId);
-        setIdMsg(isValid ? "✅" : "아이디를 영문과 숫자를 포함해 6~12자로 입력해 주세요.");
+        setIdMsg(isValid ? "✅" : "영문과 숫자를 포함해 6~12자로 입력해 주세요.");
     }, []);
 
     const pwdHandler = useCallback((e) => {
@@ -60,7 +61,7 @@ function Enroll() {
 
         // 입력값에 대한 유효성 검사를 여기에서 수행
         const isValid = pwdRule.test(entPwd);
-        setPwdMsg(isValid ? "✅" : "비밀번호를 영문과 숫자, 특수문자를 포함해 8~20자로 입력해 주세요.");
+        setPwdMsg(isValid ? "✅" : "영문과 숫자, 특수문자를 포함해 8~20자로 입력해 주세요.");
     }, []);
 
     const pwdConfirmHandler = useCallback((e) => {
@@ -69,7 +70,7 @@ function Enroll() {
 
         // 입력값에 대한 유효성 검사를 여기에서 수행
         const isValid = pwd === entPwdConfirm;
-        setPwdConfirmMsg(isValid ? "✅" : "비밀번호를 동일하게 입력해 주세요.");
+        setPwdConfirmMsg(isValid ? "✅" : "비밀번호가 일치하지 않습니다.");
     }, [pwd]); // pwd를 의존성 배열에 추가하여 pwd 상태가 변경될 때마다 함수가 업데이트됨
 
     const phoneHandler = useCallback((e) => {
@@ -78,7 +79,7 @@ function Enroll() {
 
         // 입력값에 대한 유효성 검사를 여기에서 수행
         const isValid = phoneRule.test(entPhone);
-        setPhoneMsg(isValid ? "✅" : "휴대폰번호를 숫자로만 입력해 주세요.");
+        setPhoneMsg(isValid ? "✅" : "숫자로만 입력해 주세요.");
     }, []);
 
     const validateEnroll = validateId && validateName && validatePhone && validatePwd && validatePwdConfirm
@@ -102,41 +103,59 @@ function Enroll() {
 
     // JSX에서 form 요소와 입력 필드를 렌더링, 각 핸들러 함수와 상태 연결
     return (
-        <>
-            <img src="images/dorering_logo.png"/>
-            <div>
-                <h1>회원가입</h1>
+        <div className="enroll">
+            <div className="enrollLogoBox">
+                <a href="/">
+                    <img src="images/logo.png" className="enrollLogo" />
+                </a>
+            </div>
+
+            <div className="enrollBox">
+                <p className="enrollName">회원가입</p>
                 <form onSubmit={enrollHandler}>
 
-                    <label htmlFor="userName">이름</label><br/>
-                    <input type="text" id="userName" placeholder="이름을 입력해 주세요." required 
-                        value={userName} onChange={nameHandler}/>
-                    <div className="ruleMsg">{nameMsg}</div>
+                    <div className="enrollInputBox">
+                        <label htmlFor="userName" className="labelName">이름</label>
+                        <input type="text" className="enrollInput" id="userName" placeholder="이름을 입력해 주세요." required 
+                            value={userName} onChange={nameHandler}/>
+                        <div className="ruleMsg">{nameMsg}</div>
+                    </div>
 
-                    <label htmlFor="userId">아이디</label><br/>
-                    <input type="text" id="userId" placeholder="영문과 숫자를 포함해 6~12자로 입력해 주세요." required
-                        value={userId} onChange={idHandler} />
-                    <div className="ruleMsg">{idMsg}</div>
+                    <div className="enrollInputBox">
+                        <label htmlFor="userId" className="labelName">아이디</label>
+                        <input type="text" className="enrollInput" id="userId" placeholder="영문과 숫자를 포함해 6~12자로 입력해 주세요." required
+                            value={userId} onChange={idHandler} />
+                        <div className="ruleMsg">{idMsg}</div>
+                    </div>
 
-                    <label htmlFor="pwd">비밀번호</label><br/>
-                    <input type="password" id="pwd" placeholder="영문, 숫자, 특수문자를 포함해 8~20자로 입력해 주세요." required
-                        value={pwd} onChange={pwdHandler} />
-                    <div className="ruleMsg">{pwdMsg}</div>
+                    <div className="enrollInputBox">
+                        <label htmlFor="pwd" className="labelName">비밀번호</label>
+                        <input type="password" className="enrollInput" id="pwd" placeholder="영문, 숫자, 특수문자를 포함해 8~20자로 입력해 주세요." required
+                            value={pwd} onChange={pwdHandler} />
+                        <div className="ruleMsg">{pwdMsg}</div>
+                    </div>
 
-                    <label htmlFor="pwdConfirm">비밀번호 재입력</label><br/>
-                    <input type="password" id="pwdConfirm" placeholder="비밀번호를 한번 더 입력해 주세요." required
-                        value={pwdConfirm} onChange={pwdConfirmHandler} />
-                    <div className="ruleMsg">{pwdConfirmMsg}</div>
+                    <div className="enrollInputBox">
+                        <label htmlFor="pwdConfirm" className="labelName">비밀번호 재입력</label>
+                        <input type="password" className="enrollInput" id="pwdConfirm" placeholder="비밀번호를 한번 더 입력해 주세요." required
+                            value={pwdConfirm} onChange={pwdConfirmHandler} />
+                        <div className="ruleMsg">{pwdConfirmMsg}</div>
+                    </div>
 
-                    <label htmlFor="phone">휴대폰번호</label><br/>
-                    <input type="text" id="phone" placeholder="숫자만 입력해 주세요." required
-                        value={phone} onChange={phoneHandler} />
-                    <div className="ruleMsg">{phoneMsg}</div>
+                    <div className="enrollInputBox">
+                        <label htmlFor="phone" className="labelName">휴대폰번호</label>
+                        <input type="text" className="enrollInput" id="phone" placeholder="숫자만 입력해 주세요." required
+                            value={phone} onChange={phoneHandler} />
+                        <div className="ruleMsg">{phoneMsg}</div>
+                    </div>
 
-                    <button type="submit" disabled={!validateEnroll}>회원가입</button>
+                    <div className="enrollBtnBox">
+                        <button type="submit" disabled={!validateEnroll} className="enrollBtn">회원가입</button>
+                    </div>
                 </form>
             </div>
-        </>
+        </div>
+        
     )
 }
 export default Enroll;
