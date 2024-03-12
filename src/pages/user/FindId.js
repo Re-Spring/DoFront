@@ -49,17 +49,18 @@ function FindId() {
 
     return (
         <>
-            <div className="find-logo">
-                <img src="images/dorering_logo.png" alt="Logo" />
+            <div className="findeLogoBox">
+                <a href="/">
+                    <img src="images/logo.png" className="find-logo" alt="Logo" />
+                </a>
             </div>
             <div className="find-container">
                 <div className="find-header">
                     <div className="find-options">
-                        <h2 className="find-option" id="find-id">아이디 찾기</h2>
-                        <h2 className="find-option" id="find-password"><Link to="/findPw">비밀번호 찾기</Link></h2>
+                        <p className="find-option" id="find-id">아이디 찾기</p>
+                        <p className="find-option" id="find-password"><Link to="/findPw">비밀번호 찾기</Link></p>
                     </div>
                 </div>
-                <h3 className="find-subtitle">휴대폰번호로 아이디 찾기</h3>
                 <form className="find-form" onSubmit={findIdHandler}>
                     <div className="find-input-group">
                         <label htmlFor="userName">이름</label>
@@ -87,7 +88,9 @@ function FindId() {
                         />
                         <div className="ruleMsg">{phoneMsg}</div>
                     </div>
-                    <button type="submit" className="find-button">확인</button>
+                    <div className="findButtonBox">
+                        <button type="submit" className="find-button">확인</button>
+                    </div>
                 </form>
             </div>
         </>

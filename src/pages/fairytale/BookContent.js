@@ -37,24 +37,32 @@ function BookContent() {
     }, [fairytaleCode]);
     
     return (
-        <div className="book-content">
-            <div className="contentImgBox">
-                <img src={bookDetail.fairytaleThumb} className="contentImg" alt="Fairytale Thumbnail" />
+        <div className="bookContent">
+            <div className="bookBox">
+                <div className="contentImgBox">
+                    <img src={bookDetail.fairytaleThumb} className="contentImg" alt="Fairytale Thumbnail" />
+                </div>
+                <div className="contentListBox">
+                    <div className="contentList">
+                        <p className="listName">제목</p>
+                        <input type="text" value={bookDetail.fairytaleTitle} className="titleInput" />
+                    </div>
+                    <div className="contentList">
+                        <p className="listName">저자</p>
+                        <input type="text" value={bookDetail.userId} className="userInput" />
+                    </div>
+                    <div className="contentList">    
+                        <p className="listName">장르</p>
+                        <input type="text" value={bookDetail.fairytaleGenre} className="genreInput" />
+                    </div>
+                    <div className="contentList">
+                        <p className="listName">줄거리</p>
+                        <textarea type="text" value={bookDetail.fairytaleSummary} className="summaryInput" />
+                    </div>
+                </div>
             </div>
-            <div className="contentListBox">
-                <p className="fairytaleName">{bookDetail.fairytaleTitle}</p>
-                <div className="contentList">    
-                    <p className="listName">장르</p>
-                    <input type="text" value={bookDetail.fairytaleGenre} />
-                </div>
-                <div className="contentList">
-                    <p className="listName">줄거리</p>
-                    <input type="text" value={bookDetail.fairytaleSummary} />
-                </div>
-                <div className="contentList">
-                    <p className="listName">저자</p>
-                    <input type="text" value={bookDetail.userId} />
-                </div>
+            <div className="voiceBox">
+
             </div>
         </div>
     );
