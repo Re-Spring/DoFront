@@ -17,23 +17,23 @@ export function useAuth() {
 export const AuthProvider = ({ children }) => {
     // 사용자 상태를 관리하기 위한 State. 기본값은 null로, 로그인하지 않은 상태를 나타냅니다.
     const [user, setUser] = useState(null);
-    console.log("AuthContext user 1 : ", user);
+    // console.log("AuthContext user 1 : ", user);
     // 로딩 상태 관리를 위한 state 추가
     const [loading, setLoading] = useState(true);
 
     // 로컬 스토리지에서 로그인 토큰(accessToken)을 읽어와 디코딩한 후, 사용자 상태를 업데이트하는 함수입니다.
     const updateLoginState = async () => {
         const accessToken = localStorage.getItem("accessToken");
-        console.log("AuthContext accessToken : ", accessToken);
+        // console.log("AuthContext accessToken : ", accessToken);
         if (accessToken) {
             // 토큰이 존재하면, jwtDecode를 사용해 디코딩하고 사용자 상태를 업데이트합니다.
             const decoded = jwtDecode(accessToken);
             setUser(decoded);
-            console.log("AuthContext user 2 : ", user);
+            // console.log("AuthContext user 2 : ", user);
         } else {
             // 토큰이 존재하지 않으면, 사용자 상태를 null로 설정해 로그아웃 상태로 만듭니다.
             setUser(null);
-            console.log("AuthContext user 3 : ", user);
+            // console.log("AuthContext user 3 : ", user);
         }
         // 로그인 상태 업데이트 후 로딩 상태를 false로 변경
         setLoading(false); 

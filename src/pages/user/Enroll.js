@@ -1,6 +1,5 @@
 import { useCallback, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { userEnrollAPI } from "../../apis/AuthAPI";
 import "../../styles/user/Enroll.css";

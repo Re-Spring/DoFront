@@ -1,14 +1,110 @@
+.voiceClone {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 가운데 정렬을 유지합니다. */ 
+    margin: 1%;
+}
+
+.voiceClone > button {
+    padding: 5px 30px;
+    border-radius: 10px;
+    outline: none;
+    border: solid 1px #EB9A0E;
+    background-color: #EB9A0E;
+    font-size: 20px;
+    color: #744A19;
+    cursor: pointer;
+}
+
+.bigTitle {
+    width: 90%; /* 컨테이너의 너비를 100%로 설정합니다. */
+    display: flex; /* flexbox를 활용합니다. */
+    justify-content: flex-start; /* 컨테이너 내의 아이템을 왼쪽으로 정렬합니다. */
+}
+
+.middleTitle {
+    width: 80%;
+    display: flex;
+    justify-content: space-between; /* 자식 요소들을 양쪽 끝으로 배치합니다. */
+}
+
+.middleTitle h2 {
+    align-self: flex-end; /* h3 요소를 아래쪽으로 정렬합니다. */
+}
+
+.clomeImg {
+    width: 200px;
+    height: 100px;
+}
+
 .infoBox {
     border: 1px solid black;
     padding: 20px;
     width: fit-content;
     border-radius: 10px; /* 테두리를 둥글게 설정 */
-
+    width: 80%;
+    font-size: 18px;
 }
 .recodingBox {
     border: 1px solid black;
     padding: 20px;
-    width: fit-content;
+    min-width: 200px;
+    width: 91%;
+    max-height: 400px;
+    /* width: fit-content; */
     border-radius: 10px; /* 테두리를 둥글게 설정 */
+    white-space: pre-wrap;
+    font-size: 18px;
+}
 
+.recordingContainer {
+    display: flex;
+    justify-content: center space-around; /* 가운데 정렬 */
+    gap: 50px; /* 요소 사이의 간격 */
+    width: 82%;
+}
+
+.recordingContainer > div {
+    flex: 1; /* 모든 자식 div가 동일한 너비를 가지게 합니다 */
+    
+    width: fit-content;
+}
+
+.buttonsContainer {
+    display: flex; /* Flexbox 레이아웃 사용 */
+    justify-content: space-around; /* 버튼 사이에 공간 동등하게 배분 */
+    width: 100%; /* 컨테이너 전체 너비 사용 */
+}
+
+.buttonsContainer button {
+    padding: 5px 30px;
+    border-radius: 10px;
+    outline: none;
+    border: solid 1px #EB9A0E;
+    background-color: #EB9A0E;
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+.buttonsContainer button:first-child {
+    margin-right: auto; /* 첫 번째 버튼 오른쪽 마진을 auto로 설정하여 왼쪽으로 정렬 */
+}
+
+.buttonsContainer button:last-child {
+    margin-left: auto; /* 마지막 버튼 왼쪽 마진을 auto로 설정하여 오른쪽으로 정렬 */
+}
+
+.buttonsContainer button:disabled {
+    color: lightgray;
+    cursor: default;
+}
+
+audio {
+    width: 100%; /* 너비를 100%로 설정하여 부모 요소에 맞춤 */
+}
+
+/* 플레이어 컨트롤의 일반적인 스타일 변경 */
+audio::-webkit-media-controls-panel {
+    background-color: #F1D993;
 }
