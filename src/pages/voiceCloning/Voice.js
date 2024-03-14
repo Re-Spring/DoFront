@@ -181,7 +181,9 @@ function Voice() {
             <div className="bigTitle">
                 <h1>목소리 등록</h1>
             </div>
-            {!tempVoiceCode || !user.userVoiceId || user.userVoiceId === null ? (
+            { tempVoiceCode || user.userVoiceId || user.userVoiceId !== null ? (
+                <h2>이미 목소리가 등록되어있습니다. 즐거운 리링 하세요!</h2>
+            ) : (
                 <>
                     <div className="middleTitle">
                         <h2>안내 사항</h2>
@@ -215,8 +217,6 @@ function Voice() {
                     <br/><br/>
                     <button onClick={cloneVoiceHandler}>목소리 등록</button>
                 </>
-            ) : (
-                <h2>이미 목소리가 등록되어있습니다. 즐거운 리링 하세요!</h2>
             )}
         </div>
     </>
