@@ -14,15 +14,21 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+
+    // console.log("AuthContext user 1 : ", user);
+    // 로딩 상태 관리를 위한 state 추가
     const [loading, setLoading] = useState(true);
 
     const updateLoginState = async () => {
         const accessToken = localStorage.getItem("accessToken");
+        // console.log("AuthContext accessToken : ", accessToken);
         if (accessToken) {
             const decoded = jwtDecode(accessToken); // 수정된 함수 사용
             setUser(decoded);
+            // console.log("AuthContext user 2 : ", user);
         } else {
             setUser(null);
+            // console.log("AuthContext user 3 : ", user);
         }
         setLoading(false);
     };

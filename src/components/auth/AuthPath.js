@@ -4,7 +4,7 @@ import { useAuth } from "./AuthContext";
 export function RequireAuth({ children }) {
   // 로딩 상태와 사용자 상태를 가져옵니다.
   const { user, loading } = useAuth();
-  console.log("AuthContext user : ", user);
+  // console.log("AuthContext user : ", user);
 
   // 로딩 중인 경우, 로딩 인디케이터 혹은 아무것도 렌더링하지 않음
   if (loading) {
