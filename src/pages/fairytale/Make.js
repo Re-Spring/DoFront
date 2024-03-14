@@ -1,58 +1,66 @@
 import React, { useCallback ,useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { MakeAPI } from "../../apis/MakeAPI";
 import "../../styles/common/Common.css";
 import "../../styles/mybook/Make.css";
 import { jwtDecode } from "jwt-decode";
+import { useWebSocket } from './WebSocketProvider';
+
+
 
 
 function Make(){
-
-    // dispatch 쓰기 위해서 한 것
-    const dispatch = useDispatch();
 
     const [title, setTitle] = useState('');
     const [character, setCharacter] = useState('');
     const [genre, setGenre] = useState('');
     const [keyword, setKeyword] = useState('');
     const [lesson, setLesson] = useState('');
+//    const [title, setTitle] = useState();
+//    const [character, setCharacter] = useState();
+//    const [genre, setGenre] = useState();
+//    const [keyword, setKeyword] = useState();
+//    const [lesson, setLesson] = useState();
     const [page, setPage] = useState('6');
     const [voice, setVoice] = useState('echo');
+
+    const { sendMessage } = useWebSocket('ws://localhost:8002/ws')
+
 
     const titleHandler = useCallback(async (e) => {
         const entTitle = e.target.value;
         setTitle(entTitle)
-    });
+    }, []);
 
     const characterHandler = useCallback(async (e) => {
         const entCharacter = e.target.value;
         setCharacter(entCharacter)
-    });
+    }, []);
 
     const genreHandler = useCallback(async (e) => {
         const entGenre = e.target.value;
         setGenre(entGenre)
-    });
+    }, []);
 
     const keywordHandler = useCallback(async (e) => {
         const entKeyword = e.target.value;
         setKeyword(entKeyword)
-    });
+    }, []);
 
     const lessonHandler = useCallback(async (e) => {
         const entLesson = e.target.value;
         setLesson(entLesson)
-    });
+    }, []);
 
     const pageHandler = useCallback(async (e) => {
         const entPage = e.target.value;
         setPage(entPage)
-    });
+    }, []);
 
     const voiceHandler = useCallback(async (e) => {
         const entVoice = e.target.value;
         setVoice(entVoice)
-    });
+    }, []);
+
+
 
     const user  = jwtDecode(localStorage.getItem("accessToken"));
     const userId = user.userId
@@ -64,11 +72,9 @@ function Make(){
             e.preventDefault();
             console.log("test",title, character, genre, keyword, lesson, page, voice);
 
-
             if(genre === ''){
                 alert('장르를 선택해주세요');
             }else{
-
                 const makeData = {
                     title: title,
                     character: character,
@@ -79,10 +85,8 @@ function Make(){
                     voice:voice,
                     userId:userId,
                     userCode:userCode
-            }
-            dispatch(MakeAPI({
-                makeData
-        }));
+            };
+            sendMessage(makeData);
         }
     }
 
