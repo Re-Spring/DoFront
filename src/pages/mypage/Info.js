@@ -1,63 +1,69 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../components/auth/AuthContext";
 import "../../styles/mypage/Info.css";
 
 function Info() {
-    const { user, updateLoginState } = useAuth();
+    const navigate = useNavigate();
+    const { user, logout } = useAuth(); // 로그아웃 함수를 가져옵니다.
 
-    // 사용자 정보와 입력 필드의 수정 가능 여부를 상태로 관리합니다.
     const [userInfo, setUserInfo] = useState({
-        userName: user.userName,
-        phone: user.phone,
+        userName: user?.userName || '', // Optional chaining for safety
+        phone: user?.phone || '',
     });
     const [isEditable, setIsEditable] = useState(false);
 
-    // 입력 필드 변경을 관리하는 함수입니다.
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setUserInfo({ ...userInfo, [name]: value });
     };
 
-    // '정보 수정하기' 버튼 클릭 이벤트 핸들러입니다.
-    const handleEditClick = () => {
-        setIsEditable(true); // 입력 필드를 수정 가능하게 설정합니다.
-    };
-
-    // '수정 완료' 버튼 클릭 이벤트 핸들러입니다.
     const handleUpdate = async () => {
         try {
-            const response = await fetch('/auth/update', {
+            const response = await fetch('http://localhost:8001/auth/update', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    // 인증 헤더가 필요한 경우 여기에 추가
                 },
                 body: JSON.stringify({
-                    userId: parseInt(user.userId, 10), // userId를 Integer로 변환
+                    userId: user.userId,
                     userName: userInfo.userName,
-                    phone: userInfo.phone
+                    phone: userInfo.phone,
                 }),
             });
-    
+
             if (!response.ok) {
                 throw new Error('Failed to update user information');
             }
-    
-            // 서버 응답에 따른 추가 로직
-            // 예: const updatedUser = await response.json();
-            alert('사용자 정보가 성공적으로 업데이트되었습니다.');
-            setIsEditable(false); // 수정 완료 후 입력 필드를 다시 읽기 전용으로 설정
-            // 상태 업데이트 로직
+
+            Swal.fire({
+                title: "수정 성공!",
+                text: "정보가 수정 되었습니다. 다시 로그인 해주세요.",
+                icon: "success"
+              });
+            logout(); // 로그아웃 함수 호출
+            navigate('/login'); // 로그아웃 후 로그인 페이지로 리다이렉션
         } catch (error) {
             console.error('Failed to update user information:', error);
-            alert('사용자 정보 업데이트에 실패했습니다.');
+            Swal.fire({
+                title: "수정 실패",
+                text: "정보 업데이트를 실패했습니다.",
+                icon: "error"
+              });
         }
+    };
+
+    // 날짜 포맷을 "YYYY. MM. DD" 형식으로 조정합니다.
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return `${date.getFullYear()}. ${String(date.getMonth() + 1).padStart(2, '0')}. ${String(date.getDate()).padStart(2, '0')}`;
     };
 
     return (
         <div className="info">
             <div className="welcomeMessage">
-                <p>{user.enrollDate}로부터 Do:Riring과 함께하셨습니다❤️</p>
+                <p>{formatDate(user.enrollDate)}로부터 Do:Riring과 함께하셨습니다❤️</p>
             </div>
             <div className="myInfo">
                 <div className="infoList">
@@ -84,11 +90,11 @@ function Info() {
                         readOnly={!isEditable}
                     />
                 </div>
-                <div className="nodifyBox">
+                <div className="notifyBox">
                     {isEditable ? (
                         <button onClick={handleUpdate} className="modify">수정 완료</button>
                     ) : (
-                        <button onClick={handleEditClick} className="modify">정보 수정하기</button>
+                        <button onClick={() => setIsEditable(true)} className="modify">정보 수정하기</button>
                     )}
                 </div>
             </div>
