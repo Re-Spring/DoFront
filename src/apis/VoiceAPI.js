@@ -24,7 +24,7 @@ export const voiceCloningAPI = (formData) => {
                 console.log(response);
                 if(response.status === 200){
                     dispatch(postClone(response.data));
-                    localStorage.setItem('tempVoiceCode', response.data);
+                    localStorage.setItem('tempVoiceCode', response.data.userVoiceId);
                     Swal.fire({
                         icon: 'success',
                         title: "목소리가 등록되었습니다",
