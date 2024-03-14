@@ -17,7 +17,7 @@ export function useAuth() {
 export const AuthProvider = ({ children }) => {
     // 사용자 상태를 관리하기 위한 State. 기본값은 null로, 로그인하지 않은 상태를 나타냅니다.
     const [user, setUser] = useState(null);
-    // console.log("AuthContext user 1 : ", user);
+    console.log("AuthContext user 1 : ", user);
     // 로딩 상태 관리를 위한 state 추가
     const [loading, setLoading] = useState(true);
 

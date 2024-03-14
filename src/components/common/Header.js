@@ -28,6 +28,7 @@ function Header() {
         event.preventDefault(); 
         // 로컬 스토리지에서 토큰 제거
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('tempVoiceCode');
         // // 로그인 상태 업데이트
         updateLoginState();
         window.location.href = '/';
