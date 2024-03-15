@@ -14,8 +14,8 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+      // console.log("AuthContext user 1 : ", user);
 
-    // console.log("AuthContext user 1 : ", user);
     // 로딩 상태 관리를 위한 state 추가
     const [loading, setLoading] = useState(true);
 

@@ -5,20 +5,36 @@ import { postClone } from "../modules/VoiceModule";
 // 비동기 액션 생성자
 export const voiceCloningAPI = (formData) => {
     console.log("API에서 formdata 확인 : ", formData);
+    for (let key of formData.keys()) {
+        console.log(key, ":", formData.get(key));
+    }
+    for (let value of formData.values()) {
+        console.log(value);
+    }
     const requestURL = 'http://localhost:8002/voiceCloning';
 
     return async (dispatch) => {
-        await axios.post(requestURL, formData)
+        await axios.post(requestURL, formData, 
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data' // 명시적으로 Content-Type 설정
+                }
+            })
             .then(function (response) {
                 console.log(response);
                 if(response.status === 200){
                     dispatch(postClone(response.data));
+                    localStorage.setItem('tempVoiceCode', response.data.userVoiceId);
                     Swal.fire({
                         icon: 'success',
                         title: "목소리가 등록되었습니다",
                         text: "이제 동화를 등록한 목소리로 들을 수 있습니다. 즐링!",
                         confirmButtonText: "확인"
-                    })
+                    }).then(result => {
+                        if(result.isConfirmed){
+                            window.location.reload();;
+                        }
+                    });
                 }
             })
             .catch(function (error) {
@@ -30,6 +46,10 @@ export const voiceCloningAPI = (formData) => {
                     title: "목소리 등록 시도 중 오류가 발생했습니다",
                     text: "문제가 지속될 경우 고객센터로 문의 바랍니다.",
                     confirmButtonText: "확인"
+                }).then(result => {
+                    if(result.isConfirmed){
+                        window.location.reload();;
+                    }
                 });
             });
     }

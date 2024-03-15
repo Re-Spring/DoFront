@@ -23,6 +23,9 @@ function Header() {
 
     const handleLogout = () => {
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('tempVoiceCode');
+        // // 로그인 상태 업데이트
+
         updateLoginState();
         navigate('/');
     };
