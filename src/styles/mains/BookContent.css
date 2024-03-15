@@ -14,8 +14,9 @@
   width: 20%;
 }
 
-.contentImg{ /* 이미지 표지 그림 */
-  width: 300px;
+.contentImg { /* 이미지 표지 그림 */
+  width: 300px; 
+  height: 400px; 
 }
 
 .contentListBox{ /* 상세 내용 리스트 */
