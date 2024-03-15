@@ -1,47 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../auth/AuthContext';
 import "../../styles/mains/Header.css";
 import "../../styles/common/Common.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { useAuth } from '../auth/AuthContext';
 
 function Header() {
-
-    const { user, updateLoginState } = useAuth(); 
+    const { user, updateLoginState } = useAuth();
+    const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        // 로그인 성공 시 발생하는 커스텀 이벤트를 감지하고 처리하는 함수
         const handleLoginSuccess = () => {
-            // 로그인 상태를 업데이트하는 기존 함수 호출
             updateLoginState();
         };
         window.addEventListener("loginSuccess", handleLoginSuccess);
-        // 컴포넌트 언마운트 시 이벤트 리스너 제거
         return () => {
             window.removeEventListener("loginSuccess", handleLoginSuccess);
         };
     }, [updateLoginState]);
 
-    // 로그아웃 함수
-    const handleLogout = (event) => {
-        // 이벤트 기본 동작 방지
-        event.preventDefault(); 
-        // 로컬 스토리지에서 토큰 제거
+    const handleLogout = () => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('tempVoiceCode');
         // // 로그인 상태 업데이트
+
         updateLoginState();
-        window.location.href = '/';
+        navigate('/');
     };
 
-    // 각 메뉴에 대한 서브메뉴 표시 상태를 관리하기 위한 상태
+    const handleSearch = (event) => {
+        event.preventDefault();
+        if (!searchTerm.trim()) {
+            alert("검색어를 입력해주세요.");
+            return;
+        }
+        navigate('/search', { state: { searchTerm } });
+    };
+
     const [subMenuStates, setSubMenuStates] = useState({
         myBook: false,
         voice: false,
         myPage: false
     });
 
-    // 메뉴에 마우스를 올렸을 때 해당 서브메뉴를 표시하는 로직
     const handleMouseEnter = (menu) => {
         setSubMenuStates(prevState => ({
             ...prevState,
@@ -49,7 +52,6 @@ function Header() {
         }));
     };
 
-    // 메뉴에서 마우스를 떼었을 때 해당 서브메뉴를 숨기는 로직
     const handleMouseLeave = (menu) => {
         setSubMenuStates(prevState => ({
             ...prevState,
@@ -65,10 +67,12 @@ function Header() {
                         <img src="../images/logo.png" alt="" className="logo" />
                     </a>
                     <div className="searchBox">
-                        <input className="searchInput" type="text" placeholder="동화 검색" />
-                        <button className="searchBtn">
+                        <input className="searchInput" type="text" placeholder="동화 검색" 
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}/>
+                        <button onClick={handleSearch} className="searchBtn">
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
+                    </button>
                     </div>
                 </div>
                 <div className="mainWrap">
