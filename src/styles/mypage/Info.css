@@ -14,13 +14,14 @@
 }
 
 .welcomeMessage{
-    width: 27%;
+    width: 32%;
     height: 80px;
     line-height: 45px;
     margin: auto;
     border-radius: 10px;
-    border: solid 1px #CCB396;
-    background-color: #CCB396;
+    /* border: solid 1px #CCB396; */
+    /* background-color: #CCB396; */
+    color: #CCB396;
     margin-top: 70px;
 }
 
