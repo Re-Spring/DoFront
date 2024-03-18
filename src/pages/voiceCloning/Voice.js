@@ -19,8 +19,8 @@ function Voice() {
     ]);
     const [audioUrls, setAudioUrls] = useState([null, null, null]);
     const recordingMessages = [
-        "벚꽃이 피면 사람들은 말한대\n봄이 왔다 기분 좋다\n\n그런데 벚꽃에는\n사람들이 모르는 향기로운 비밀이 있대\n\n벚꽃이 지면 그때야 알게 돼\n딱 일주일 길면 이 주\n찰나를 살고 찰나 속에 가는 벚꽃이란 그리움인걸",
-        "내가 눈 떴을 때 때는 바야흐로 봄이었다.\n대지는 척박하고 바람은 거칠었다.\n뿌리를 잘못 내린 듯 아무도 축복하지 않았지만,\n그래도 봄은 아름다웠다.\n\n잘게 분해되는 눈 위로 따뜻한 햇살이 덮였다.",
+        "\n벚꽃이 피면 사람들은 말한대\n봄이 왔다 기분 좋다\n\n그런데 벚꽃에는\n사람들이 모르는 향기로운 비밀이 있대\n\n벚꽃이 지면 그때야 알게 돼\n딱 일주일 길면 이 주\n찰나를 살고 찰나 속에 가는 벚꽃이란 그리움인걸\n\n",
+        "\n\n내가 눈 떴을 때 때는 바야흐로 봄이었다.\n대지는 척박하고 바람은 거칠었다.\n뿌리를 잘못 내린 듯 아무도 축복하지 않았지만,\n그래도 봄은 아름다웠다.\n\n잘게 분해되는 눈 위로 따뜻한 햇살이 덮였다.\n\n\n\n",
         "그대가 밀어올린 꽃줄기 끝에서\n그대가 피는 것인데\n왜 내가 이다지도 떨리는지\n\n그대가 피어 그대 몸속으로\n꽃벌 한 마리 날아든 것인데\n왜 내가 이다지도 아득한지\n왜 내 몸이 이리도 뜨거운지\n\n그대가 꽃피는 것이\n처음부터 내 일이었다는 듯이"
     ];
     
@@ -179,10 +179,15 @@ function Voice() {
     <>
         <div className='voiceClone'>
             <div className="bigTitle">
-                <h1>목소리 등록</h1>
+                <p>목소리 등록</p>
             </div>
             { tempVoiceCode || user.userVoiceId || user.userVoiceId != null ? (
-                <h2>이미 목소리가 등록되어있습니다. 즐거운 리링 하세요!</h2>
+                <>
+                    <img className='cloneImg2' src="/images/clone_img_3.jpg"/>
+                    <br/><br/>
+                    <h2 style={{color : '#EB9A0E'}}>이미 목소리가 등록되어 있습니다. 즐거운 리링 하세요!</h2>
+                    <br/><br/><br/>
+                </>
             ) : (
                 <>
                     <div className="middleTitle">

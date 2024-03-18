@@ -110,8 +110,8 @@ function Header() {
                         {user ? (
                             // 토큰이 있는 경우 사용자 이름과 로그아웃 표시
                             <>
-                                <a>{user.userName}님 환영합니다 |</a>
-                                <a onClick={handleLogout}> 로그아웃</a>
+                                <a style={{ cursor: 'default' }}>{user.userName}님 환영합니다 |</a>
+                                <a onClick={handleLogout} style={{ cursor: 'pointer' }}> 로그아웃</a>
                             </>
                         ) : (
                             // 토큰이 없는 경우 로그인 및 회원가입 링크 표시

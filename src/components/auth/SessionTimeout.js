@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Swal from "sweetalert2";
 import { useAuth } from "./AuthContext";
 
-export function SessionTimeout(timeoutDuration = 1800000) { // 기본 타임아웃을 30분(1800000ms)으로 설정, 5분(300000ms), 1분(60000ms)
+export function SessionTimeout(timeoutDuration = 3600000) { // 기본 타임아웃을 60분(3600000)으로 설정, 30분(1800000ms), 5분(300000ms), 1분(60000ms)
     const { user, updateLoginState } = useAuth();
 
     useEffect(() => {
