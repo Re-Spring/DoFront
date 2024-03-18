@@ -2,28 +2,21 @@ import React, { useCallback ,useState, useEffect } from 'react';
 import "../../styles/common/Common.css";
 import "../../styles/mybook/Make.css";
 import { jwtDecode } from "jwt-decode";
-import { useWebSocket } from './WebSocketProvider';
-
-
+import { MakeAPI } from "../../apis/MakeAPI";
+import { useDispatch } from 'react-redux';
 
 
 function Make(){
+
+    const dispatch = useDispatch();
 
     const [title, setTitle] = useState('');
     const [character, setCharacter] = useState('');
     const [genre, setGenre] = useState('');
     const [keyword, setKeyword] = useState('');
     const [lesson, setLesson] = useState('');
-//    const [title, setTitle] = useState();
-//    const [character, setCharacter] = useState();
-//    const [genre, setGenre] = useState();
-//    const [keyword, setKeyword] = useState();
-//    const [lesson, setLesson] = useState();
     const [page, setPage] = useState('6');
     const [voice, setVoice] = useState('echo');
-
-    const { sendMessage } = useWebSocket('ws://localhost:8002/ws')
-
 
     const titleHandler = useCallback(async (e) => {
         const entTitle = e.target.value;
@@ -60,8 +53,6 @@ function Make(){
         setVoice(entVoice)
     }, []);
 
-
-
     const user  = jwtDecode(localStorage.getItem("accessToken"));
     const userId = user.userId
     const userCode = user.userCode
@@ -85,8 +76,10 @@ function Make(){
                     voice:voice,
                     userId:userId,
                     userCode:userCode
-            };
-            sendMessage(makeData);
+            }
+            dispatch(MakeAPI({
+                makeData
+        }));
         }
     }
 
