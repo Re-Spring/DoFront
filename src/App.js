@@ -14,6 +14,7 @@ import { PublicRoute, RequireAuth } from './components/auth/AuthPath';
 import FindId from './pages/user/FindId';
 import FindPw from './pages/user/FindPw';
 import SearchPage from './pages/fairytale/SearchPage'; // SearchPage 컴포넌트의 경로에 맞게 조정해주세요.
+import { SessionTimeout } from './components/auth/SessionTimeout';
 import MyBook from './pages/fairytale/MyBook';
 
 function App() {
@@ -45,9 +46,15 @@ function App() {
         </Routes>
 
       </BrowserRouter>
+      <SessionManager />
     </AuthProvider>
 
   );
+}
+
+function SessionManager() {
+  SessionTimeout();
+  return null; // 이 컴포넌트는 UI를 렌더링하지 않음
 }
 
 export default App;

@@ -3,9 +3,11 @@ import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { userLoginAPI } from "../../apis/AuthAPI";
 import "../../styles/user/Login.css";
+import { useAuth } from "../../components/auth/AuthContext";
 
 function Login() { 
 
+    const { logout } = useAuth();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const idInputRef = useRef(null);
@@ -26,7 +28,7 @@ function Login() {
         console.log(userId, password);
 
         dispatch(userLoginAPI({
-            userId, password, navigate
+            userId, password, navigate, logout
         }));
     }
 

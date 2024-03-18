@@ -26,8 +26,9 @@ function Header() {
         localStorage.removeItem('tempVoiceCode');
         // // 로그인 상태 업데이트
 
-        updateLoginState();
-        navigate('/');
+        // updateLoginState();
+        window.location.reload(); // 페이지 새로고침
+        // navigate('/');
     };
 
     const handleSearch = (event) => {
