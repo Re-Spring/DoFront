@@ -57,34 +57,35 @@ function Info() {
     const handleWithdrawal = async () => {
         const isConfirmed = await Swal.fire({
             title: '정말로 탈퇴하시겠습니까?',
-            text: "이 작업은 되돌릴 수 없습니다!",
+            text: "탈퇴하면 재가입은 한 달 뒤에 가능합니다!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: '네, 탈퇴하겠습니다!'
         });
-
+    
         if (isConfirmed.value) {
             try {
                 const response = await fetch(`http://localhost:8001/auth/withdrawal/${user.userId}`, {
                     method: 'DELETE',
                 });
-
+    
                 if (!response.ok) {
                     throw new Error('Failed to withdraw');
                 }
-
-                Swal.fire(
+    
+                // 사용자가 확인 버튼을 클릭한 후 탈퇴 처리 완료 알림을 표시
+                await Swal.fire(
                     '탈퇴 처리됨!',
                     '회원 탈퇴가 성공적으로 처리되었습니다.',
                     'success'
                 );
-                logout();
-                navigate('/login');
+                logout(); // 로그아웃 처리
+                navigate('/login'); // 로그인 페이지로 리다이렉션
             } catch (error) {
                 console.error('Failed to withdraw:', error);
-                Swal.fire({
+                await Swal.fire({
                     title: "탈퇴 실패",
                     text: "회원 탈퇴를 실패했습니다.",
                     icon: "error"
@@ -102,7 +103,7 @@ function Info() {
     return (
         <div className="info">
             <div className="welcomeMessage">
-                <p>{formatDate(user.enrollDate)}로부터 Do:Riring과 함께하셨습니다❤️</p>
+                <h2>{formatDate(user.enrollDate)}로부터 Do-Rering과 함께하셨습니다❤️</h2>
             </div>
             <div className="myInfo">
                 <div className="infoList">
