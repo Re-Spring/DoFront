@@ -41,7 +41,7 @@ export const userEnrollAPI = ({userData, navigate}) => {
     }
 }
 
-let logoutTimer;
+// let logoutTimer;
 
 export const userLoginAPI = ({userId, password, navigate, logout}) => {
     const requestURL = 'http://localhost:8001/auth/login';
@@ -65,7 +65,8 @@ export const userLoginAPI = ({userId, password, navigate, logout}) => {
                     console.log("토큰 디코딩 확인 : ", jwtDecode(accessToken));
                     // 상태 업데이트
                     dispatch(postLogin(response.data));
-                    logoutTimer = setTimeout(logout, loginTokenHandler(jwtDecode(accessToken).exp))
+                    // logoutTimer = setTimeout(logout, loginTokenHandler(jwtDecode(accessToken).exp));
+                    // loginTokenHandler(jwtDecode(accessToken).exp, logout);
                     Swal.fire({
                         icon: 'success',
                         title: "로그인 되었습니다",

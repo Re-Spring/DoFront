@@ -17,9 +17,13 @@
 }
 
 .bigTitle {
-    width: 90%; /* 컨테이너의 너비를 100%로 설정합니다. */
-    display: flex; /* flexbox를 활용합니다. */
-    justify-content: flex-start; /* 컨테이너 내의 아이템을 왼쪽으로 정렬합니다. */
+    font-size: 32px;
+    color: #744A19;
+    margin-left: 400px; /* 왼쪽 마진 조정 */
+    margin-top: 10px; /* 상단 마진을 조정하여 공간 확보 */
+    width: 90%; 
+    display: flex; 
+    justify-content: flex-start; 
 }
 
 .middleTitle {
@@ -35,6 +39,11 @@
 .clomeImg {
     width: 200px;
     height: 100px;
+}
+
+.cloneImg2 {
+    width: 11%;
+    border-radius: 10%;
 }
 
 .infoBox {
@@ -96,7 +105,7 @@
 }
 
 .buttonsContainer button:disabled {
-    color: lightgray;
+    color: gray;
     cursor: default;
 }
 
