@@ -1,6 +1,6 @@
 .info{
     margin: auto;
-    height: 600px;
+    height: 700px;
     text-align: center;
 }
 
@@ -8,7 +8,7 @@
     margin: auto;
     margin-top: 50px;
     width: 20%;
-    height: 400px;
+    height: 480px;
     border: solid 1px #874900;
     border-radius: 10px;
 }
@@ -48,6 +48,25 @@
     padding: 12px 100px;
     background-color: #CCB396;
     border: solid 1px #CCB396;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.modifing{
+    margin-top: 50px;
+    padding: 12px 116px;
+    background-color: #CCB396;
+    border: solid 1px #CCB396;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.withdraw{
+    margin-top: 20px;
+    padding: 12px 100px;
+    background-color: white;
+    border: solid 1px #BC9F7D;
+    color: #a07e58;
     border-radius: 10px;
     font-size: 16px;
 }

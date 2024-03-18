@@ -83,7 +83,7 @@ function Header() {
                                 {subMenuStates.myBook && (
                                     <ul className="subMenu">
                                         <li><a href="/Make">동화 만들기</a></li>
-                                        <li><a href="/">내 동화</a></li>
+                                        <li><a href="/MyBook">내 동화</a></li>
                                     </ul>
                                 )}
                             </li>

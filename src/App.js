@@ -14,6 +14,7 @@ import { PublicRoute, RequireAuth } from './components/auth/AuthPath';
 import FindId from './pages/user/FindId';
 import FindPw from './pages/user/FindPw';
 import SearchPage from './pages/fairytale/SearchPage'; // SearchPage 컴포넌트의 경로에 맞게 조정해주세요.
+import MyBook from './pages/fairytale/MyBook';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="info" element={ <RequireAuth><Info/></RequireAuth> }/>
             <Route path="voice" element={ <RequireAuth><Voice/></RequireAuth> }/>
             <Route path="search" element={<SearchPage />} />
+            <Route path="mybook" element={<MyBook />} />
           </Route>
 
           <Route path='login' element={ <PublicRoute><Login/></PublicRoute> }/>
