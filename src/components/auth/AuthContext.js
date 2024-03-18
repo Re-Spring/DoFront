@@ -34,8 +34,11 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-        localStorage.removeItem("accessToken");
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('tempVoiceCode');
+        window.location.reload(); // 페이지 새로고침
         setUser(null);
+        
     };
 
     useEffect(() => {
