@@ -1,15 +1,19 @@
-// // 회원가입 프론트 갈아엎기 전
+// const calculateRemainingTime = (expirationTime) => {
+//     const currentTime = new Date().getTime();
+//     const adjExpirationTime = new Date(expirationTime).getTime();
+//     const remainingDuration = adjExpirationTime - currentTime;
+//     return remainingDuration;
+//   };
 
-// import {GET, POST} from "../../apis/AuthAPI";
+export const loginTokenHandler = (expirationTime) => {
+    expirationTime = expirationTime * 1000; // JWT exp 값은 초 단위이므로, 밀리초 단위로 변환
+    const currentTime = new Date().getTime(); // 현재 시간을 밀리초 단위로 가져옴
+    const timeUntilExpiration = expirationTime - currentTime; // 만료까지 남은 시간 계산
 
-// // 회원가입 요청을 처리하는 함수
-// export const enrollActionHandler = (userId, password, userName, phone) => {
-//     // 회원가입 API의 엔드포인트
-//     const URL = '/auth/enroll';
-//     // 요청 본문
-//     const enrollObject = {userId, password, userName, phone};
-//     // POST 요청
-//     const response = POST(URL, enrollObject, {});
-//     // 응답 반환
-//     return response;
-// };
+    // localStorage.setItem('expirationTime', String(expirationTime));
+    // console.log(String(expirationTime));
+    // const remainingTime = calculateRemainingTime(expirationTime);
+    // console.log(remainingTime);
+
+    return timeUntilExpiration;
+  };

@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 import axios from "axios";
 import { getFindId, getFindPw, postEnroll, postLogin, postModifyPw } from '../modules/AuthModule';
 import { jwtDecode } from 'jwt-decode';
+import { loginTokenHandler } from '../components/auth/AuthAction';
 
 
 export const userEnrollAPI = ({userData, navigate}) => {
@@ -40,7 +41,9 @@ export const userEnrollAPI = ({userData, navigate}) => {
     }
 }
 
-export const userLoginAPI = ({userId, password, navigate}) => {
+let logoutTimer;
+
+export const userLoginAPI = ({userId, password, navigate, logout}) => {
     const requestURL = 'http://localhost:8001/auth/login';
     console.log("api 전 : ", userId, password);
     return async (dispatch, getState) => {
@@ -62,6 +65,7 @@ export const userLoginAPI = ({userId, password, navigate}) => {
                     console.log("토큰 디코딩 확인 : ", jwtDecode(accessToken));
                     // 상태 업데이트
                     dispatch(postLogin(response.data));
+                    logoutTimer = setTimeout(logout, loginTokenHandler(jwtDecode(accessToken).exp))
                     Swal.fire({
                         icon: 'success',
                         title: "로그인 되었습니다",
