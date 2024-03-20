@@ -2,7 +2,6 @@ import Swal from 'sweetalert2';
 import axios from "axios";
 import { getFindId, getFindPw, postEnroll, postLogin, postModifyPw } from '../modules/AuthModule';
 import { jwtDecode } from 'jwt-decode';
-import { loginTokenHandler } from '../components/auth/AuthAction';
 
 
 export const userEnrollAPI = ({userData, navigate}) => {

@@ -109,6 +109,12 @@
     cursor: default;
 }
 
+.recordMsg{
+    text-align: center;
+    font-size: 15px;
+    color: rgb(0, 200, 0);
+}
+
 audio {
     width: 100%; /* 너비를 100%로 설정하여 부모 요소에 맞춤 */
 }
@@ -116,4 +122,17 @@ audio {
 /* 플레이어 컨트롤의 일반적인 스타일 변경 */
 audio::-webkit-media-controls-panel {
     background-color: #F1D993;
+}
+
+.loadingContainer{
+    position: fixed; /* 고정 위치 */
+    /* top: 0;
+    left: 0; */
+    width: 50%; /* 화면 전체 너비 */
+    height: 50%; /* 화면 전체 높이 */
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    /* background-color: rgba(0, 0, 0, 0.5);  */
+    z-index: 1000; /* 다른 내용 위에 표시 */
 }
