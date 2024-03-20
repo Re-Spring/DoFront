@@ -17,9 +17,11 @@ import FindPw from './pages/user/FindPw';
 import SearchPage from './pages/fairytale/SearchPage'; // SearchPage 컴포넌트의 경로에 맞게 조정해주세요.
 import { SessionTimeout } from './components/auth/SessionTimeout';
 import MyBook from './pages/fairytale/MyBook';
+import UserInfo from './pages/admin/UserInfo';
 import { firebaseApp } from './configs/Firebase';
 import { getToken, getMessaging } from 'firebase/messaging';
 import { TokenProvider , useToken } from './components/token/TokenContext';
+
 
 
 
@@ -60,25 +62,25 @@ function App() {
 
             <Routes>
 
-              <Route path='/' element={<Layout/>}>
-                <Route index element={ <Main/> }/>
-                <Route path="bookContent/:fairytaleCode" element={<BookContent />} />
-                <Route path='dubing' element={ <RequireAuth><Dubing/></RequireAuth> }/>
-                <Route path="make" element={ <RequireAuth><Make/></RequireAuth> }/>
-                <Route path="info" element={ <RequireAuth><Info/></RequireAuth> }/>
-                <Route path="voice" element={ <RequireAuth><Voice/></RequireAuth> }/>
-                <Route path="search" element={<SearchPage />} />
-                <Route path="mybook" element={<MyBook />} />
-              </Route>
+          <Route path='/' element={<Layout/>}>
+            <Route index element={ <Main/> }/>
+            <Route path="bookContent/:fairytaleCode" element={<BookContent />} />
+            <Route path='dubing' element={ <RequireAuth><Dubing/></RequireAuth> }/>
+            <Route path="make" element={ <RequireAuth><Make/></RequireAuth> }/>
+            <Route path="info" element={ <RequireAuth><Info/></RequireAuth> }/>
+            <Route path="voice" element={ <RequireAuth><Voice/></RequireAuth> }/>
+            <Route path="search" element={ <RequireAuth><SearchPage /></RequireAuth> } />
+            <Route path="mybook" element={ <RequireAuth><MyBook /></RequireAuth> } />
+            <Route path="userInfo" element={ <RequireAuth><UserInfo /></RequireAuth> } />
+          </Route>
 
-              <Route path='login' element={ <PublicRoute><Login/></PublicRoute> }/>
-              <Route path='enroll' element={ <PublicRoute><Enroll/></PublicRoute> }/>
+          <Route path='login' element={ <PublicRoute><Login/></PublicRoute> }/>
+          <Route path='enroll' element={ <PublicRoute><Enroll/></PublicRoute> }/>
 
-              <Route path='findId' element={ <FindId/> }/>
-              <Route path='findPw' element={ <FindPw/> }/>
+          <Route path='findId' element={ <PublicRoute><FindId/></PublicRoute> }/>
+          <Route path='findPw' element={ <PublicRoute><FindPw/></PublicRoute> }/>
 
             </Routes>
-
           </BrowserRouter>
           <SessionManager />
         </AuthProvider>

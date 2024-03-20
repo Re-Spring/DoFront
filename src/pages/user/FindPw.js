@@ -63,7 +63,7 @@ function FindPw() {
     return (
         <>
             <div className="findeLogoBox">
-                <a href="">
+                <a href="/">
                     <img src="images/logo.png" className="find-logo" alt="Logo" />
                 </a>
             </div>
