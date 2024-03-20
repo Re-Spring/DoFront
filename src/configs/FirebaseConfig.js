@@ -1,3 +1,4 @@
+// FirebaseConfig.js
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "do-rering.firebaseapp.com",
