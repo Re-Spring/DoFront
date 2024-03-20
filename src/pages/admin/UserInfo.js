@@ -7,11 +7,24 @@ function UserInfo() {
     
     const dispatch = useDispatch();
 
-    const expVoices = useSelector(state => state.admin)
-
     useEffect(() => {
         dispatch(expiredVoiceAPI());
     }, []);
+
+    const expVoices = useSelector(state => state.admin);
+    console.log("[UserInfo] expVoices 확인 : ", expVoices);
+
+    const [currentPage, setCurrentPage] = useState();
+    const itemsperPage = 10;
+    const totalItems = expVoices?.length;
+    const totalPages = Math.ceil(totalItems / itemsperPage);
+    const startIndex = (currentPage - 1) * itemsperPage;
+    const endIndex = Math.min(startIndex + itemsperPage, totalItems);
+    const handlePageChange = (newPage) => {
+        if (newPage >= 1 && newPage <= totalPages) {
+            setCurrentPage(newPage);
+        }
+    }
 
     const deleteVoiceHandler = async (voiceId) => {
         Swal.fire({
@@ -42,7 +55,7 @@ function UserInfo() {
                 </thead>
                 <tbody>
                     {expVoices && expVoices.length > 0 ? (
-                        expVoices.slice().map(
+                        expVoices.slice(startIndex, endIndex).map(
                             (voices, index) => (
                                 <tr key={voices.no}>
                                     <td>{index}</td>
