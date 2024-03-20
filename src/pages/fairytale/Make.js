@@ -4,11 +4,23 @@ import "../../styles/mybook/Make.css";
 import { jwtDecode } from "jwt-decode";
 import { MakeAPI } from "../../apis/MakeAPI";
 import { useDispatch } from 'react-redux';
+import { useToken } from '../../components/token/TokenContext';
 
 
 function Make(){
 
     const dispatch = useDispatch();
+    const [token, setToken] = useState('');
+
+
+    useEffect(() => {
+    // 로컬 스토리지에서 토큰 가져오기
+    const storedToken = localStorage.getItem('fcmToken');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
+    console.log("토큰값", token)
 
     const [title, setTitle] = useState('');
     const [character, setCharacter] = useState('');
@@ -62,6 +74,7 @@ function Make(){
             // 폼 제출 이벤트 방지
             e.preventDefault();
             console.log("test",title, character, genre, keyword, lesson, page, voice);
+            console.log("token", token)
 
             if(genre === ''){
                 alert('장르를 선택해주세요');
@@ -75,7 +88,8 @@ function Make(){
                     page:page,
                     voice:voice,
                     userId:userId,
-                    userCode:userCode
+                    userCode:userCode,
+                    token:token
             }
             dispatch(MakeAPI({
                 makeData
