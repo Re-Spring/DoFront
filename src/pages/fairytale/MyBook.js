@@ -38,7 +38,8 @@ function MyBook() {
                     </div>
                 ))
             ) : (
-                <div>등록한 동화가 없습니다.</div> // 스토리가 없을 경우 메시지 표시
+                // 스토리가 없을 경우 메시지 표시
+                <div className='notFairytale'>등록한 동화가 없습니다.</div> 
             )}
         </div>
     );
