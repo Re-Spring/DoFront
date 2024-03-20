@@ -22,9 +22,6 @@ import { firebaseApp } from './configs/Firebase';
 import { getToken, getMessaging } from 'firebase/messaging';
 import { TokenProvider , useToken } from './components/token/TokenContext';
 
-
-
-
 function App() {
 
    const { setToken } = useToken();
