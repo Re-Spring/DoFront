@@ -69,7 +69,7 @@ function App() {
             <Route path="make" element={ <RequireAuth><Make/></RequireAuth> }/>
             <Route path="info" element={ <RequireAuth><Info/></RequireAuth> }/>
             <Route path="voice" element={ <RequireAuth><Voice/></RequireAuth> }/>
-            <Route path="search" element={ <RequireAuth><SearchPage /></RequireAuth> } />
+            <Route path="search" element={ <SearchPage /> } />
             <Route path="mybook" element={ <RequireAuth><MyBook /></RequireAuth> } />
             <Route path="userInfo" element={ <RequireAuth><UserInfo /></RequireAuth> } />
           </Route>
