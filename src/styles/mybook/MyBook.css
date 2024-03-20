@@ -5,10 +5,10 @@
     margin-top: 40px;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start; /* 중앙 정렬로 변경 */
-    flex-wrap: wrap; /* 아이템이 넘칠 경우 다음 줄로 넘김 */
-    align-content: space-between;
-
+    flex-direction: column; /* Flex 항목들을 수직으로 정렬합니다. */
+    align-items: center; /* 가로 방향으로 중앙 정렬합니다. */
+    justify-content: center; /* 세로 방향으로 중앙 정렬합니다. */
+    height: 100%; /* 부모 요소의 전체 높이를 차지하도록 설정합니다. */
 }
 
 .myBookItem {
@@ -32,4 +32,11 @@
     width: 100%; /* 이미지의 너비를 자동으로 설정하여 비율 유지 */
     max-width: 100%; /* 이미지가 컨테이너를 벗어나지 않도록 설정 */
     height: 200px; /* 이미지의 높이를 자동으로 조절 */
+}
+
+.notFairytale{
+    height: 270px;
+    margin-top: 150px;
+    font-size: 18px;
+    color: #824600;
 }
