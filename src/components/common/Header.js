@@ -90,38 +90,6 @@ function Header() {
                     </div>
                 </div>
                 <div className="mainWrap">
-<<<<<<< HEAD
-                    <div className="mainMenuBox">
-                        <ul className="mainMenu">
-                            <li onMouseEnter={() => handleMouseEnter('myBook')} onMouseLeave={() => handleMouseLeave('myBook')}>
-                                <p>MyBook</p>
-                                {subMenuStates.myBook && (
-                                    <ul className="subMenu">
-                                        <li><a href="/Make">동화 만들기</a></li>
-                                        <li><a href="/">내 동화</a></li>
-                                    </ul>
-                                )}
-                            </li>
-                            <li onMouseEnter={() => handleMouseEnter('voice')} onMouseLeave={() => handleMouseLeave('voice')}>
-                                <p>목소리</p>
-                                {subMenuStates.voice && (
-                                    <ul className="subMenu">
-                                        <li><a href="/voice">목소리 등록</a></li>
-                                    </ul>
-                                )}
-                            </li>
-                            <li onMouseEnter={() => handleMouseEnter('myPage')} onMouseLeave={() => handleMouseLeave('myPage')}>
-                                <p>마이페이지</p>
-                                {subMenuStates.myPage && (
-                                    <ul className="subMenu">
-                                        <li><a href="/Info">내 정보</a></li>
-
-                                    </ul>
-                                )}
-                            </li>
-                        </ul>
-                    </div>
-=======
                     { user && user.userRole == "admin" ? (
                         <div className="mainMenuBox">
                             <ul className="mainMenu">
@@ -174,7 +142,6 @@ function Header() {
                                 </ul>
                             </div>
                     )}                  
->>>>>>> main
                     <div className="homeLogin">
                         {user ? (
                             // 토큰이 있는 경우 사용자 이름과 로그아웃 표시
