@@ -1,3 +1,6 @@
+/* SearchPage.css */
+
+/* 반응형 미디어 쿼리 */
 @media screen and (max-width: 1024px) {
     /* 노트북 및 태블릿 화면 크기에 맞는 스타일 조정 */
 }
@@ -9,53 +12,68 @@
 @media screen and (max-width: 480px) {
     /* 중소형 스마트폰 화면 크기에 맞는 스타일 조정 */
 }
-.searchPage h2 {
-    font-size: 32px;
-    color: #000000;
-    margin: auto;
-    height: auto;
-    margin-top: 20px;
-    text-align: center; /* 텍스트를 가운데로 정렬합니다. */
-    
-    /* 필요하다면 추가 스타일링을 여기에 추가합니다. */
+
+/* 검색 결과 제목 스타일 */
+.searchResultsTitle {
+    font-size: 32px; /* 오른쪽 스크린샷의 '동화' 제목과 동일한 폰트 크기 */
+    color: #824600; /* '동화' 제목과 동일한 색상 */
+    text-align: left; /* 가운데 정렬 */
+    margin-top: 50px; /* '동화' 제목과 동일한 마진 상단 조정 */
+    margin-bottom: 20px; /* 적절한 하단 마진 조정 */
+    margin-left: 25px;
 }
 
-
-/* 검색 결과를 담는 컨테이너의 스타일을 정의합니다.
-   flex-wrap 속성을 사용하여 항목이 컨테이너 너비를 초과할 경우 다음 줄로 넘어가게 합니다. */
-   .searchResultsContainer {
+/* 검색 결과 컨테이너 스타일 */
+.searchResultsContainer {
+    /* 여기에 메인 페이지의 .fairyTalesContainer 스타일을 적용 */
+    width: 60%; /* 컨테이너 너비를 100%로 변경 */
+    max-width: 1400px; /* 최대 너비 설정 */
+    margin: auto; /* 가운데 정렬을 위해 자동 마진 사용 */
+    margin-top: 40px;
+    padding-left: 25px;
     display: flex;
-    margin: auto;
-    flex-wrap: wrap;
-    height: auto; /* 높이를 auto로 변경하여 컨텐츠에 맞게 높이가 조절되도록 함 */
-    padding-bottom: 50px; /* 컨텐츠 하단에 패딩 추가 */
-    justify-content: center; /* 항목들을 가운데 정렬합니다. */
-    gap: flex-start; /* 항목 사이의 간격을 정합니다. */
-    padding: 50px; /* 컨테이너의 내부 여백을 추가합니다. */
+    flex-direction: row;
+    justify-content: flex-start; /* 중앙 정렬로 변경 */
+    flex-wrap: wrap; /* 아이템이 넘칠 경우 다음 줄로 넘김 */
+    align-content: space-between;
 }
 
-/* 각 검색 결과 항목의 스타일을 정의합니다.
-   flex-direction 속성으로 요소들을 세로로 정렬합니다. */
+/* 검색 결과 아이템 스타일 */
 .searchResultItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* 내부 항목을 가운데 정렬합니다. */
-    width: 200px; /* 항목의 너비를 정합니다. */
-    background-color: #fff; /* 배경색을 흰색으로 설정합니다. */
-    overflow: hidden; /* 내용이 넘칠 경우 숨깁니다. */
+    width: 15%; /* 3개의 아이템이 한 줄에 들어가도록 너비 설정 */
+    flex-direction: column; /* 아이템 내부를 세로로 정렬 */
+    align-items: flex-start;
+    margin: 10px;
+    /* border: solid 1px black; */
 }
 
-/* 검색 결과 이미지의 스타일을 정의합니다. */
+/* 반응형 미디어 쿼리 */
+@media (max-width: 768px) {
+    .searchResultItem {
+        min-width: 150px; /* 모바일 기기에서는 아이템의 최소 너비를 줄임 */
+    }
+    /* 기타 모바일 레이아웃 조정 사항 추가 */
+}
+
+/* 검색 결과 이미지 스타일 */
 .searchThumbnail {
     width: 100%; /* 이미지의 너비를 자동으로 설정하여 비율 유지 */
     max-width: 100%; /* 이미지가 컨테이너를 벗어나지 않도록 설정 */
     height: 200px; /* 이미지의 높이를 자동으로 조절 */
 }
 
-/* 검색 결과 제목의 스타일을 정의합니다. */
+/* 검색 결과 제목 스타일 */
 .searchResultItem h3 {
-    margin: 10px; /* 상하좌우 여백을 추가합니다. */
-    font-size: 1rem; /* 폰트 크기를 정합니다. */
-    color: #333; /* 폰트 색상을 어두운 회색으로 설정합니다. */
-    text-align: center; /* 텍스트를 가운데 정렬합니다. */
+    font-size: 12px; /* 폰트 사이즈 */
+    color: #333; /* 폰트 색상 */
+    text-align: left; /* 텍스트 가운데 정렬 */
+    width: 100%; /* 텍스트 영역이 아이템 너비 전체를 차지하도록 설정 */
+    margin: 5px auto; /* 위아래 마진 */
+}
+
+/* 구분선 스타일 */
+.line {
+    border: solid 1px #F1D993;
+    width: 80%;
+    margin: auto;
 }

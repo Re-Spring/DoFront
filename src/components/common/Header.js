@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'; // Link 컴포넌트를 추가합니다.
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -40,6 +41,13 @@ function Header() {
         navigate('/search', { state: { searchTerm } });
     };
 
+    // Added code: handleKeyPress function
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+        handleSearch(e);
+    }
+};
+
     const [subMenuStates, setSubMenuStates] = useState({
         myBook: false,
         voice: false,
@@ -72,13 +80,48 @@ function Header() {
                     <div className="searchBox">
                         <input className="searchInput" type="text" placeholder="동화 검색" 
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}/>
+                              // Added code: onKeyPress event handler for detecting Enter key press
+                              onKeyPress={handleKeyPress} 
+                              onChange={(e) => setSearchTerm(e.target.value)}
+                          />
                         <button onClick={handleSearch} className="searchBtn">
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
                     </div>
                 </div>
                 <div className="mainWrap">
+<<<<<<< HEAD
+                    <div className="mainMenuBox">
+                        <ul className="mainMenu">
+                            <li onMouseEnter={() => handleMouseEnter('myBook')} onMouseLeave={() => handleMouseLeave('myBook')}>
+                                <p>MyBook</p>
+                                {subMenuStates.myBook && (
+                                    <ul className="subMenu">
+                                        <li><a href="/Make">동화 만들기</a></li>
+                                        <li><a href="/">내 동화</a></li>
+                                    </ul>
+                                )}
+                            </li>
+                            <li onMouseEnter={() => handleMouseEnter('voice')} onMouseLeave={() => handleMouseLeave('voice')}>
+                                <p>목소리</p>
+                                {subMenuStates.voice && (
+                                    <ul className="subMenu">
+                                        <li><a href="/voice">목소리 등록</a></li>
+                                    </ul>
+                                )}
+                            </li>
+                            <li onMouseEnter={() => handleMouseEnter('myPage')} onMouseLeave={() => handleMouseLeave('myPage')}>
+                                <p>마이페이지</p>
+                                {subMenuStates.myPage && (
+                                    <ul className="subMenu">
+                                        <li><a href="/Info">내 정보</a></li>
+
+                                    </ul>
+                                )}
+                            </li>
+                        </ul>
+                    </div>
+=======
                     { user && user.userRole == "admin" ? (
                         <div className="mainMenuBox">
                             <ul className="mainMenu">
@@ -131,6 +174,7 @@ function Header() {
                                 </ul>
                             </div>
                     )}                  
+>>>>>>> main
                     <div className="homeLogin">
                         {user ? (
                             // 토큰이 있는 경우 사용자 이름과 로그아웃 표시
@@ -141,7 +185,7 @@ function Header() {
                         ) : (
                             // 토큰이 없는 경우 로그인 및 회원가입 링크 표시
                             <>
-                                <a href="/login">로그인 |</a>
+                                <a href="/login">로그인</a>
                                 <a href="/enroll"> 회원가입</a>
                             </>
                         )}
