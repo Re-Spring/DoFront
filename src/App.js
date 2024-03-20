@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import CustomerService from './pages/mypage/CustomerService';
 import Layout from './layouts/Layout';
 import Main from './pages/fairytale/Main'
 import Login from './pages/user/Login';
@@ -14,6 +15,7 @@ import { PublicRoute, RequireAuth } from './components/auth/AuthPath';
 import FindId from './pages/user/FindId';
 import FindPw from './pages/user/FindPw';
 import SearchPage from './pages/fairytale/SearchPage'; // SearchPage 컴포넌트의 경로에 맞게 조정해주세요.
+import CustomerServicePosts from './pages/mypage/CustomerServicePosts';
 
 function App() {
 
@@ -31,12 +33,14 @@ function App() {
             <Route path="make" element={ <RequireAuth><Make/></RequireAuth> }/>
             <Route path="info" element={ <RequireAuth><Info/></RequireAuth> }/>
             <Route path="voice" element={ <RequireAuth><Voice/></RequireAuth> }/>
+            <Route path="/CustomerService" element={<CustomerService />} />
+            <Route path="/CustomerServicePosts" element={<CustomerServicePosts />} />
             <Route path="search" element={<SearchPage />} />
           </Route>
 
           <Route path='login' element={ <PublicRoute><Login/></PublicRoute> }/>
           <Route path='enroll' element={ <PublicRoute><Enroll/></PublicRoute> }/>
-
+        
           <Route path='findId' element={ <FindId/> }/>
           <Route path='findPw' element={ <FindPw/> }/>
 
