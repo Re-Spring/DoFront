@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './layouts/Layout';
 import Main from './pages/fairytale/Main'
@@ -17,15 +18,49 @@ import SearchPage from './pages/fairytale/SearchPage'; // SearchPage 컴포넌�
 import { SessionTimeout } from './components/auth/SessionTimeout';
 import MyBook from './pages/fairytale/MyBook';
 import UserInfo from './pages/admin/UserInfo';
+import { firebaseApp } from './configs/Firebase';
+import { getToken, getMessaging } from 'firebase/messaging';
+import { TokenProvider , useToken } from './components/token/TokenContext';
+
+
+
 
 function App() {
 
+   const { setToken } = useToken();
+
+   useEffect(() => {
+    const messaging = getMessaging(firebaseApp);
+
+    // 알림 권한 요청
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        console.log('Notification permission granted.');
+        // FCM 토큰 획득
+        getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
+          .then((currentToken) => {
+            if (currentToken) {
+              console.log("FCM Token:", currentToken);
+              localStorage.setItem('fcmToken', currentToken);
+//              setToken(currentToken); // 저장
+            } else {
+              console.log('No registration token available. Request permission to generate one.');
+            }
+          }).catch((err) => {
+            console.log('An error occurred while retrieving token. ', err);
+          });
+      } else {
+        console.log('Unable to get permission to notify.');
+      }
+    });
+  }, []);
+
   return (
+    <TokenProvider>
+        <AuthProvider>
+          <BrowserRouter>
 
-    <AuthProvider>
-      <BrowserRouter>
-
-        <Routes>
+            <Routes>
 
           <Route path='/' element={<Layout/>}>
             <Route index element={ <Main/> }/>
@@ -45,11 +80,11 @@ function App() {
           <Route path='findId' element={ <PublicRoute><FindId/></PublicRoute> }/>
           <Route path='findPw' element={ <PublicRoute><FindPw/></PublicRoute> }/>
 
-        </Routes>
-
-      </BrowserRouter>
-      <SessionManager />
-    </AuthProvider>
+            </Routes>
+          </BrowserRouter>
+          <SessionManager />
+        </AuthProvider>
+    </TokenProvider>
 
   );
 }
