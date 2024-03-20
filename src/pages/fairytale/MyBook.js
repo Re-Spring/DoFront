@@ -6,10 +6,12 @@ import { Link } from 'react-router-dom';
 
 function MyBook() {
     const [stories, setStories] = useState([]);
-    const [error, setError] = useState(""); // 에러 상태 추가
+    const [error] = useState(""); // 에러 상태 추가
 
     useEffect(() => {
-        const userCode = 1; // 동적으로 설정할 방법을 고려해야 함
+        // 예시: 로컬 스토리지에서 userCode 가져오기
+        const userCode = localStorage.getItem("userCode"); // 로그인 시 저장된 userCode 사용
+    
         axios.get(`http://localhost:8001/stories/usercode/${userCode}`)
         .then(response => {
             console.log(response.data); // 응답 데이터 로깅
