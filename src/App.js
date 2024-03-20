@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import CustomerService from './pages/mypage/CustomerService';
 import Layout from './layouts/Layout';
@@ -15,16 +16,56 @@ import { PublicRoute, RequireAuth } from './components/auth/AuthPath';
 import FindId from './pages/user/FindId';
 import FindPw from './pages/user/FindPw';
 import SearchPage from './pages/fairytale/SearchPage'; // SearchPage 컴포넌트의 경로에 맞게 조정해주세요.
+<<<<<<< HEAD
 import CustomerServicePosts from './pages/mypage/CustomerServicePosts';
+=======
+import { SessionTimeout } from './components/auth/SessionTimeout';
+import MyBook from './pages/fairytale/MyBook';
+import UserInfo from './pages/admin/UserInfo';
+import { firebaseApp } from './configs/Firebase';
+import { getToken, getMessaging } from 'firebase/messaging';
+import { TokenProvider , useToken } from './components/token/TokenContext';
+
+
+
+>>>>>>> main
 
 function App() {
 
+   const { setToken } = useToken();
+
+   useEffect(() => {
+    const messaging = getMessaging(firebaseApp);
+
+    // 알림 권한 요청
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        console.log('Notification permission granted.');
+        // FCM 토큰 획득
+        getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
+          .then((currentToken) => {
+            if (currentToken) {
+              console.log("FCM Token:", currentToken);
+              localStorage.setItem('fcmToken', currentToken);
+//              setToken(currentToken); // 저장
+            } else {
+              console.log('No registration token available. Request permission to generate one.');
+            }
+          }).catch((err) => {
+            console.log('An error occurred while retrieving token. ', err);
+          });
+      } else {
+        console.log('Unable to get permission to notify.');
+      }
+    });
+  }, []);
+
   return (
+    <TokenProvider>
+        <AuthProvider>
+          <BrowserRouter>
 
-    <AuthProvider>
-      <BrowserRouter>
-
-        <Routes>
+            <Routes>
 
           <Route path='/' element={<Layout/>}>
             <Route index element={ <Main/> }/>
@@ -33,23 +74,41 @@ function App() {
             <Route path="make" element={ <RequireAuth><Make/></RequireAuth> }/>
             <Route path="info" element={ <RequireAuth><Info/></RequireAuth> }/>
             <Route path="voice" element={ <RequireAuth><Voice/></RequireAuth> }/>
+<<<<<<< HEAD
             <Route path="/CustomerService" element={<CustomerService />} />
             <Route path="/CustomerServicePosts" element={<CustomerServicePosts />} />
             <Route path="search" element={<SearchPage />} />
+=======
+            <Route path="search" element={ <SearchPage /> } />
+            <Route path="mybook" element={ <RequireAuth><MyBook /></RequireAuth> } />
+            <Route path="userInfo" element={ <RequireAuth><UserInfo /></RequireAuth> } />
+>>>>>>> main
           </Route>
 
           <Route path='login' element={ <PublicRoute><Login/></PublicRoute> }/>
           <Route path='enroll' element={ <PublicRoute><Enroll/></PublicRoute> }/>
+<<<<<<< HEAD
         
           <Route path='findId' element={ <FindId/> }/>
           <Route path='findPw' element={ <FindPw/> }/>
+=======
 
-        </Routes>
+          <Route path='findId' element={ <PublicRoute><FindId/></PublicRoute> }/>
+          <Route path='findPw' element={ <PublicRoute><FindPw/></PublicRoute> }/>
+>>>>>>> main
 
-      </BrowserRouter>
-    </AuthProvider>
+            </Routes>
+          </BrowserRouter>
+          <SessionManager />
+        </AuthProvider>
+    </TokenProvider>
 
   );
+}
+
+function SessionManager() {
+  SessionTimeout();
+  return null; // 이 컴포넌트는 UI를 렌더링하지 않음
 }
 
 export default App;

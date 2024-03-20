@@ -2,28 +2,33 @@ import React, { useCallback ,useState, useEffect } from 'react';
 import "../../styles/common/Common.css";
 import "../../styles/mybook/Make.css";
 import { jwtDecode } from "jwt-decode";
-import { useWebSocket } from './WebSocketProvider';
-
-
+import { MakeAPI } from "../../apis/MakeAPI";
+import { useDispatch } from 'react-redux';
+import { useToken } from '../../components/token/TokenContext';
 
 
 function Make(){
+
+    const dispatch = useDispatch();
+    const [token, setToken] = useState('');
+
+
+    useEffect(() => {
+    // 로컬 스토리지에서 토큰 가져오기
+    const storedToken = localStorage.getItem('fcmToken');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
+    console.log("토큰값", token)
 
     const [title, setTitle] = useState('');
     const [character, setCharacter] = useState('');
     const [genre, setGenre] = useState('');
     const [keyword, setKeyword] = useState('');
     const [lesson, setLesson] = useState('');
-//    const [title, setTitle] = useState();
-//    const [character, setCharacter] = useState();
-//    const [genre, setGenre] = useState();
-//    const [keyword, setKeyword] = useState();
-//    const [lesson, setLesson] = useState();
     const [page, setPage] = useState('6');
     const [voice, setVoice] = useState('echo');
-
-    const { sendMessage } = useWebSocket('ws://localhost:8002/ws')
-
 
     const titleHandler = useCallback(async (e) => {
         const entTitle = e.target.value;
@@ -60,8 +65,6 @@ function Make(){
         setVoice(entVoice)
     }, []);
 
-
-
     const user  = jwtDecode(localStorage.getItem("accessToken"));
     const userId = user.userId
     const userCode = user.userCode
@@ -71,6 +74,7 @@ function Make(){
             // 폼 제출 이벤트 방지
             e.preventDefault();
             console.log("test",title, character, genre, keyword, lesson, page, voice);
+            console.log("token", token)
 
             if(genre === ''){
                 alert('장르를 선택해주세요');
@@ -84,9 +88,12 @@ function Make(){
                     page:page,
                     voice:voice,
                     userId:userId,
-                    userCode:userCode
-            };
-            sendMessage(makeData);
+                    userCode:userCode,
+                    token:token
+            }
+            dispatch(MakeAPI({
+                makeData
+        }));
         }
     }
 

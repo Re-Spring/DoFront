@@ -19,10 +19,12 @@ function Voice() {
     ]);
     const [audioUrls, setAudioUrls] = useState([null, null, null]);
     const recordingMessages = [
-        "벚꽃이 피면 사람들은 말한대\n봄이 왔다 기분 좋다\n\n그런데 벚꽃에는\n사람들이 모르는 향기로운 비밀이 있대\n\n벚꽃이 지면 그때야 알게 돼\n딱 일주일 길면 이 주\n찰나를 살고 찰나 속에 가는 벚꽃이란 그리움인걸",
-        "내가 눈 떴을 때 때는 바야흐로 봄이었다.\n대지는 척박하고 바람은 거칠었다.\n뿌리를 잘못 내린 듯 아무도 축복하지 않았지만,\n그래도 봄은 아름다웠다.\n\n잘게 분해되는 눈 위로 따뜻한 햇살이 덮였다.",
+        "벚꽃이 피면 사람들은 말한대\n봄이 왔다 기분 좋다\n그런데 벚꽃에는\n사람들이 모르는 향기로운 비밀이 있대\n\n벚꽃이 지면 그때야 알게 돼\n딱 일주일 길면 이 주\n찰나를 살고 찰나 속에 가는\n벚꽃이란 그리움인걸\n\n벚꽃 그건 그리움인가봐",
+        "네 장미꽃이 그토록 소중한 것은\n그 꽃을 위해 네가 공들인 시간 때문이야\n사막이 아름다운 것은\n그것이 어딘가에 샘을 감추고 있기 때문이야\n\n누군가에게 길들여진다는 것은\n눈물을 흘릴 일이 생긴다는 것인지도 몰라\n\n넌 네가 길들인 것에 대해\n언제까지나 책임을 져야 하는 거야\n넌 네 장미에 대해 책임이 있어",
         "그대가 밀어올린 꽃줄기 끝에서\n그대가 피는 것인데\n왜 내가 이다지도 떨리는지\n\n그대가 피어 그대 몸속으로\n꽃벌 한 마리 날아든 것인데\n왜 내가 이다지도 아득한지\n왜 내 몸이 이리도 뜨거운지\n\n그대가 꽃피는 것이\n처음부터 내 일이었다는 듯이"
     ];
+    const [recordingMsg, setRecordingMsg] = useState(["", "", ""]);
+    const [isLoading, setIsLoading] = useState(false);
     
     console.log("클론페이지 아이디 확인 : ", userId);
 
@@ -84,6 +86,11 @@ function Voice() {
                 const localChunks = []; // 로컬 변수로 chunks 관리
                 mediaRecorder.current.start();
                 updateRecordingState(index, true, false, false); // 녹음 시작 상태 업데이트
+                setRecordingMsg(prevMsgs => {
+                    const newMsgs = [...prevMsgs];
+                    newMsgs[index] = "녹음중..🎙"; // 특정 인덱스의 메시지 업데이트
+                    return newMsgs;
+                });
 
                 mediaRecorder.current.ondataavailable = e => {
                     localChunks.push(e.data); // 로컬 변수 업데이트
@@ -96,8 +103,13 @@ function Voice() {
                     setAudioUrls(prevAudioUrls => prevAudioUrls.map((url, idx) => idx === index ? newAudioUrl : url));
                     console.log(audioUrls);
                     updateRecordingState(index, false, true, recordings[index].isSaved); // 녹음 완료 상태 업데이트
+                    setRecordingMsg(prevMsgs => {
+                        const newMsgs = [...prevMsgs];
+                        newMsgs[index] = "녹음완료📹"; // 특정 인덱스의 메시지 업데이트
+                        return newMsgs;
+                    });
                 };          
-            setTimeout(() => mediaRecorder.current.stop(), 100000);
+            // setTimeout(() => mediaRecorder.current.stop(), 100000);
         }).catch(err => {
             console.error('startRecording에서 에러 발생 : ', err);
         });
@@ -122,7 +134,11 @@ function Voice() {
         // 실제 애플리케이션에서는 여기서 파일을 서버에 업로드하거나,
         // 필요한 처리를 수행한 후에 isSaved 상태를 업데이트해야 합니다.
         updateRecordingState(index, false, true, true); // 저장 상태 업데이트
-
+        setRecordingMsg(prevMsgs => {
+            const newMsgs = [...prevMsgs];
+            newMsgs[index] = "등록성공📥"; // 특정 인덱스의 메시지 업데이트
+            return newMsgs;
+        });
     };
 
     // 녹음 상태 업데이트 헬퍼 함수
@@ -167,7 +183,8 @@ function Voice() {
         // FormData에 userId를 추가합니다.
         formData.append('user_id', userId);
         console.log("페이지에서 formdate 확인 : ", formData);
-        dispatch(voiceCloningAPI(formData));
+        setIsLoading(true);
+        dispatch(voiceCloningAPI({formData, setIsLoading}));
 
         // console.log('모든 오디오 파일 및 userId 서버로 전송:', audioUrls, userId);
     }
@@ -179,10 +196,16 @@ function Voice() {
     <>
         <div className='voiceClone'>
             <div className="bigTitle">
-                <h1>목소리 등록</h1>
+                <p>목소리 등록</p>
             </div>
-            { tempVoiceCode || user.userVoiceId || user.userVoiceId !== null ? (
-                <h2>이미 목소리가 등록되어있습니다. 즐거운 리링 하세요!</h2>
+            { tempVoiceCode || (user.userVoiceId && user.userVoiceId != null) ? (
+                <>
+                    <br/>
+                    <img className='cloneImg2' src="/images/clone_img_3.jpg"/>
+                    <br/><br/>
+                    <h2 style={{color : '#EB9A0E'}}>이미 목소리가 등록되어 있습니다. 즐거운 리링 하세요!</h2>
+                    <br/><br/><br/>
+                </>
             ) : (
                 <>
                     <div className="middleTitle">
@@ -210,11 +233,20 @@ function Voice() {
                                     <button onClick={() => saveRecording(index)} disabled={!recordings[index].isRecorded}>등록하기</button>
                                 </div>
                                 <br/>
+                                <div className="recordMsg">{recordingMsg[index]}</div>
+                                <br/>
                                 <audio controls src={audioUrls[index]} />
                             </div>
                         ))}
                     </div>
                     <br/><br/>
+                    {isLoading && (
+                        <div className="loadingContainer">
+                            <img src="/images/clone_loading.gif" alt="Loading..." />
+                            <br/>
+                            <p>loading..</p>
+                        </div>
+                    )}
                     <button onClick={cloneVoiceHandler}>목소리 등록</button>
                 </>
             )}

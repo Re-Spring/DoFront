@@ -1,0 +1,42 @@
+.myBookContainer {
+    width: 60%; /* 컨테이너 너비를 100%로 변경 */
+    max-width: 1400px; /* 최대 너비 설정 */
+    margin: auto; /* 가운데 정렬을 위해 자동 마진 사용 */
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    flex-direction: column; /* Flex 항목들을 수직으로 정렬합니다. */
+    align-items: center; /* 가로 방향으로 중앙 정렬합니다. */
+    justify-content: center; /* 세로 방향으로 중앙 정렬합니다. */
+    height: 100%; /* 부모 요소의 전체 높이를 차지하도록 설정합니다. */
+}
+
+.myBookItem {
+    width: 15%; /* 3개의 아이템이 한 줄에 들어가도록 너비 설정 */
+    flex-direction: column; /* 아이템 내부를 세로로 정렬 */
+    align-items: center; /* 세로축 중앙 정렬 */
+    margin: 10px 25px;
+    /* border: solid 1px black; */
+}
+
+
+/* 반응형 미디어 쿼리 */
+@media (max-width: 768px) {
+    .myBookItem {
+        min-width: 150px; /* 모바일 기기에서는 아이템의 최소 너비를 줄임 */
+    }
+    /* 기타 모바일 레이아웃 조정 사항 추가 */
+}
+
+.fairyTaleThumbnail {
+    width: 100%; /* 이미지의 너비를 자동으로 설정하여 비율 유지 */
+    max-width: 100%; /* 이미지가 컨테이너를 벗어나지 않도록 설정 */
+    height: 200px; /* 이미지의 높이를 자동으로 조절 */
+}
+
+.notFairytale{
+    height: 270px;
+    margin-top: 150px;
+    font-size: 18px;
+    color: #824600;
+}

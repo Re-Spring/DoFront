@@ -1,19 +1,7 @@
-@media screen and (max-width: 1024px) {
-    /* 노트북 및 태블릿 화면 크기에 맞는 스타일 조정 */
-}
-
-@media screen and (max-width: 768px) {
-    /* 태블릿 및 대형 스마트폰 화면 크기에 맞는 스타일 조정 */
-}
-
-@media screen and (max-width: 480px) {
-    /* 중소형 스마트폰 화면 크기에 맞는 스타일 조정 */
-}
-
 
 .mainBox {
     /* 높이를 auto로 변경하여 컨텐츠에 맞게 높이가 조절되도록 함 */
-    height: 1500px;
+    height: auto;
     padding-bottom: 50px; /* 컨텐츠 하단에 패딩 추가 */
 }
 
@@ -36,6 +24,11 @@
 .categoryBtn{
     border: none;
     background-color: white;
+}
+
+.categoryBtn.active {
+    font-weight: bold; /* 글씨를 진하게 */
+    color: #000; /* 글씨 색상 변경, 필요에 따라 조정 */
 }
 
 
@@ -99,4 +92,18 @@
     border: solid 1px #F1D993;
     width: 80%;
     margin: auto;
+}
+
+.moreBtnBox{
+    float: right;
+    margin-right: 300px;
+}
+
+.loadMoreButton{
+    padding: 5px 20px;
+    border-radius: 10px;
+    outline: none;
+    border: solid 1px #EB9A0E;
+    background-color: #EB9A0E;
+    cursor: pointer;
 }

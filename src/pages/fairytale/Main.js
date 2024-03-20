@@ -5,6 +5,8 @@ import "../../styles/common/Common.css";
 
 function Main() {
     const [stories, setStories] = useState([]);
+    const [visibleCount, setVisibleCount] = useState(10); // 초기에 보이는 동화의 수
+    const [activeGenre, setActiveGenre] = useState('전체보기'); // 현재 선택된 카테고리 추적
 
     useEffect(() => {
         fetchAllStories();
@@ -41,6 +43,15 @@ function Main() {
         }
     };
 
+    const handleGenreClick = (genre) => {
+        setActiveGenre(genre); // 클릭된 장르를 activeGenre로 설정
+        fetchStoriesByGenre(genre); // 장르에 맞는 스토리를 가져오는 함수 호출
+    };
+
+    const showMoreStories = () => {
+        setVisibleCount(prevCount => prevCount + 10); // "더보기" 버튼 클릭 시 10개씩 추가로 표시
+    };
+
     return (
         <div className="mainBox">
             <div className="bannerBox">
@@ -52,21 +63,20 @@ function Main() {
                 </div>
                 <div>
                     <ul className='categoryList'>
-                        <li><button onClick={() => fetchStoriesByGenre('전체보기')} className='categoryBtn'>전체보기</button></li>
-                        <li><button onClick={() => fetchStoriesByGenre('로맨스')} className='categoryBtn'>로맨스</button></li>
-                        <li><button onClick={() => fetchStoriesByGenre('전래동화')} className='categoryBtn'>전래동화</button></li>
-                        <li><button onClick={() => fetchStoriesByGenre('판타지')} className='categoryBtn'>판타지</button></li>
-                        <li><button onClick={() => fetchStoriesByGenre('모험')} className='categoryBtn'>모험</button></li>
-                        <li><button onClick={() => fetchStoriesByGenre('우화')} className='categoryBtn'>우화</button></li>
-                        <li><button onClick={() => fetchStoriesByGenre('가족')} className='categoryBtn'>가족</button></li>
+                        {['전체보기', '로맨스', '전래동화', '판타지', '모험', '우화', '가족'].map((genre) => (
+                            <li key={genre}>
+                                <button onClick={() => handleGenreClick(genre)} className={`categoryBtn ${activeGenre === genre ? 'active' : ''}`}>
+                                    {genre}
+                                </button>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
             <div className='line'></div>
-             <div className="fairyTalesContainer">
-                {stories.map(story => (
+            <div className="fairyTalesContainer">
+                {stories.slice(0, visibleCount).map(story => (
                     <div key={story.fairytaleCode} className="fairyTaleItem">
-                        {/* 여기에서 Link 컴포넌트를 사용하여 동화의 상세 페이지로의 링크를 생성합니다. */}
                         <Link to={`/bookContent/${story.fairytaleCode}`}>
                             <img src={story.fairytaleThumb} alt="Story Thumbnail" className="fairyTaleThumbnail" />
                             <div className="fairyTaleContent">
@@ -75,6 +85,11 @@ function Main() {
                         </Link>
                     </div>
                 ))}
+            </div>
+            <div className='moreBtnBox'>
+                {visibleCount < stories.length && (
+                    <button onClick={showMoreStories} className="loadMoreButton">더보기 ▼</button>
+                )}
             </div>
         </div>
     );

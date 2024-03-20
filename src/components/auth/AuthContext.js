@@ -14,7 +14,7 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-      // console.log("AuthContext user 1 : ", user);
+    console.log("AuthContext user 1 : ", user);
 
     // 로딩 상태 관리를 위한 state 추가
     const [loading, setLoading] = useState(true);
@@ -34,9 +34,29 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-        localStorage.removeItem("accessToken");
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('tempVoiceCode');
+        window.location.reload(); // 페이지 새로고침
         setUser(null);
+        
     };
+
+    const checkTokenExpiration = () => {
+        const accessToken = localStorage.getItem('accessToken');
+        if(accessToken) {
+            const decodedToken = jwtDecode(accessToken);
+            const currentTime = Date.now() / 1000; // 현재 시간 (초 단위)
+            console.log("토큰 남은 시간 체크 : ", currentTime - decodedToken.exp);
+            if ( decodedToken.exp < currentTime ) {
+                logout(); // 토큰 만료 시 로그아웃 실행
+            }
+        }
+    };
+
+    useEffect(() => {
+        const intervalId = setInterval(checkTokenExpiration, 60000); // 1분마다 토큰 만료 여부 검사
+        return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 인터벌 정리
+      }, []);
 
     useEffect(() => {
         updateLoginState();
