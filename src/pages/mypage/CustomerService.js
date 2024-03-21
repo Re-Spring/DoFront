@@ -11,7 +11,8 @@ const CustomerService = () => {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('/api/customer-service-posts');
+        const response = await axios.get('http://localhost:8001/customer-service-post');
+        console.log(response.data);
         setPosts(response.data);
         setLoading(false);
       } catch (error) {

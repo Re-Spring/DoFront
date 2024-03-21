@@ -105,7 +105,7 @@ function Header() {
                                     <p>고객 문의 관리</p>
                                     {subMenuStates.userService && (
                                         <ul className="subMenu">
-                                            <li><a href="/">고객 문의 관리</a></li>
+                                            <li><a href="/CustomerService">고객 문의 관리</a></li>
                                         </ul>
                                     )}
                                 </li>
