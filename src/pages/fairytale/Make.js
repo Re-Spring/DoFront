@@ -4,14 +4,11 @@ import "../../styles/mybook/Make.css";
 import { jwtDecode } from "jwt-decode";
 import { MakeAPI } from "../../apis/MakeAPI";
 import { useDispatch } from 'react-redux';
-import { useToken } from '../../components/token/TokenContext';
-
 
 function Make(){
 
     const dispatch = useDispatch();
     const [token, setToken] = useState('');
-
 
     useEffect(() => {
     // 로컬 스토리지에서 토큰 가져오기
@@ -76,8 +73,8 @@ function Make(){
             console.log("test",title, character, genre, keyword, lesson, page, voice);
             console.log("token", token)
 
-            if(genre === ''){
-                alert('장르를 선택해주세요');
+            if(title === '' || genre === ''){
+                alert('필수 요소를 선택해주세요');
             }else{
                 const makeData = {
                     title: title,
@@ -114,7 +111,7 @@ function Make(){
                         <div>
                             <p className='textName'><label htmlFor="genre">장르</label></p>
                             <select id="genre" className='optionBox' value={genre} onChange={genreHandler}>
-                                <option value='' default>선택안함</option>
+                                <option value='' default>-</option>
                                 <option value="romance">로맨스</option>
                                 <option value="folktale">전래동화</option>
                                 <option value="fantasy">판타지</option>
@@ -134,19 +131,24 @@ function Make(){
                         <div>
                             <p className='textName'><label htmlFor="voice">목소리 선택</label></p>
                             <select id="voice" className='optionBox' value={voice} onChange={voiceHandler}>
-                                <option value="echo" default>Echo</option>
-                                <option value="alloy">Alloy</option>
-                                <option value="fable">Fable</option>
-                                <option value="onyx">Onyx</option>
-                                <option value="nova">Nova</option>
-                                <option value="shimmer">Shimmer</option>
-                                <option value="myVoice">내 목소리</option>
+                                <optgroup label="인공지능 목소리">
+                                    <option value="echo">Echo</option>
+                                    <option value="alloy">Alloy</option>
+                                    <option value="fable">Fable</option>
+                                    <option value="onyx">Onyx</option>
+                                    <option value="nova">Nova</option>
+                                    <option value="shimmer">Shimmer</option>
+                                </optgroup>
+                                <optgroup label="등록한 목소리">
+                                    <option value="myVoice">내 목소리</option>
+                                </optgroup>
                             </select>
                         </div>
                         <div>
                             <p className='textName'><label htmlFor="page">페이지 수</label></p>
                             <select id="page" className='optionBox' value={page} onChange={pageHandler}>
-                                <option value="6" default>6</option>
+                                <option value='' default>-</option>
+                                <option value="6">6</option>
                                 <option value="7">7</option>
                                 <option value="8">8</option>
                                 <option value="9">9</option>
