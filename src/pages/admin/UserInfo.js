@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { expiredVoiceAPI } from '../../apis/AdminAPI';
+import { deleteVoiceAPI, expiredVoiceAPI } from '../../apis/AdminAPI';
 import Swal from 'sweetalert2';
+import "../../styles/admin/admin.css"
 
 function UserInfo() {
     
@@ -14,7 +15,7 @@ function UserInfo() {
     const expVoices = useSelector(state => state.admin);
     console.log("[UserInfo] expVoices 확인 : ", expVoices);
 
-    const [currentPage, setCurrentPage] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
     const itemsperPage = 10;
     const totalItems = expVoices?.length;
     const totalPages = Math.ceil(totalItems / itemsperPage);
@@ -30,9 +31,12 @@ function UserInfo() {
         Swal.fire({
             icon: 'question',
             title: "삭제하시겠습니까?",
-            confirmButtonText: "확인"
+            confirmButtonText: "확인",
+            denyButtonText: "취소"
         }).then(result => {
-            dispatch();
+            if(result.isConfirmed){
+                dispatch(deleteVoiceAPI(voiceId));
+            }
         });
     }
 
@@ -58,7 +62,7 @@ function UserInfo() {
                         expVoices.slice(startIndex, endIndex).map(
                             (voices, index) => (
                                 <tr key={voices.no}>
-                                    <td>{index}</td>
+                                    <td>{index + 1}</td>
                                     <td>{voices.voiceId}</td>
                                     <td>
                                         <button onClick={() => deleteVoiceHandler(voices.voiceId)}>아이디 삭제</button>
