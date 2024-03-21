@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import axios from "axios";
 import { jwtDecode } from 'jwt-decode';
-import { getExpVoice, postDeleteVoice } from '../modules/AdminModule';
+import { deleteDeleteVoice, getExpVoice } from '../modules/AdminModule';
 
 export function expiredVoiceAPI(){
     const requestURL = 'http://localhost:8001/expVoice';
@@ -24,11 +24,11 @@ export function deleteVoiceAPI(voiceId){
     const requestURL = `http://localhost:8001/deleteVoice/${voiceId}`
 
     return async (dispatch, getState) => {
-        await axios.post(requestURL)
+        await axios.delete(requestURL)
             .then(function (response) {
                 console.log('[AdminAPI] deleteVoiceAPI RESPONSE : ', response);
                 if(response.status === 200){
-                    dispatch(postDeleteVoice(response.data));
+                    dispatch(deleteDeleteVoice(response.data));
                     Swal.fire({
                         icon: 'success',
                         title: "삭제 완료",
@@ -46,11 +46,11 @@ export function deleteVoiceAPI(voiceId){
                     icon: 'error',
                     title: "보이스아이디 삭제 중 오류 발생",
                     text: error.response.data
+                }).then(result => {
+                    if(result.isConfirmed){
+                        window.location.reload();;
+                    }
                 })
-            }).then(result => {
-                if(result.isConfirmed){
-                    window.location.reload();;
-                }
             });
     }
 }

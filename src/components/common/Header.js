@@ -152,8 +152,8 @@ function Header() {
                         ) : (
                             // 토큰이 없는 경우 로그인 및 회원가입 링크 표시
                             <>
-                                <a href="/login">로그인</a>
-                                <a href="/enroll"> 회원가입</a>
+                                <a href="/login">로그인 </a>
+                                <a href="/enroll">| 회원가입</a>
                             </>
                         )}
                     </div>
