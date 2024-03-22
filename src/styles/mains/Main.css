@@ -31,6 +31,10 @@
     color: #000; /* 글씨 색상 변경, 필요에 따라 조정 */
 }
 
+.adminBox{
+    margin-bottom: 200px;
+}
+
 
 .mainFairyTale {
     font-size: 32px;
