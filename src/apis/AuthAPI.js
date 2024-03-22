@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 
 
 export const userEnrollAPI = ({userData, navigate}) => {
-    const requestURL = 'http://localhost:8001/auth/enroll';
+    const requestURL = `http://${process.env.REACT_APP_API_IP}:8001/auth/enroll`;
 
     return async (dispatch, getState) => {
         await axios.post(requestURL, userData)
@@ -43,7 +43,7 @@ export const userEnrollAPI = ({userData, navigate}) => {
 // let logoutTimer;
 
 export const userLoginAPI = ({userId, password, navigate, logout}) => {
-    const requestURL = 'http://localhost:8001/auth/login';
+    const requestURL = `http://${process.env.REACT_APP_API_IP}:8001/auth/login`;
     console.log("api 전 : ", userId, password);
     return async (dispatch, getState) => {
         await axios.post(requestURL, {userId, password}, 
@@ -100,7 +100,7 @@ export const userLoginAPI = ({userId, password, navigate, logout}) => {
 }
 
 export const findIdAPI = ({userName, phoneNum}) => {
-    const requestURL = 'http://localhost:8001/auth/findId/' + userName + '/' + phoneNum;
+    const requestURL = `http://${process.env.REACT_APP_API_IP}:8001/auth/findId/` + userName + '/' + phoneNum;
     const body = { userName: userName, phone: phoneNum };
     return async (dispatch, getState) => {
         await axios.get(requestURL, body)
@@ -133,7 +133,7 @@ export const findIdAPI = ({userName, phoneNum}) => {
 }
 
 export const findPwAPI = ({userName, userId, phoneNum, navigate}) => {
-    const requestURL = 'http://localhost:8001/auth/findPw/' + userName + '/' + userId + '/' + phoneNum;
+    const requestURL = `http://${process.env.REACT_APP_API_IP}:8001/auth/findPw/` + userName + '/' + userId + '/' + phoneNum;
     const body = { userName: userName, userId: userId, phone: phoneNum };
     return async (dispatch, getState) => {
         await axios.get(requestURL, body)
@@ -215,7 +215,7 @@ export const findPwAPI = ({userName, userId, phoneNum, navigate}) => {
 
 const modifyPwAPI = async (userId, newPassword, dispatch) => {
     console.log(userId, newPassword);
-    const url = 'http://localhost:8001/auth/setPwd';
+    const url = `http://${process.env.REACT_APP_API_IP}:8001/auth/setPwd`;
     const params = new URLSearchParams();
     params.append('userId', userId);
     params.append('newPassword', newPassword);

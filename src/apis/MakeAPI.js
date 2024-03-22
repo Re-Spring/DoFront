@@ -4,7 +4,7 @@ import { postMake } from '../modules/MakeModule';
 
 export const MakeAPI = ({ makeData }) => {
     console.log("makeData : " + makeData)
-    const requestURL = 'http://localhost:8002/generateStory';
+    const requestURL = `http://${process.env.REACT_APP_API_IP}:8002/generateStory`;
 
     console.log("요청후 : " + requestURL)
     return async (dispatch, getState) => {
