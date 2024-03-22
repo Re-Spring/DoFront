@@ -71,3 +71,13 @@
     border-radius: 10px;
     font-size: 16px;
 }
+
+/* 수정 불가능한 input의 배경색을 회색으로 설정합니다. */
+.readonlyInput {
+    background-color: #f2f2f2;
+}
+
+/* 수정 가능한 input의 테두리를 진하게 만듭니다. */
+.editableInput {
+    border: 2px solid #666; /* 예시 색상입니다. 원하는 색상으로 조정하세요. */
+}

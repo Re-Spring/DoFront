@@ -51,12 +51,17 @@ function BookContent() {
             fetchBookDetail();
         }
     }, [fairytaleCode]); // fairytaleCode가 변경될 때마다 useEffect 재실행
+
+    function createImageUrl(fairytaleThumb) {
+        const encodedPath = fairytaleThumb.replace(/\\/g, "/").split('/').map(encodeURIComponent).join('/');
+        return `http://localhost:8002/${encodedPath}`;
+    }
     
     return (
         <div className="bookContent">
             <div className="bookBox">
                 <div className="contentImgBox">
-                    <img src={bookDetail.fairytaleThumb} className="contentImg" alt="Fairytale Thumbnail" />
+                    <img src={createImageUrl(bookDetail.fairytaleThumb)} className="contentImg" alt="Fairytale Thumbnail" />
                 </div>
                 <div className="contentListBox">
                     <div className="contentList">

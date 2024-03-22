@@ -40,6 +40,11 @@ function MyBook() {
         setVisibleCount(prevCount => prevCount + 10); // "더보기" 버튼 클릭 시 10개씩 추가로 표시
     };
 
+    function createImageUrl(fairytaleThumb) {
+        const encodedPath = fairytaleThumb.replace(/\\/g, "/").split('/').map(encodeURIComponent).join('/');
+        return `http://localhost:8002/${encodedPath}`;
+    }
+
     return (
         <div className='myBookBox'>
             <div>
@@ -50,7 +55,7 @@ function MyBook() {
                     stories.slice(0, visibleCount).map(story => (
                         <div key={story.fairytaleCode} className='myBookItem'>
                             <Link to={`/bookContent/${story.fairytaleCode}`}>
-                                <img src={story.fairytaleThumb} alt="Story Thumbnail" className="fairyTaleThumbnail" />
+                                <img src={createImageUrl(story.fairytaleThumb)} alt="Story Thumbnail" className="fairyTaleThumbnail" />
                                 <div className='fairyTaleContent'>
                                     <h3>{story.fairytaleTitle}</h3>
                                 </div>
