@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteVoiceAPI, expiredVoiceAPI } from '../../apis/AdminAPI';
 import Swal from 'sweetalert2';
 import "../../styles/admin/admin.css"
+import "../../styles/common/Common.css";
 
 function UserInfo() {
     
@@ -32,6 +33,7 @@ function UserInfo() {
             icon: 'question',
             title: "삭제하시겠습니까?",
             confirmButtonText: "확인",
+            showDenyButton: true,
             denyButtonText: "취소"
         }).then(result => {
             if(result.isConfirmed){
@@ -41,45 +43,52 @@ function UserInfo() {
     }
 
     return (
-        <div>
-            <p>회원 정보 관리</p>
-            <h4>탈퇴 회원 보이스아이디 삭제</h4>
-            <table>
-                <colgroup>
-                    <col width="30%"/>
-                    <col width="30%"/>
-                    <col width="40%"/>
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>NO</th>
-                        <th>VOICE_ID</th>
-                        <th>DELETE</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {expVoices && expVoices.length > 0 ? (
-                        expVoices.slice(startIndex, endIndex).map(
-                            (voices, index) => (
-                                <tr key={voices.no}>
-                                    <td>{index + 1}</td>
-                                    <td>{voices.voiceId}</td>
-                                    <td>
-                                        <button onClick={() => deleteVoiceHandler(voices.voiceId)}>아이디 삭제</button>
-                                    </td>
-                                </tr>
-                        ))
-                    ):(
+        <div className='userInfoBox'>
+            <p className='userInfoTitle'>회원 정보 관리</p>
+            <h2 className='deleteTitle'>탈퇴 회원 보이스 데이터 삭제</h2>
+            <br/>
+            <div className='userInfoTable'>
+                <div className='userInfoTxt'>
+                    <a>만료 보이스 데이터 누적 수 : {expVoices[0]?.no}</a>
+                    <a>삭제 처리된 데이터 총 건수 : {expVoices[0]?.no - expVoices?.length}</a>
+                </div>
+                <table>
+                    <colgroup>
+                        <col width="30%"/>
+                        <col width="30%"/>
+                        <col width="40%"/>
+                    </colgroup>
+                    <thead>
                         <tr>
-                            <td colSpan="3">
-                                <h6>내역이 존재하지 않습니다.</h6>
-                            </td>
+                            <th>NO</th>
+                            <th>VOICE_ID</th>
+                            <th>DELETE</th>
                         </tr>
-                    )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {expVoices && expVoices.length > 0 ? (
+                            expVoices.slice(startIndex, endIndex).map(
+                                (voices, index) => (
+                                    <tr key={voices.no}>
+                                        <td>{totalItems - (startIndex + index)}</td>
+                                        <td>{voices.voiceId.slice(0, -5) + "*****"}</td>
+                                        <td>
+                                            <button className='deleteBtn' onClick={() => deleteVoiceHandler(voices.voiceId)}>아이디 삭제</button>
+                                        </td>
+                                    </tr>
+                            ))
+                        ):(
+                            <tr>
+                                <td colSpan="3" style={{textAlign: 'center'}}>
+                                    <h6>내역이 존재하지 않습니다.</h6>
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
             <ul className='pagination'>
-                <li className='icon' onClick={() => handlePageChange(currentPage -1)}></li>
+                <li className='icon' onClick={() => handlePageChange(currentPage -1)}><a>&lt;</a></li>
                 {Array.from({ length: totalPages }, (_, index) => (
                     <li
                         key={index}
@@ -90,7 +99,7 @@ function UserInfo() {
                         </a>
                     </li>
                 ))}
-                <li onClick={() => handlePageChange(currentPage +1)}></li>
+                <li onClick={() => handlePageChange(currentPage +1)}><a>&gt;</a></li>
             </ul>
         </div>
     );

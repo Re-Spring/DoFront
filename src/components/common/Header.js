@@ -93,21 +93,14 @@ function Header() {
                     { user && user.userRole == "admin" ? (
                         <div className="mainMenuBox">
                             <ul className="mainMenu">
-                                <li onMouseEnter={() => handleMouseEnter('userInfo')} onMouseLeave={() => handleMouseLeave('userInfo')}>
-                                    <p>회원 정보 관리</p>
-                                    {subMenuStates.userInfo && (
-                                        <ul className="subMenu">
-                                            <li><a href="/userInfo">회원 정보 관리</a></li>
-                                        </ul>
-                                    )}
+                                <li>
+                                    <a href="/Make">새 동화 만들기</a>
                                 </li>
-                                <li onMouseEnter={() => handleMouseEnter('userService')} onMouseLeave={() => handleMouseLeave('userService')}>
-                                    <p>고객 문의 관리</p>
-                                    {subMenuStates.userService && (
-                                        <ul className="subMenu">
-                                            <li><a href="/CustomerService">고객 문의 관리</a></li>
-                                        </ul>
-                                    )}
+                                <li>
+                                    <a href="/userInfo">회원 정보 관리</a>
+                                </li>
+                                <li>
+                                    <a href="/CustomerService">고객 문의 관리</a>
                                 </li>
                             </ul>
                         </div>
@@ -124,7 +117,7 @@ function Header() {
                                         )}
                                     </li>
                                     <li onMouseEnter={() => handleMouseEnter('voice')} onMouseLeave={() => handleMouseLeave('voice')}>
-                                        <p>목소리</p>
+                                        <p>목소리 등록</p>
                                         {subMenuStates.voice && (
                                             <ul className="subMenu">
                                                 <li><a href="/voice">목소리 등록</a></li>
@@ -136,6 +129,7 @@ function Header() {
                                         {subMenuStates.myPage && (
                                             <ul className="subMenu">
                                                 <li><a href="/Info">내 정보</a></li>
+                                                <li><a href="/CustomerService">문의하기</a></li>
                                             </ul>
                                         )}
                                     </li>

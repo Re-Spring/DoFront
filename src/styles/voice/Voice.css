@@ -112,6 +112,7 @@
 .recordMsg{
     text-align: center;
     font-size: 15px;
+    height: 15px;
     color: rgb(0, 200, 0);
 }
 
