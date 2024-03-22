@@ -4,92 +4,139 @@ import "../../styles/mains/Main.css";
 import "../../styles/common/Common.css";
 
 function Main() {
-    const [stories, setStories] = useState([]);
-    const [visibleCount, setVisibleCount] = useState(10); // 초기에 보이는 동화의 수
-    const [activeGenre, setActiveGenre] = useState('전체보기'); // 현재 선택된 카테고리 추적
+    const [basicStories, setBasicStories] = useState([]); // 기본 동화 상태 추가
+    const [userStories, setUserStories] = useState([]); // 유저 동화 상태 추가
+    const [visibleCount, setVisibleCount] = useState(10);
+    const [activeGenre, setActiveGenre] = useState('전체보기');
 
     useEffect(() => {
-        fetchAllStories();
+        fetchBasicStories(); // 기본 동화 불러오기
+        fetchAllUserStories(); // 유저 동화 불러오기
     }, []);
 
-    const fetchAllStories = async () => {
+    const fetchBasicStories = async () => {
+        // 기본 동화 불러오기 로직 (예시로만 제공, 실제 API 경로에 맞게 수정 필요)
         try {
-            const response = await fetch('http://localhost:8001/stories');
+            const response = await fetch('http://localhost:8001/stories/role/admin');
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error('Network response was not ok for basic stories');
             }
             const data = await response.json();
-            setStories(data);
+            setBasicStories(data);
         } catch (error) {
-            console.error('Failed to fetch stories:', error);
+            console.error('Failed to fetch basic stories:', error);
         }
     };
 
-    const fetchStoriesByGenre = async (genre) => {
+    const fetchAllUserStories = async () => {
+        // 유저 동화 불러오기 로직 (예시로만 제공, 실제 API 경로에 맞게 수정 필요)
+        try {
+            const response = await fetch('http://localhost:8001/stories/role/user');
+            if (!response.ok) {
+                throw new Error('Network response was not ok for user stories');
+            }
+            const data = await response.json();
+            setUserStories(data);
+        } catch (error) {
+            console.error('Failed to fetch user stories:', error);
+        }
+    };
+
+    const fetchUserStoriesByGenre = async (genre) => {
         try {
             if (genre === '전체보기') {
-                fetchAllStories();
+                fetchAllUserStories();
                 return;
             }
-
+    
             const response = await fetch(`http://localhost:8001/stories/genre/${genre}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            setStories(data);
+            setUserStories(data);
         } catch (error) {
-            console.error(`Failed to fetch stories by genre ${genre}:`, error);
+            console.error(`Failed to fetch user stories by genre ${genre}:`, error);
         }
     };
 
     const handleGenreClick = (genre) => {
-        setActiveGenre(genre); // 클릭된 장르를 activeGenre로 설정
-        fetchStoriesByGenre(genre); // 장르에 맞는 스토리를 가져오는 함수 호출
+        setActiveGenre(genre);
+        fetchUserStoriesByGenre(genre);
     };
 
     const showMoreStories = () => {
-        setVisibleCount(prevCount => prevCount + 10); // "더보기" 버튼 클릭 시 10개씩 추가로 표시
+        setVisibleCount((prevCount) => prevCount + 10);
     };
+
+    function createImageUrl(fairytaleThumb) {
+        const encodedPath = fairytaleThumb.replace(/\\/g, "/").split('/').map(encodeURIComponent).join('/');
+        return `http://localhost:8002/${encodedPath}`;
+    }
 
     return (
         <div className="mainBox">
             <div className="bannerBox">
                 <img src="../images/banner.png" alt="" className="mainBanner"/>
             </div>
-            <div className='categoryBox'>
-                <div className="fairyTaleBox">
-                    <p className="mainFairyTale">동화</p>
-                </div>
-                <div>
-                    <ul className='categoryList'>
-                        {['전체보기', '로맨스', '전래동화', '판타지', '모험', '우화', '가족'].map((genre) => (
-                            <li key={genre}>
-                                <button onClick={() => handleGenreClick(genre)} className={`categoryBtn ${activeGenre === genre ? 'active' : ''}`}>
-                                    {genre}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-            <div className='line'></div>
-            <div className="fairyTalesContainer">
-                {stories.slice(0, visibleCount).map(story => (
-                    <div key={story.fairytaleCode} className="fairyTaleItem">
-                        <Link to={`/bookContent/${story.fairytaleCode}`}>
-                            <img src={story.fairytaleThumb} alt="Story Thumbnail" className="fairyTaleThumbnail" />
-                            <div className="fairyTaleContent">
-                                <h3>{story.fairytaleTitle}</h3>
-                            </div>
-                        </Link>
+            <div className='adminBox'>
+                {/* 기본 동화 표시 영역 */}
+                <div className='categoryBox'>
+                    <div className="fairyTaleBox">
+                        <p className="mainFairyTale">기본 동화</p>
                     </div>
-                ))}
+                </div>
+                <div className='line'></div>
+                <div className="fairyTalesContainer">
+                    {basicStories.slice(0, visibleCount).map((story) => (
+                        <div key={story.fairytaleCode} className="fairyTaleItem">
+                            <Link to={`/bookContent/${story.fairytaleCode}`}>
+                                <img src={story.fairytaleThumb} alt="Story Thumbnail" className="fairyTaleThumbnail" />
+                                <div className="fairyTaleContent">
+                                    <h3>{story.fairytaleTitle}</h3>
+                                </div>
+                            </Link>
+                        </div>
+                    ))}
+                </div>
             </div>
-            <div className='moreBtnBox'>
-                {visibleCount < stories.length && (
-                    <button onClick={showMoreStories} className="loadMoreButton">더보기 ▼</button>
-                )}
+    
+            <div className='userBox'>
+                {/* 유저 동화 카테고리 선택 및 표시 영역 */}
+                <div className='categoryBox'>
+                    <div className="fairyTaleBox">
+                        <p className="mainFairyTale">유저 동화</p>
+                    </div>
+                    <div>
+                        <ul className='categoryList'>
+                            {['전체보기', '로맨스', '전래동화', '판타지', '모험', '우화', '가족'].map((genre) => (
+                                <li key={genre}>
+                                    <button onClick={() => handleGenreClick(genre)} className={`categoryBtn ${activeGenre === genre ? 'active' : ''}`}>
+                                        {genre}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+                <div className='line'></div>
+                <div className="fairyTalesContainer">
+                    {userStories.slice(0, visibleCount).map((story) => (
+                        <div key={story.fairytaleCode} className="fairyTaleItem">
+                            <Link to={`/bookContent/${story.fairytaleCode}`}>
+                                <img src={createImageUrl(story.fairytaleThumb)} alt="Story Thumbnail" className="fairyTaleThumbnail" />
+                                <div className="fairyTaleContent">
+                                    <h3>{story.fairytaleTitle}</h3>
+                                </div>
+                            </Link>
+                        </div>
+                    ))}
+                </div>
+                <div className='moreBtnBox'>
+                    {visibleCount < userStories.length && (
+                        <button onClick={showMoreStories} className="loadMoreButton">더보기 ▼</button>
+                    )}
+                </div>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import axios from "axios";
 import { jwtDecode } from 'jwt-decode';
-import { deleteDeleteVoice, getExpVoice } from '../modules/AdminModule';
+import { getExpVoice, posdtDeleteVoice } from '../modules/AdminModule';
 
 export function expiredVoiceAPI(){
     const requestURL = `http://${process.env.REACT_APP_API_IP}/expVoice`;
@@ -10,7 +10,7 @@ export function expiredVoiceAPI(){
         await axios.get(requestURL)
             .then(function (response) {
                 console.log('[AdminAPI] expiredVoiceAPI RESPONSE : ', response);
-                if(response.status === 200) {
+                if(response.status == 200) {
                     dispatch(getExpVoice(response.data));
                 }
             })
@@ -21,14 +21,17 @@ export function expiredVoiceAPI(){
 }
 
 export function deleteVoiceAPI(voiceId){
-    const requestURL = `http://${process.env.REACT_APP_API_IP}:8001/deleteVoice/${voiceId}`
+
+    const requestURL = 'http://${process.env.REACT_APP_API_IP}:8002/deleteVoice'
+    console.log('[AdminAPI] deleteVoiceAPI voiceId : ', voiceId)
+    const body = { voiceId: voiceId };
 
     return async (dispatch, getState) => {
-        await axios.delete(requestURL)
+        await axios.post(requestURL, body)
             .then(function (response) {
                 console.log('[AdminAPI] deleteVoiceAPI RESPONSE : ', response);
                 if(response.status === 200){
-                    dispatch(deleteDeleteVoice(response.data));
+                    dispatch(posdtDeleteVoice(response.data));
                     Swal.fire({
                         icon: 'success',
                         title: "삭제 완료",
@@ -41,11 +44,11 @@ export function deleteVoiceAPI(voiceId){
                 }
             })
             .catch(function (error) {
-                console.error('AdminAPI expiredVoiceAPI 에러 발생 : ', error);
+                console.error('AdminAPI deleteVoiceAPI 에러 발생 : ', error);
                 Swal.fire({
                     icon: 'error',
                     title: "보이스아이디 삭제 중 오류 발생",
-                    text: error.response.data
+                    text: error.response.message
                 }).then(result => {
                     if(result.isConfirmed){
                         window.location.reload();;

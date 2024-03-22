@@ -1,7 +1,122 @@
 table {
     width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: solid 1px #cccccc;
+    border-left: 0;
+    border-right: 0;
+    text-align: center;
 }
 
-table thead, tbody{
+thead {
+    border-bottom: solid 2px #9baf00;
+}
+
+th, td {
+    padding: 1rem;
+    border: solid 1px #cccccc;
+    border-left: 0;
+    border-right: 0;
+}
+
+th {
+    font-weight: 700;
+}
+
+tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+tr:nth-child(even):hover {
+    background-color: #ebebeb;
+}
+
+.userInfoBox {
+    height: auto;
+}
+
+.userInfoTitle {
+    font-size: 32px;
+    color: #824600;
+    margin-left: 300px;
+    margin-top: 50px;
+}
+
+.deleteTitle {
     text-align: center;
+    color: #9baf00;
+}
+
+.userInfoTable {
+    width: 70%;
+    margin: auto;
+}
+
+.userInfoTxt {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.deleteBtn {
+    padding: 5px 30px;
+    border-radius: 5px;
+    outline: none;
+    border: solid 1px #C7302B;
+    background-color: #C7302B;
+    color: white;
+    font-size: 15px;
+}
+
+.deleteBtn:hover {
+    border: solid 1px #a9221d;
+    background-color: #a9221d;
+}
+
+.pagination {
+    width: 70%;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    gap: .25rem
+}
+  
+.pagination,
+.pagination li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+  
+.pagination li {
+    background-color: white;
+    list-style: none;
+    cursor: pointer;
+}
+  
+.pagination li a {
+    text-decoration: none;
+    color: #9baf00;
+    height: 40px;
+    width: 40px;
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .25rem;
+    border: 1px solid #9baf00;
+}
+  
+.pagination li:last-child a {
+    border-right-width: 1px;
+}
+  
+.pagination li a.active,
+.pagination li a:hover,
+.pagination li a:focus,
+.pagination li a:active {
+    background-color: #9baf00;
+    border: 1px solid #9baf00;
+    color: white;
 }

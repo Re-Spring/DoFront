@@ -106,30 +106,30 @@ function Info() {
                 <h2>{formatDate(user.enrollDate)}로부터 Do-Rering과 함께하셨습니다❤️</h2>
             </div>
             <div className="myInfo">
-                <div className="infoList">
-                    <p className="infoName">ID</p>
-                    <input readOnly value={user.userId} className="infoInput" />
-                </div>
-                <div className="infoList">
-                    <p className="infoName">이름</p>
-                    <input
-                        name="userName"
-                        value={userInfo.userName}
-                        onChange={handleInputChange}
-                        className="infoInput"
-                        readOnly={!isEditable}
-                    />
-                </div>
-                <div className="infoList">
-                    <p className="infoName">전화번호</p>
-                    <input
-                        name="phone"
-                        value={userInfo.phone}
-                        onChange={handleInputChange}
-                        className="infoInput"
-                        readOnly={!isEditable}
-                    />
-                </div>
+            <div className="infoList">
+                <p className="infoName">ID</p>
+                <input readOnly value={user.userId} className={`infoInput ${isEditable ? 'readonlyInput' : ''}`} />
+            </div>
+            <div className="infoList">
+                <p className="infoName">이름</p>
+                <input
+                    name="userName"
+                    value={userInfo.userName}
+                    onChange={handleInputChange}
+                    className={`infoInput ${isEditable ? 'editableInput' : ''}`}
+                    readOnly={!isEditable}
+                />
+            </div>
+            <div className="infoList">
+                <p className="infoName">전화번호</p>
+                <input
+                    name="phone"
+                    value={userInfo.phone}
+                    onChange={handleInputChange}
+                    className={`infoInput ${isEditable ? 'editableInput' : ''}`}
+                    readOnly={!isEditable}
+                />
+            </div>
                 <div className="notifyBox">
                     {isEditable ? (
                         <>
