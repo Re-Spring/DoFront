@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import { deleteDeleteVoice, getExpVoice } from '../modules/AdminModule';
 
 export function expiredVoiceAPI(){
-    const requestURL = 'http://localhost:8001/expVoice';
+    const requestURL = `http://${process.env.REACT_APP_API_IP}/expVoice`;
 
     return async (dispatch, getState) => {
         await axios.get(requestURL)
@@ -21,7 +21,7 @@ export function expiredVoiceAPI(){
 }
 
 export function deleteVoiceAPI(voiceId){
-    const requestURL = `http://localhost:8001/deleteVoice/${voiceId}`
+    const requestURL = `http://${process.env.REACT_APP_API_IP}:8001/deleteVoice/${voiceId}`
 
     return async (dispatch, getState) => {
         await axios.delete(requestURL)

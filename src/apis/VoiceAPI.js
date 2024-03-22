@@ -11,7 +11,7 @@ export const voiceCloningAPI = ({formData, setIsLoading}) => {
     for (let value of formData.values()) {
         console.log(value);
     }
-    const requestURL = 'http://localhost:8002/voiceCloning';
+    const requestURL = `http://${process.env.REACT_APP_API_IP}:8002/voiceCloning`;
 
     return async (dispatch) => {
         await axios.post(requestURL, formData, 

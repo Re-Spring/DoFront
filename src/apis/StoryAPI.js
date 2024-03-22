@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 
 // StoryAPI 함수의 수정된 버전
 export const fetchFairytales = async () => {
-    const requestURL = 'http://localhost:8001/fairytales';
+    const requestURL = `http://${process.env.REACT_APP_API_IP}:8001/fairytales`;
     try {
         const response = await axios.get(requestURL);
         if (response.status === 200) {
