@@ -17,6 +17,7 @@ import FindId from './pages/user/FindId';
 import FindPw from './pages/user/FindPw';
 import SearchPage from './pages/fairytale/SearchPage'; // SearchPage 컴포넌트의 경로에 맞게 조정해주세요.
 import CustomerServicePosts from './pages/mypage/CustomerServicePosts';
+import CustomerServicePostDetail from './pages/mypage/CustomerServicePostDetail';
 import { SessionTimeout } from './components/auth/SessionTimeout';
 import MyBook from './pages/fairytale/MyBook';
 import UserInfo from './pages/admin/UserInfo';
@@ -70,6 +71,7 @@ function App() {
             <Route path="voice" element={ <RequireAuth><Voice/></RequireAuth> }/>
             <Route path="CustomerService" element={<CustomerService/>} />
             <Route path="CustomerServicePosts" element={<CustomerServicePosts/>} />
+            <Route path="/customer-service/:boardCode" element={<CustomerServicePostDetail />} />
             <Route path="search" element={<SearchPage />} />
             <Route path="search" element={ <SearchPage /> } />
             <Route path="mybook" element={ <RequireAuth><MyBook /></RequireAuth> } />
