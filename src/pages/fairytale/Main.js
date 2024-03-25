@@ -29,16 +29,25 @@ function Main() {
     };
 
     const fetchAllUserStories = async () => {
-        // 유저 동화 불러오기 로직 (예시로만 제공, 실제 API 경로에 맞게 수정 필요)
         try {
             const response = await fetch('http://localhost:8001/stories/role/user');
             if (!response.ok) {
-                throw new Error('Network response was not ok for user stories');
+                throw new Error(`Network response was not ok for user stories`);
             }
-            const data = await response.json();
-            setUserStories(data);
-        } catch (error) {
-            console.error('Failed to fetch user stories:', error);
+            // 응답 본문을 텍스트로 변환
+            const text = await response.text();
+            try {
+                // 텍스트를 JSON으로 파싱 시도
+                const data = JSON.parse(text);
+                setUserStories(data);
+            } catch (parseError) {
+                // JSON 파싱 실패 시 오류 처리
+                console.error('Failed to parse JSON:', parseError);
+                // 여기서 추가적인 오류 처리 로직을 구현할 수 있습니다.
+                // 예: 사용자에게 알림 메시지 표시
+            }
+        } catch (networkError) {
+            console.error('Failed to fetch user stories:', networkError);
         }
     };
 
@@ -83,6 +92,8 @@ function Main() {
         const encodedPath = fairytaleThumb.replace(/\\/g, "/").split('/').map(encodeURIComponent).join('/');
         return `http://localhost:8002/${encodedPath}`;
     }
+
+    
 
     return (
         <div className="mainBox">

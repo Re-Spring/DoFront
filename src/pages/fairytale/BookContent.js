@@ -90,9 +90,8 @@ function BookContent() {
             <div className="voiceBox">
                 {/* 여기에 비디오 플레이어를 추가합니다. */}
                 {bookDetail.videoPath && (
-                    <video width="320" height="240" controls>
+                    <video className="video" controls>
                         <source src={createVideoUrl(bookDetail.videoPath)} type="video/mp4" />
-                        Your browser does not support the video tag.
                     </video>
                 )}
             </div>
