@@ -58,10 +58,10 @@ function Enroll() {
         const entPwd = e.target.value;
         setPwd(entPwd);
 
-        // 입력값에 대한 유효성 검사를 여기에서 수행
+       // 입력값에 대한 유효성 검사를 여기에서 수행
         const isValid = pwdRule.test(entPwd);
         setPwdMsg(isValid ? "✅" : "영문과 숫자, 특수문자를 포함해 8~20자로 입력해 주세요.");
-    }, []);
+    }, []); 
 
     const pwdConfirmHandler = useCallback((e) => {
         const entPwdConfirm = e.target.value;
