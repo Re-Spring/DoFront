@@ -66,6 +66,7 @@ function Make(){
     const userId = user.userId
     const userCode = user.userCode
     console.log(userId)
+    const tempVoiceCode = localStorage.getItem('tempVoiceCode');
 
     const makeHandler = async (e) => {
             // 폼 제출 이벤트 방지
@@ -139,9 +140,13 @@ function Make(){
                                     <option value="nova">Nova</option>
                                     <option value="shimmer">Shimmer</option>
                                 </optgroup>
-                                <optgroup label="등록한 목소리">
-                                    <option value="myVoice">내 목소리</option>
-                                </optgroup>
+                                {tempVoiceCode || (user.userVoiceId && user.userVoiceId != null) ? (
+                                    <optgroup label="등록한 목소리">
+                                        <option value="myVoice">내 목소리</option>
+                                    </optgroup>
+                                ) : (
+                                    <optgroup label="등록한 목소리가 없어요"></optgroup>
+                                )}
                             </select>
                         </div>
                         <div className='choice'>
