@@ -1,5 +1,6 @@
 /* CustomerService 컴포넌트의 최상위 요소에 적용 */
 .customer-service {
+    color: #824600;
     max-width: 800px; /* 적당한 최대 너비 설정 */
     margin: auto; /* 중앙 정렬 */
     padding: 20px; /* 패딩으로 내용과 테두리 사이 공간 확보 */

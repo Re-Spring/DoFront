@@ -1,85 +1,144 @@
 /* 고객센터 게시판의 전체 레이아웃 스타일링 */
 .customer-service {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  position: relative;
+  max-width: 800px; /* 최대 너비 설정 */
+  margin: 40px auto; /* 상하 40px, 좌우 자동(가운데 정렬) */
+  padding: 20px; /* 내부 여백 */
+  background: #ffffff; /* 배경색 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 상자 그림자 효과 */
+  border-radius: 8px; /* 모서리 둥글게 */
 }
 
 /* 고객센터 제목 스타일링 */
-.customer-service > p {
-  font-size: 24px;
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+.customer-service-title {
+  font-size: 24px; /* 글씨 크기 */
+  text-align: center; /* 가운데 정렬 */
+  color: #824600; /* 글씨 색상 */
+  margin-bottom: 20px; /* 아래쪽 여백 */
 }
 
 /* 글 생성 링크 버튼 스타일링 */
-.customer-service > a {
-  display: block; /* 버튼처럼 보이게 하려면 display: inline-block; 또는 display: block; 사용 */
-  width: fit-content;
-  padding: 10px 15px;
-  margin: 0 auto 20px auto; /* 중앙 정렬 */
-  background-color: #5cb85c;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+.create-post-link {
+  display: block; /* 버튼처럼 보이도록 블록 요소로 설정 */
+  width: fit-content; /* 내용에 맞는 너비 */
+  padding: 10px 15px; /* 상하 10px, 좌우 15px의 내부 여백 */
+  margin: 0 auto 20px; /* 위 0, 좌우 자동, 아래 20px 여백(중앙 정렬) */
+  background-color: #ffa500; /* 배경 색상 */
+  color: white; /* 글씨 색상 */
+  border-radius: 4px; /* 모서리 둥글게 */
+  text-decoration: none; /* 링크 밑줄 없앰 */
+  cursor: pointer; /* 마우스 오버시 커서 모양 변경 */
+  transition: background-color 0.3s; /* 배경색 변경시 트랜지션 효과 */
 }
 
-.customer-service > a:hover {
-  background-color: #0056b3;
+/* 글 생성 버튼의 배경색을 갈색으로 변경하고 오른쪽 정렬 */
+.button-container {
+  float: right; /* 오른쪽으로 정렬 */
+}
+
+.create-post-link:hover {
+  background-color: #fb6544; /* 마우스 오버시 배경색 변경 */
 }
 
 /* 게시글 목록 스타일링 */
 .posts-list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
+  list-style: none; /* 목록 기호 없앰 */
+  padding-left: 0; /* 왼쪽 패딩 제거 */
+  margin: 0; /* 외부 여백 제거 */
 }
 
 /* 게시글 아이템 스타일링 */
 .post-item {
-  background-color: none;
-  border: none;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  padding: 15px;
-  transition: background-color 0.3s;
+  background-color: none; /* 배경색 없음 */
+  border: none; /* 테두리 없음 */
+  margin-bottom: 10px; /* 아래쪽 여백 */
+  padding: 15px; /* 내부 여백 */
+  transition: background-color 0.3s; /* 배경색 변경시 트랜지션 효과 */
 }
 
 .post-item:hover {
-  background-color: #e9e9e9;
+  background-color: #e9e9e9; /* 마우스 오버시 배경색 변경 */
 }
 
 /* 게시글 제목 스타일링 */
 .post-item h2 {
-  margin: 0 0 10px 0;
-  color: #007bff;
-  text-decoration: none;
+  margin: 0 0 10px 0; /* 아래쪽 여백 */
+  color: #007bff; /* 글씨 색상 */
+  text-decoration: none; /* 링크 밑줄 없앰 */
 }
 
 /* 게시글 요약 내용 스타일링 */
 .post-item p {
-  color: #666;
-  margin: 0;
+  color: #666; /* 글씨 색상 */
+  margin: 0; /* 외부 여백 제거 */
 }
 
 /* 게시글이 없을 경우의 스타일링 */
 .no-posts {
-  text-align: center;
-  padding: 20px;
-  font-style: italic;
-  color: #888;
+  text-align: center; /* 가운데 정렬 */
+  padding: 20px; /* 내부 여백 */
+  font-style: italic; /* 이탤릭체 */
+  color: #888; /* 글씨 색상 */
 }
 
-.create-post-link {
-  position: absolute; /* 절대 위치 설정으로 위치 조정 */
-  bottom: 10px; /* 하단에서부터의 위치 */
-  right: 10px; /* 오른쪽에서부터의 위치 */
-  /* ... 기타 스타일 ... */
+/* 게시글 제목 및 날짜를 포함하는 테이블 스타일 */
+table {
+  width: 100%; /* 테이블 전체 너비 사용 */
+  border-collapse: collapse; /* 테이블 테두리 합치기 */
+  margin-top: 20px; /* 테이블 상단 여백 */
+}
+
+th, td {
+  border: 1px solid #ddd; /* 테이블 셀 테두리 */
+  padding: 8px; /* 셀 내부 여백 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+}
+
+th {
+  background-color: #f2f2f2; /* 테이블 헤더 배경색 */
+}
+
+/* 페이지네이션 스타일링 */
+.pagination-nav {
+  text-align: center; /* 가운데 정렬 */
+  padding: 10px 0; /* 상하 여백 */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center; /* 요소들을 가운데 정렬 */
+  list-style: none; /* 목록 스타일 없앰 */
+  padding: 0; /* 내부 여백 제거 */
+}
+
+.pagination li {
+  margin: 0 5px; /* 목록 항목 사이의 여백 */
+}
+
+.pagination li a {
+  text-decoration: none; /* 링크 밑줄 없앰 */
+  color: #000; /* 링크 색상 */
+  display: block; /* 블록 레벨 요소로 변경 */
+}
+
+.page-item.active a {
+  font-weight: bold; /* 현재 페이지 링크는 굵게 */
+}
+
+/* 더 많은 게시물을 불러오기 위한 버튼 스타일링 */
+.loadMoreButton {
+  padding: 5px 20px; /* 내부 여백 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  outline: none; /* 외곽선 없앰 */
+  border: solid 1px #EB9A0E; /* 테두리 색상 */
+  background-color: #EB9A0E; /* 배경색 */
+  cursor: pointer; /* 마우스 오버시 커서 변경 */
+  margin-bottom: 20px; /* 하단 여백 */
+}
+
+/* 반응형 미디어 쿼리 */
+@media (max-width: 768px) {
+  .button-container {
+    float: none;
+    text-align: center; /* 모바일 화면에서 버튼 중앙 정렬 */
+  }
 }
