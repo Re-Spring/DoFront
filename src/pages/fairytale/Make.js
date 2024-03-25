@@ -1,14 +1,18 @@
 import React, { useCallback ,useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // useNavigate 훅 가져오기
 import "../../styles/common/Common.css";
 import "../../styles/mybook/Make.css";
 import { jwtDecode } from "jwt-decode";
 import { MakeAPI } from "../../apis/MakeAPI";
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
+
 
 function Make(){
 
     const dispatch = useDispatch();
     const [token, setToken] = useState('');
+    const navigate = useNavigate(); 
 
     useEffect(() => {
     // 로컬 스토리지에서 토큰 가져오기
@@ -26,10 +30,14 @@ function Make(){
     const [lesson, setLesson] = useState('');
     const [page, setPage] = useState('6');
     const [voice, setVoice] = useState('echo');
+    const [titleMsg, setTilteMsg] = useState("");
 
     const titleHandler = useCallback(async (e) => {
         const entTitle = e.target.value;
-        setTitle(entTitle)
+        setTitle(entTitle);
+
+        const isValid = title.length > 0;
+        setTilteMsg(isValid ? "✅" : "제목을 입력해주세요.")
     }, []);
 
     const characterHandler = useCallback(async (e) => {
@@ -62,6 +70,8 @@ function Make(){
         setVoice(entVoice)
     }, []);
 
+
+
     const user  = jwtDecode(localStorage.getItem("accessToken"));
     const userId = user.userId
     const userCode = user.userCode
@@ -74,8 +84,12 @@ function Make(){
             console.log("test",title, character, genre, keyword, lesson, page, voice);
             console.log("token", token)
 
-            if(title === '' || genre === ''){
-                alert('필수 요소를 선택해주세요');
+            if (title === '') {
+                alert('제목을 입력해주세요');
+                return; // 제목이 비어있으면 여기서 함수 실행을 중단
+            } else if (genre === '') {
+                alert('장르를 선택해주세요');
+                return; // 장르가 비어있으면 여기서 함수 실행을 중단
             }else{
                 const makeData = {
                     title: title,
@@ -83,14 +97,24 @@ function Make(){
                     genre: genre,
                     keyword:keyword,
                     lesson:lesson,
-                    page:page,
+                    page:'7',
                     voice:voice,
                     userId:userId,
                     userCode:userCode,
                     token:token
-            }
+            };
+            Swal.fire({
+                icon: 'success',
+                title: "동화 생성 중입니다...🪄",
+                text: "동화가 생성되면 알람으로 알려드려요!🛎️",
+                confirmButtonText: "✓"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/"); // 사용자가 확인 버튼을 클릭하면 메인 페이지로 이동
+                }
+            });
             dispatch(MakeAPI({
-                makeData
+                makeData, navigate
         }));
         }
     }
@@ -105,14 +129,10 @@ function Make(){
                             <p className='textName'><label htmlFor="title">제목</label></p>
                             <input type="text" className='inputBox' id="title" placeholder="원하는 제목을 입력해주세요." value={title} onChange={titleHandler}/>
                         </div>
-                        <div>
-                        <p className='textName'><label htmlFor="character">주인공</label></p>
-                            <input type="text" className='inputBox' id="character" placeholder="원하는 주인공을 입력해주세요." value={character} onChange={characterHandler}/>
-                        </div>
                         <div className='choice'>
                             <p className='textName'><label htmlFor="genre">장르</label></p>
                             <select id="genre" className='optionBox' value={genre} onChange={genreHandler}>
-                                <option value='' default>-</option>
+                                <option value='' default disabled hidden>선택해주세요</option>
                                 <option value="romance">로맨스</option>
                                 <option value="folktale">전래동화</option>
                                 <option value="fantasy">판타지</option>
@@ -121,6 +141,11 @@ function Make(){
                                 <option value="family">가족</option>
                             </select>
                         </div>
+                        <div>
+                        <p className='textName'><label htmlFor="character">주인공</label></p>
+                            <input type="text" className='inputBox' id="character" placeholder="원하는 주인공을 입력해주세요." value={character} onChange={characterHandler}/>
+                        </div>
+
                         <div>
                             <p className='textName'><label htmlFor="keyword">키워드</label></p>
                             <input type="text" className='inputBox' id="keyword" value={keyword} placeholder="원하는 키워드를 입력해주세요." onChange={keywordHandler}/>
@@ -147,17 +172,6 @@ function Make(){
                                 ) : (
                                     <optgroup label="등록한 목소리가 없어요"></optgroup>
                                 )}
-                            </select>
-                        </div>
-                        <div className='choice'>
-                            <p className='textName'><label htmlFor="page">페이지 수</label></p>
-                            <select id="page" className='optionBox' value={page} onChange={pageHandler}>
-                                <option value='' default>-</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
                             </select>
                         </div>
                     </div>

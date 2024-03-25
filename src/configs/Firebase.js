@@ -18,10 +18,21 @@ isSupported().then((supported) => {
             let notificationOptions = {
                 body: payload.notification.body,
                 // icon: payload.notification.icon
+                // data: {
+                  // click_action: payload.notification.click_action // 알림 클릭시 이동할 URL 저장
+              // }
             };
-            new window.Notification(payload.notification.title, notificationOptions);
-        }
-    });
+            // 알림 객체 생성하고 변수에 저장
+            let notification = new window.Notification(payload.notification.title, notificationOptions);
+
+             // 알림 클릭 이벤트 리스너 추가
+              notification.onclick = function(event) {
+                  event.preventDefault(); // 브라우저의 기본 동작 방지
+                  // window.location.href = `https://${process.env.REACT_APP_API_IP}:3000/bookContent/${story.fairytaleCode}`; // 메인 페이지 URL로 이동; // 새 탭에서 동화 상세 페이지 열기
+                  notification.close(); // 알림 닫기
+              }
+      }
+  });
   } else {
     console.log("This browser doesn't support Firebase Cloud Messaging");
   }
