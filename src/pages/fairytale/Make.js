@@ -108,7 +108,7 @@ function Make(){
                         <p className='textName'><label htmlFor="character">주인공</label></p>
                             <input type="text" className='inputBox' id="character" placeholder="원하는 주인공을 입력해주세요." value={character} onChange={characterHandler}/>
                         </div>
-                        <div>
+                        <div className='choice'>
                             <p className='textName'><label htmlFor="genre">장르</label></p>
                             <select id="genre" className='optionBox' value={genre} onChange={genreHandler}>
                                 <option value='' default>-</option>
@@ -128,7 +128,7 @@ function Make(){
                             <p className='textName'><label htmlFor="lesson">교훈</label></p>
                             <input type="text" className='inputBox' id="lesson" placeholder="교훈을 입력해주세요." value={lesson} onChange={lessonHandler}/>
                         </div>
-                        <div>
+                        <div className='choice'>
                             <p className='textName'><label htmlFor="voice">목소리 선택</label></p>
                             <select id="voice" className='optionBox' value={voice} onChange={voiceHandler}>
                                 <optgroup label="인공지능 목소리">
@@ -144,7 +144,7 @@ function Make(){
                                 </optgroup>
                             </select>
                         </div>
-                        <div>
+                        <div className='choice'>
                             <p className='textName'><label htmlFor="page">페이지 수</label></p>
                             <select id="page" className='optionBox' value={page} onChange={pageHandler}>
                                 <option value='' default>-</option>
@@ -155,9 +155,9 @@ function Make(){
                                 <option value="10">10</option>
                             </select>
                         </div>
-                        <div className='makeBtnBox'>
-                            <button type="submit" className='makeBtn'>만들기</button>
-                        </div>
+                    </div>
+                    <div className='makeBtnBox'>
+                        <button type="submit" className='makeBtn'>만들기</button>
                     </div>
                 </form>
              </div>

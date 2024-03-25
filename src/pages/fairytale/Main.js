@@ -42,14 +42,24 @@ function Main() {
         }
     };
 
+    const genreMappings = {
+        '로맨스': 'romance',
+        '전래동화': 'folktale',
+        '판타지': 'fantasy',
+        '모험': 'adventure',
+        '우화': 'fable',
+        '가족': 'family'
+    };
+    
     const fetchUserStoriesByGenre = async (genre) => {
+        const genreInEnglish = genreMappings[genre] || genre; // 매핑된 영어 이름 사용, 매핑되지 않으면 기존 genre 사용
         try {
             if (genre === '전체보기') {
                 fetchAllUserStories();
                 return;
             }
     
-            const response = await fetch(`http://localhost:8001/stories/genre/${genre}`);
+            const response = await fetch(`http://localhost:8001/stories/genre/${genreInEnglish}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -81,17 +91,15 @@ function Main() {
             </div>
             <div className='adminBox'>
                 {/* 기본 동화 표시 영역 */}
-                <div className='categoryBox'>
                     <div className="fairyTaleBox">
                         <p className="mainFairyTale">기본 동화</p>
                     </div>
-                </div>
                 <div className='line'></div>
                 <div className="fairyTalesContainer">
                     {basicStories.slice(0, visibleCount).map((story) => (
                         <div key={story.fairytaleCode} className="fairyTaleItem">
                             <Link to={`/bookContent/${story.fairytaleCode}`}>
-                                <img src={story.fairytaleThumb} alt="Story Thumbnail" className="fairyTaleThumbnail" />
+                                <img src={createImageUrl(story.fairytaleThumb)} alt="Story Thumbnail" className="fairyTaleThumbnail" />
                                 <div className="fairyTaleContent">
                                     <h3>{story.fairytaleTitle}</h3>
                                 </div>
@@ -120,18 +128,24 @@ function Main() {
                     </div>
                 </div>
                 <div className='line'></div>
-                <div className="fairyTalesContainer">
-                    {userStories.slice(0, visibleCount).map((story) => (
-                        <div key={story.fairytaleCode} className="fairyTaleItem">
-                            <Link to={`/bookContent/${story.fairytaleCode}`}>
-                                <img src={createImageUrl(story.fairytaleThumb)} alt="Story Thumbnail" className="fairyTaleThumbnail" />
-                                <div className="fairyTaleContent">
-                                    <h3>{story.fairytaleTitle}</h3>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
-                </div>
+                {userStories.length > 0 ? (
+                    <div className="fairyTalesContainer">
+                        {userStories.slice(0, visibleCount).map((story) => (
+                            <div key={story.fairytaleCode} className="fairyTaleItem">
+                                <Link to={`/bookContent/${story.fairytaleCode}`}>
+                                    <img src={createImageUrl(story.fairytaleThumb)} alt="Story Thumbnail" className="fairyTaleThumbnail" />
+                                    <div className="fairyTaleContent">
+                                        <h3>{story.fairytaleTitle}</h3>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="noStoriesMessage">
+                        등록된 동화가 없습니다.
+                    </div>
+                )}
                 <div className='moreBtnBox'>
                     {visibleCount < userStories.length && (
                         <button onClick={showMoreStories} className="loadMoreButton">더보기 ▼</button>

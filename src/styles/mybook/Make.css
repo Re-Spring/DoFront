@@ -1,5 +1,6 @@
 .makeBox{
     height: auto;
+    width: 100%;
 }
 
 .fairyTaleMake{
@@ -10,11 +11,17 @@
 }
 
 .promptBox{
+    width: 703px;
     margin: auto;
-    margin-top: 50px;
-    margin-bottom: 100px;
-    width: 45%;
+    margin-top: 80px;
+    margin-bottom: 60px;
+    text-align: center;
 }
+
+.choice{
+    text-align: left;
+}
+
 
 .textName{
     text-align: right;
@@ -33,8 +40,9 @@
 }
 
 .makeBtnBox{
-    float: right;
-    margin-right: 10%;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 400px 100px 0;
 }
 
 .makeBtn{
