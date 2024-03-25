@@ -44,3 +44,14 @@
   vertical-align: top;
   height: 150px;
 }
+
+.voiceBox{
+  text-align: center;
+  margin-top: 100px;
+}
+
+.video{
+  width: 700px;
+  height: 350px;
+  border: solid 1px rgb(155, 152, 152);
+}
