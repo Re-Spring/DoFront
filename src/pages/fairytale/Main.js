@@ -42,12 +42,8 @@ function Main() {
                 setUserStories(data);
             } catch (parseError) {
                 // JSON 파싱 실패 시 오류 처리
-                console.error('Failed to parse JSON:', parseError);
-                // 여기서 추가적인 오류 처리 로직을 구현할 수 있습니다.
-                // 예: 사용자에게 알림 메시지 표시
             }
         } catch (networkError) {
-            console.error('Failed to fetch user stories:', networkError);
         }
     };
 
@@ -75,7 +71,6 @@ function Main() {
             const data = await response.json();
             setUserStories(data);
         } catch (error) {
-            console.error(`Failed to fetch user stories by genre ${genre}:`, error);
         }
     };
 

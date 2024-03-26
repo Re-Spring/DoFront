@@ -4,64 +4,69 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 function BookContent() {
-    // 책의 상세 정보 상태 값 설정
     const [bookDetail, setBookDetail] = useState({
-        fairytaleSummary: '', // 동화 요약
-        fairytaleTitle: '', // 동화 제목
-        fairytaleGenre: '', // 동화 장르
-        fairytaleThumb: '', // 동화 썸네일
-        userId: '' // 사용자 ID
+        fairytaleSummary: '',
+        fairytaleTitle: '',
+        fairytaleGenre: '',
+        fairytaleThumb: '',
+        userId: '',
+        videoFileCode: '' // 비디오 파일 코드 상태 추가
     });
-    
-    // useParams 훅을 통해 fairytaleCode 추출
+    const [videoPath, setVideoPath] = useState(''); // 비디오 경로 상태 추가
+
     const { fairytaleCode } = useParams();
 
     useEffect(() => {
-        // 동화 코드가 없거나 유효하지 않을 경우 에러 메시지 출력 후 종료
         if (!fairytaleCode) {
-            console.error("fairytaleCode is null or invalid.");
             return;
         }
 
-        // 책의 상세 정보를 가져오는 비동기 함수 fetchBookDetail 선언
         const fetchBookDetail = async () => {
             try {
-                // 동화 코드를 이용하여 책의 상세 정보를 가져옴
                 const response = await fetch(`http://localhost:8001/stories/detail/${fairytaleCode}`);
-                
-                // HTTP 응답이 성공적이지 않을 경우 에러 발생
                 if (!response.ok) {
                     throw new Error(`Failed to fetch book detail, status: ${response.status}`);
                 }
-
-                // JSON 형식으로 변환하여 데이터 가져오기
                 const data = await response.json();
-                
-                // 책의 상세 정보를 상태 값으로 설정
                 setBookDetail(data);
+
+                // 비디오 파일 코드가 있는 경우, 비디오 경로 조회
+                if (data.videoFileCode) {
+                    fetchVideoPath(data.videoFileCode);
+                }
             } catch (error) {
-                // 에러 발생 시 에러 메시지 출력
-                console.error("Error fetching book detail:", error);
             }
         };
-    
-        // fairytaleCode가 존재할 경우 fetchBookDetail 함수 실행
+
         fetchBookDetail();
     }, [fairytaleCode]);
 
-    // 이미지 URL을 생성하는 함수
+    // 비디오 파일 코드를 사용하여 비디오 경로를 조회하는 함수
+    const fetchVideoPath = async (videoFileCode) => {
+        try {
+            // 요청 URL이 백엔드 엔드포인트와 일치하는지 확인
+            const response = await fetch(`http://localhost:8001/stories/video/${videoFileCode}`);
+            if (!response.ok) {
+                throw new Error(`비디오 경로를 가져오는데 실패했습니다, 상태: ${response.status}`);
+            }
+            // BookContent.js 내의 fetchVideoPath 수정 부분
+            const data = await response.json();
+            setVideoPath(data.videoPath); // 이제 data 객체 내에 videoPath 키를 기대할 수 있습니다.
+        } catch (error) {
+        }
+    };
+
     function createImageUrl(fairytaleThumb) {
         const encodedPath = fairytaleThumb.replace(/\\/g, "/").split('/').map(encodeURIComponent).join('/');
         return `http://localhost:8002/${encodedPath}`;
     }
 
-    // 비디오 URL을 생성하는 함수
     function createVideoUrl(videoPath) {
         if(!videoPath) return '';
         const encodedPath = videoPath.replace(/\\/g, "/").split('/').map(encodeURIComponent).join('/');
         return `http://localhost:8002/${encodedPath}`;
     }
-    
+
     return (
         <div className="bookContent">
             <div className="bookBox">
@@ -88,10 +93,9 @@ function BookContent() {
                 </div>
             </div>
             <div className="voiceBox">
-                {/* 여기에 비디오 플레이어를 추가합니다. */}
-                {bookDetail.videoPath && (
+                {videoPath && (
                     <video className="video" controls>
-                        <source src={createVideoUrl(bookDetail.videoPath)} type="video/mp4" />
+                        <source src={createVideoUrl(videoPath)} type="video/mp4" />
                     </video>
                 )}
             </div>
@@ -100,4 +104,3 @@ function BookContent() {
 }
 
 export default BookContent;
-
