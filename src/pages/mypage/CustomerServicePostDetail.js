@@ -23,7 +23,6 @@ const PostDetail = () => {
         // setComments(commentsResponse.data || []);
         setComments(postResponse.data.comments || []);
       } catch (error) {
-        console.error('Error fetching post details', error);
         setPost(null);
         setComments([]);
       }

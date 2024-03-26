@@ -87,7 +87,6 @@ function Enroll() {
     const enrollHandler = async (e) => {
         // 폼 제출 이벤트 방지
         e.preventDefault();
-        console.log(userId, pwd, userName, phone);
 
         const userData = {
             userName: userName, 

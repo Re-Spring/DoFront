@@ -9,13 +9,11 @@ export function expiredVoiceAPI(){
     return async (dispatch, getState) => {
         await axios.get(requestURL)
             .then(function (response) {
-                console.log('[AdminAPI] expiredVoiceAPI RESPONSE : ', response);
                 if(response.status == 200) {
                     dispatch(getExpVoice(response.data));
                 }
             })
             .catch(function(error) {
-            console.error('AdminAPI expiredVoiceAPI 에러 발생 : ', error);
             })
     }
 }
@@ -23,13 +21,11 @@ export function expiredVoiceAPI(){
 export function deleteVoiceAPI(voiceId){
 
     const requestURL = 'http://${process.env.REACT_APP_API_IP}:8002/deleteVoice'
-    console.log('[AdminAPI] deleteVoiceAPI voiceId : ', voiceId)
     const body = { voiceId: voiceId };
 
     return async (dispatch, getState) => {
         await axios.post(requestURL, body)
             .then(function (response) {
-                console.log('[AdminAPI] deleteVoiceAPI RESPONSE : ', response);
                 if(response.status === 200){
                     dispatch(posdtDeleteVoice(response.data));
                     Swal.fire({
@@ -44,7 +40,6 @@ export function deleteVoiceAPI(voiceId){
                 }
             })
             .catch(function (error) {
-                console.error('AdminAPI deleteVoiceAPI 에러 발생 : ', error);
                 Swal.fire({
                     icon: 'error',
                     title: "보이스아이디 삭제 중 오류 발생",

@@ -45,7 +45,6 @@ function Info() {
             logout(); // 로그아웃 함수 호출
             navigate('/login'); // 로그아웃 후 로그인 페이지로 리다이렉션
         } catch (error) {
-            console.error('Failed to update user information:', error);
             Swal.fire({
                 title: "수정 실패",
                 text: "정보 업데이트를 실패했습니다.",

@@ -25,8 +25,6 @@ function Login() {
         const userId = idInputRef.current.value;
         const password = pwdInputRef.current.value;
                                                               
-        console.log(userId, password);
-
         dispatch(userLoginAPI({
             userId, password, navigate, logout
         }));

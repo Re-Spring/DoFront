@@ -14,7 +14,6 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    console.log("AuthContext user 1 : ", user);
 
     // 로딩 상태 관리를 위한 state 추가
     const [loading, setLoading] = useState(true);
@@ -46,7 +45,6 @@ export const AuthProvider = ({ children }) => {
         if(accessToken) {
             const decodedToken = jwtDecode(accessToken);
             const currentTime = Date.now() / 1000; // 현재 시간 (초 단위)
-            console.log("토큰 남은 시간 체크 : ", currentTime - decodedToken.exp);
             if ( decodedToken.exp < currentTime ) {
                 logout(); // 토큰 만료 시 로그아웃 실행
             }

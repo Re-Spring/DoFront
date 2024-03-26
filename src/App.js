@@ -35,22 +35,17 @@ function App() {
     // 알림 권한 요청
     Notification.requestPermission().then(permission => {
       if (permission === 'granted') {
-        console.log('Notification permission granted.');
         // FCM 토큰 획득
         getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
           .then((currentToken) => {
             if (currentToken) {
-              console.log("FCM Token:", currentToken);
               localStorage.setItem('fcmToken', currentToken);
 //              setToken(currentToken); // 저장
             } else {
-              console.log('No registration token available. Request permission to generate one.');
             }
           }).catch((err) => {
-            console.log('An error occurred while retrieving token. ', err);
           });
       } else {
-        console.log('Unable to get permission to notify.');
       }
     });
   }, []);

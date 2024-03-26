@@ -19,7 +19,6 @@ const CustomerService = () => {
         setTotalPosts(res.data.totalItems);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching posts', error);
         setLoading(false);
       }
     };
