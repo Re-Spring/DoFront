@@ -21,7 +21,6 @@ function MyBook() {
         axios.get(`http://localhost:8001/stories/usercode/${userCode}`)
             .then(response => {
                 // 응답 데이터 로깅 및 상태 업데이트
-                console.log(response.data);
                 setStories(response.data);
             })
             .catch(error => {

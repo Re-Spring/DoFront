@@ -9,9 +9,12 @@ const storySlice = createSlice({
         getStory: (state, action) => {
             return action.payload;
         },
+        getUserStory: (state, action) => {
+            return action.payload;
+        },
     },
 });
 
-export const { getStory } = storySlice.actions;
+export const { getStory, getUserStory } = storySlice.actions;
 
 export default storySlice.reducer;

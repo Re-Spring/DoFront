@@ -35,9 +35,6 @@ function Make(){
     const titleHandler = useCallback(async (e) => {
         const entTitle = e.target.value;
         setTitle(entTitle);
-
-        const isValid = title.length > 0;
-        setTilteMsg(isValid ? "✅" : "제목을 입력해주세요.")
     }, []);
 
     const characterHandler = useCallback(async (e) => {
@@ -104,9 +101,9 @@ function Make(){
             };
             Swal.fire({
                 icon: 'success',
-                title: "동화 생성 중입니다...🪄",
-                text: "동화가 생성되면 알람으로 알려드려요!🛎️",
-                confirmButtonText: "✓"
+                title: "동화 생성 중입니다...✨",
+                text: "🛎️동화가 생성되면 알람으로 알려드려요!🛎️",
+                confirmButtonText: "확인"
             }).then((result) => {
                 if (result.isConfirmed) {
                     navigate("/"); // 사용자가 확인 버튼을 클릭하면 메인 페이지로 이동
@@ -120,7 +117,7 @@ function Make(){
 
     return (
         <>
-             <div className='makeBox'>
+            <div className='makeBox'>
                 <p className='fairyTaleMake'>동화 만들기</p>
                 <form onSubmit={makeHandler}>
                     <div className='promptBox'>
@@ -174,7 +171,7 @@ function Make(){
                         <button type="submit" className='makeBtn'>만들기</button>
                     </div>
                 </form>
-             </div>
+            </div>
         </>
     )
 }
