@@ -12,17 +12,7 @@ export const MakeAPI = ({ makeData, navigate }) => {
                 console.log("test",response);
                 // 성공적으로 동화를 생성한 경우
                 if(response.status === 200){
-                    // 액션 생성자 함수를 호출하여 액션 객체 생성 및 디스패치
-                    dispatch(postMake(response.data));
-                    Swal.fire({
-                        icon: 'success',
-                        title: "동화 생성이 완료되었습니다.",
-                        text: "즐거운 동화 감상하세요!",
-                        confirmButtonText: "✓"
-                    }).then(result => {
-                        if(result.isConfirmed){
-                        }
-                    });
+                    console.log("success");
                 }
             })
             .catch(function (error) {

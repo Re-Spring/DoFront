@@ -12,7 +12,6 @@ isSupported().then((supported) => {
 
     // 포그라운드 메시지 수신 처리
     onMessage(messaging, (payload) => {
-        console.log('Message received. ', payload);
         // 포그라운드에서 사용자에게 알림 표시
         if ('Notification' in window) {
             let notificationOptions = {
@@ -27,10 +26,12 @@ isSupported().then((supported) => {
 
              // 알림 클릭 이벤트 리스너 추가
               notification.onclick = function(event) {
-                  event.preventDefault(); // 브라우저의 기본 동작 방지
-                  // window.location.href = `https://${process.env.REACT_APP_API_IP}:3000/bookContent/${story.fairytaleCode}`; // 메인 페이지 URL로 이동; // 새 탭에서 동화 상세 페이지 열기
-                  notification.close(); // 알림 닫기
-              }
+              event.preventDefault(); // 브라우저의 기본 동작 방지
+              const fairytaleCode = payload.data && payload.data.fairytaleCode;
+              console.log(fairytaleCode);
+              window.location.href = `/bookContent/${fairytaleCode}`; // 클릭시 이동할 URL
+              notification.close(); // 알림 닫기
+          }
       }
   });
   } else {
