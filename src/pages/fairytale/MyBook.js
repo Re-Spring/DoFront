@@ -21,12 +21,10 @@ function MyBook() {
         axios.get(`http://localhost:8001/stories/usercode/${userCode}`)
             .then(response => {
                 // 응답 데이터 로깅 및 상태 업데이트
-                console.log(response.data);
                 setStories(response.data);
             })
             .catch(error => {
                 // 에러 처리: 에러 발생 시 에러 상태를 업데이트
-                console.error("Failed to fetch stories", error);
                 setError("동화를 불러오는 데 실패했습니다.");
             });
     }, []);
