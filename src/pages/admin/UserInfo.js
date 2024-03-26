@@ -14,7 +14,6 @@ function UserInfo() {
     }, []);
 
     const expVoices = useSelector(state => state.admin);
-    console.log("[UserInfo] expVoices 확인 : ", expVoices);
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsperPage = 10;

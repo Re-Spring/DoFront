@@ -10,7 +10,6 @@ export const userEnrollAPI = ({userData, navigate}) => {
     return async (dispatch, getState) => {
         await axios.post(requestURL, userData)
             .then(function (response) {
-                console.log(response);
                 // 성공적으로 가입 처리된 경우
                 if(response.status === 200){
                     // 액션 생성자 함수를 호출하여 액션 객체 생성 및 디스패치
@@ -29,7 +28,6 @@ export const userEnrollAPI = ({userData, navigate}) => {
             })
             .catch(function (error) {
                 // 백엔드에서 보낸 에러 메시지 처리
-                console.log("회원 가입 중 오류 발생: ", error.response);
                 Swal.fire({
                     icon: 'error',
                     title: error.response.status == 400 ? error.response.data : "가입 시도 중 오류가 발생했습니다",
@@ -44,7 +42,6 @@ export const userEnrollAPI = ({userData, navigate}) => {
 
 export const userLoginAPI = ({userId, password, navigate, logout}) => {
     const requestURL = `http://${process.env.REACT_APP_API_IP}:8001/auth/login`;
-    console.log("api 전 : ", userId, password);
     return async (dispatch, getState) => {
         await axios.post(requestURL, {userId, password}, 
             {
@@ -53,15 +50,12 @@ export const userLoginAPI = ({userId, password, navigate, logout}) => {
                 }
             })
             .then(function (response) {
-                console.log(response);
                 // 성공적으로 로그인 처리된 경우
                 if(response.status === 200){
                     // 토큰을 상태로 저장하거나 로컬/세션 스토리지에 저장하는 로직 추가
                     const accessToken = response.data.accessToken;
                     // 로컬 스토리지에 토큰 저장
                     localStorage.setItem('accessToken', accessToken);
-                    console.log("토큰 확인 : ", accessToken);
-                    console.log("토큰 디코딩 확인 : ", jwtDecode(accessToken));
                     // 상태 업데이트
                     dispatch(postLogin(response.data));
                     // logoutTimer = setTimeout(logout, loginTokenHandler(jwtDecode(accessToken).exp));
@@ -87,8 +81,6 @@ export const userLoginAPI = ({userId, password, navigate, logout}) => {
             })
             .catch(function (error) {
                 // 백엔드에서 보낸 에러 메시지 처리
-                console.log("로그인 중 오류 발생: ", error);
-                console.log("로그인 중 오류 발생: ", error.response);
                 Swal.fire({
                     icon: 'error',
                     title: error.response.status == 400 ? error.response.data : "로그인 시도 중 오류가 발생했습니다",
@@ -105,10 +97,8 @@ export const findIdAPI = ({userName, phoneNum}) => {
     return async (dispatch, getState) => {
         await axios.get(requestURL, body)
             .then(function (response) {
-                console.log(response);
                 if(response.status === 200){
                     const userId = response.data;
-                    console.log("아이디 찾기 확인 : ", userId);
                     dispatch(getFindId(response.data));
                     Swal.fire({
                         icon: 'success',
@@ -120,8 +110,6 @@ export const findIdAPI = ({userName, phoneNum}) => {
             })
             .catch(function (error) {
                 // 백엔드에서 보낸 에러 메시지 처리
-                console.log("아이디 찾기 중 오류 발생: ", error);
-                console.log("아이디 찾기 중 오류 발생: ", error.response);
                 Swal.fire({
                     icon: 'error',
                     title: error.response.status == 400 ? error.response.data : "아이디 찾기 중 오류가 발생했습니다",
@@ -138,9 +126,7 @@ export const findPwAPI = ({userName, userId, phoneNum, navigate}) => {
     return async (dispatch, getState) => {
         await axios.get(requestURL, body)
             .then(function (response) {
-                console.log(response);
                 if(response.status === 200){
-                    console.log("비밀번호 찾기 확인 : ", response.data);
                     dispatch(getFindPw(response.data));
                     Swal.fire({
                         title: "변경할 비밀번호를 입력하세요",
@@ -189,7 +175,6 @@ export const findPwAPI = ({userName, userId, phoneNum, navigate}) => {
                         }
                     })
                     .catch(function (error) { 
-                        console.log("비밀번호 변경 중 오류 발생: ", error);
                         Swal.fire({
                             icon: 'error',
                             title: error.response.status == 400 ? error.response.data : "비밀번호 변경 중 오류가 발생했습니다",
@@ -201,8 +186,6 @@ export const findPwAPI = ({userName, userId, phoneNum, navigate}) => {
             })
             .catch(function (error) {
                 // 백엔드에서 보낸 에러 메시지 처리
-                console.log("비밀번호 찾기 중 오류 발생: ", error);
-                console.log("비밀번호 찾기 중 오류 발생: ", error.response);
                 Swal.fire({
                     icon: 'error',
                     title: error.response.status == 400 ? error.response.data : "비밀번호 찾기 중 오류가 발생했습니다",
@@ -214,7 +197,6 @@ export const findPwAPI = ({userName, userId, phoneNum, navigate}) => {
 }
 
 const modifyPwAPI = async (userId, newPassword, dispatch) => {
-    console.log(userId, newPassword);
     const url = `http://${process.env.REACT_APP_API_IP}:8001/auth/setPwd`;
     const params = new URLSearchParams();
     params.append('userId', userId);
@@ -222,10 +204,8 @@ const modifyPwAPI = async (userId, newPassword, dispatch) => {
     
     try {
         const response = await axios.post(url, params);
-        console.log("변경 결과 response 확인 : ", response);
         // 서버 응답이 성공(200 OK)이 아닌 경우 오류를 throw하고 해당 오류 메시지 처리
         if (response.status !== 200) {
-            console.log(response.statusText);
             throw new Error("다시 시도해 주세요. 불편을 드려 죄송합니다.");
         }
 
@@ -235,7 +215,6 @@ const modifyPwAPI = async (userId, newPassword, dispatch) => {
         return response.data;
     } catch (error) {
         // 요청이 실패하면 오류 메시지 throw
-        console.log("비밀번호 변경 에러 발생 : ", error)
         throw new Error("다시 시도해 주세요. 불편을 드려 죄송합니다.");
     }
 };

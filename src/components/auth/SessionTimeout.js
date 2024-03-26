@@ -26,7 +26,6 @@ export function SessionTimeout(timeoutDuration = 3600000) { // 기본 타임아�
             const lastActivityDate = lastActivity ? new Date(lastActivity) : new Date();
             if (now.getTime() - lastActivityDate.getTime() > timeoutDuration) {
                 // 타임아웃 시 로그아웃 처리
-                console.log('Session timeout. Logging out...');
                 // 로그아웃 로직을 여기에 구현...
                 localStorage.removeItem('accessToken');
                 localStorage.removeItem('tempVoiceCode');

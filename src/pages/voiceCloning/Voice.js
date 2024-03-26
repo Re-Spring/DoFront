@@ -26,8 +26,6 @@ function Voice() {
     const [recordingMsg, setRecordingMsg] = useState(["", "", ""]);
     const [isLoading, setIsLoading] = useState(false);
     
-    console.log("클론페이지 아이디 확인 : ", userId);
-
     useEffect(() => {
         // audioUrls 상태가 업데이트될 때마다 로그 출력
         audioUrls.forEach((url, index) => console.log(`Audio URL ${index + 1}: ${url}`));
@@ -99,9 +97,7 @@ function Voice() {
                 mediaRecorder.current.onstop = () => {
                     const blob = new Blob(localChunks, { 'type': 'audio/wav' });
                     const newAudioUrl = URL.createObjectURL(blob);
-                    console.log(newAudioUrl);
                     setAudioUrls(prevAudioUrls => prevAudioUrls.map((url, idx) => idx === index ? newAudioUrl : url));
-                    console.log(audioUrls);
                     updateRecordingState(index, false, true, recordings[index].isSaved); // 녹음 완료 상태 업데이트
                     setRecordingMsg(prevMsgs => {
                         const newMsgs = [...prevMsgs];
@@ -111,23 +107,19 @@ function Voice() {
                 };          
             // setTimeout(() => mediaRecorder.current.stop(), 100000);
         }).catch(err => {
-            console.error('startRecording에서 에러 발생 : ', err);
         });
     };
 
     const stopRecording = (index) => {
         if (mediaRecorder.current && recordings[index].isRecording) {
             mediaRecorder.current.stop(); // 녹음 중지
-            console.log('녹음 중지 시도');
         } else {
-            console.error('MediaRecorder가 초기화되지 않았습니다.');
         }
     }
 
     const saveRecording = (index) => {
         
         if (!audioUrls[index]) {
-            console.log(`${index} : No audio data to save.`);
             return;
         }
         // 이 예제에서는 파일을 임시 저장하는 로직을 구현하지 않습니다.
@@ -175,14 +167,12 @@ function Voice() {
                     // FormData에 변환된 WAV Blob 추가
                     formData.append("files", new File([wavBlob], fileName, { type: "audio/wav" }));
                 }).catch(error => {
-                    console.error('WAV 변환 오류:', error);
                 });
             }
         }
 
         // FormData에 userId를 추가합니다.
         formData.append('user_id', userId);
-        console.log("페이지에서 formdate 확인 : ", formData);
         setIsLoading(true);
         dispatch(voiceCloningAPI({formData, setIsLoading}));
 
@@ -190,7 +180,6 @@ function Voice() {
     }
 
     const tempVoiceCode = localStorage.getItem('tempVoiceCode');
-    console.log("클론 직후 보이스코드 확인 : ", tempVoiceCode);
 
     return (
     <>

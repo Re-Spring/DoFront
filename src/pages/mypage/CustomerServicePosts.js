@@ -15,7 +15,6 @@ const CustomerServicePosts = () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
       if (!accessToken) {
-        console.error('No access token found');
         return;
       }
 
@@ -35,7 +34,6 @@ const CustomerServicePosts = () => {
       // 게시글 리스트 페이지로 이동
       navigate('/CustomerService');
     } catch (error) {
-      console.error('Error creating a post', error);
     }
   };
 

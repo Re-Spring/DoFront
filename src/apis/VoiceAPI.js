@@ -4,13 +4,6 @@ import { postClone } from "../modules/VoiceModule";
 
 // 비동기 액션 생성자
 export const voiceCloningAPI = ({formData, setIsLoading}) => {
-    console.log("API에서 formdata 확인 : ", formData);
-    for (let key of formData.keys()) {
-        console.log(key, ":", formData.get(key));
-    }
-    for (let value of formData.values()) {
-        console.log(value);
-    }
     const requestURL = `http://${process.env.REACT_APP_API_IP}:8002/voiceCloning`;
 
     return async (dispatch) => {
@@ -21,7 +14,6 @@ export const voiceCloningAPI = ({formData, setIsLoading}) => {
                 }
             })
             .then(function (response) {
-                console.log(response);
                 if(response.status === 200){
                     dispatch(postClone(response.data));
                     localStorage.setItem('tempVoiceCode', response.data.userVoiceId);
@@ -40,8 +32,6 @@ export const voiceCloningAPI = ({formData, setIsLoading}) => {
             })
             .catch(function (error) {
                 // 백엔드에서 보낸 에러 메시지 처리
-                console.log("목소리 등록 API에서 오류 발생: ", error);
-                console.log("목소리 등록 API 백에서 오류 발생: ", error.response);
                 setIsLoading(false);
                 Swal.fire({
                     icon: 'error',
