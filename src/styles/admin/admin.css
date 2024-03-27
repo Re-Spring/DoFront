@@ -74,7 +74,7 @@ tr:nth-child(even):hover {
 }
 
 .pagination {
-    width: 70%;
+    padding: 0;
     margin: auto;
     margin-top: 1rem;
     margin-bottom: 1rem;

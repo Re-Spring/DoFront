@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import "../../styles/mypage/CustomerService.css";
+import { useAuth } from '../../components/auth/AuthContext';
 
 const CustomerService = () => {
   const [posts, setPosts] = useState([]);
@@ -9,6 +10,7 @@ const CustomerService = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
   const [totalPosts, setTotalPosts] = useState(0);
+  const {user} = useAuth();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -35,42 +37,48 @@ const CustomerService = () => {
   const totalPages = Math.ceil(totalPosts / postsPerPage);
 
   return (
-    <div className="customer-service">
-      <div className="customer-service-header">
-        <p className="customer-service-title">고객센터 게시판</p>
-        <div className="button-container">
-          <Link to="/CustomerServicePosts" className="create-post-link">글 생성</Link>
-        </div>
+    <div className="inquire">
+      <div>
+        <p className="inquireName">문의하기</p>
       </div>
-  
-      <table>
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>제목</th>
-            <th>게시일</th>
-          </tr>
-        </thead>
-        <tbody>
-          {posts.length > 0 ? (
-            posts.map(post => (
-              <tr key={post.boardCode}>
-                <td>{post.boardCode}</td>
-                <td>
-                  <Link to={`/customer-service/${post.boardCode}`} className="post-title">
-                    {post.title}
-                  </Link>
-                </td>
-                <td>{new Date(post.postedDate).toLocaleDateString()}</td>
-              </tr>
-            ))
-          ) : (
+      { user.userRole == 'admin' ? (
+          <></>
+        ):(
+          <div className="inquireBtnBox">
+            <Link to="/CustomerServicePosts" className="inquireBtn">문의 글쓰기</Link>
+          </div>
+        )}
+
+      <div className='inquireMain'>
+        <table>
+          <thead>
             <tr>
-              <td colSpan="3">게시글이 없습니다.</td>
+              <th className='colum1'>No</th>
+              <th className='colum2'>제목</th>
+              <th className='colum3'>작성일</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {posts.length > 0 ? (
+              posts.map(post => (
+                <tr key={post.boardCode}>
+                  <td>{post.boardCode}</td>
+                  <td>
+                    <Link to={`/customer-service/${post.boardCode}`} className='inquireTitle' >
+                      {post.title}
+                    </Link>
+                  </td>
+                  <td>{new Date(post.postedDate).toLocaleDateString()}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3">게시글이 없습니다.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
 
       {totalPages > 1 && (
         <nav className="pagination-nav">
