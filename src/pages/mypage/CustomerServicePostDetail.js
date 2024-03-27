@@ -42,20 +42,26 @@ const PostDetail = () => {
 
   // 상세 내용을 보여주는 UI를 반환합니다.
   return (
-    <div className="post-detail">
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      <div className="comments-section">
-        {comments.length > 0 ? (
-          comments.map(comment => (
-            <div key={comment.id} className="comment">
-              <p>{comment.text}</p>
-              <span>— {comment.user}</span>
-            </div>
-          ))
-        ) : (
-          <p>No comments yet.</p>
-        )}
+    <div className="inquireDetail">
+      <div className='inquireDetailBox'>
+        <div>
+          <input value={post.title} className="writeTitle" />
+        </div>
+        <div>
+          <input value={post.content} className="writeContent" />
+        </div>
+        <div className='adminComentBox'>
+          <div><p>관리자 답글</p></div>
+          <div className="adminComent">
+            {(post.comment && post.comment != null) ? (
+              <div key={post.id}>
+                    <p>{post.comment}</p>
+                  </div>
+              ) : (
+                <p>답글이 아직 없습니다.</p>
+                )}
+          </div>
+        </div>
       </div>
     </div>
   );

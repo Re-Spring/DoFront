@@ -38,24 +38,31 @@ const CustomerServicePosts = () => {
   };
 
   return (
-    <div className="customer-service">
-      <p>1대1 문의 글 작성</p>
-      <div className="input-group">
-        <input
-          className="input-field"
-          type="text"
-          value={newPostTitle}
-          onChange={(e) => setNewPostTitle(e.target.value)}
-          placeholder="Title"
-        />
+    <div className="write">
+      <div>
+        <p className='writeName'>문의글 작성</p>
+      </div>
+      <div className="writeBox">
+        <div>
+          <input
+            className="writeTitle"
+            type="text"
+            value={newPostTitle}
+            onChange={(e) => setNewPostTitle(e.target.value)}
+            placeholder="제목을 입력하세요."
+            />
+        </div>
+        <div>
         <textarea
-          className="input-field"
+          className="writeContent"
           value={newPostContent}
           onChange={(e) => setNewPostContent(e.target.value)}
-          placeholder="Content"
-          style={{ resize: 'none' }}
+          placeholder="문의 내용을 입력하세요."
         />
-        <button className="button create-post" onClick={createPost}>글 생성</button>
+        </div>
+        <div className='createBtnBox'>
+          <button className="createBtn" onClick={createPost}>글 생성</button>
+        </div>
       </div>
     </div>
   );
