@@ -21,7 +21,7 @@ function Make(){
       setToken(storedToken);
     }
   }, []);
-    console.log("토큰값", token)
+    // console.log("토큰값", token)
 
     const [title, setTitle] = useState('');
     const [character, setCharacter] = useState('');
@@ -75,46 +75,64 @@ function Make(){
     console.log(userId)
     const tempVoiceCode = localStorage.getItem('tempVoiceCode');
 
-    const makeHandler = async (e) => {
-            // 폼 제출 이벤트 방지
-            e.preventDefault();
-            console.log("test",title, character, genre, keyword, lesson, page, voice);
-            console.log("token", token)
+    const [voiceId, SetVoiceId] = useState('');
 
-            if (title === '') {
-                alert('제목을 입력해주세요');
-                return; // 제목이 비어있으면 여기서 함수 실행을 중단
-            } else if (genre === '') {
-                alert('장르를 선택해주세요');
-                return; // 장르가 비어있으면 여기서 함수 실행을 중단
-            }else{
-                const makeData = {
-                    title: title,
-                    character: character,
-                    genre: genre,
-                    keyword:keyword,
-                    lesson:lesson,
-                    page:'7',
-                    voice:voice,
-                    userId:userId,
-                    userCode:userCode,
-                    token:token
+    
+    useEffect(() => {
+            if(tempVoiceCode && tempVoiceCode != null) {
+                SetVoiceId(tempVoiceCode);
+            } else if(user.userVoiceId && user.userVoiceId != null){
+                SetVoiceId(user.userVoiceId);
             };
-            Swal.fire({
-                icon: 'success',
-                title: "동화 생성 중입니다...✨",
-                text: "🛎️동화가 생성되면 알람으로 알려드려요!🛎️",
-                confirmButtonText: "확인"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    navigate("/"); // 사용자가 확인 버튼을 클릭하면 메인 페이지로 이동
-                }
-            });
-            dispatch(MakeAPI({
-                makeData, navigate
-        }));
-        }
+    }, [])
+
+
+    const makeHandler = async (e) => {
+        // 폼 제출 이벤트 방지
+        e.preventDefault();
+        console.log("보이스아이디확인1",tempVoiceCode);
+        console.log("보이스아이디확인2",user.userVoiceId);
+
+        
+        console.log("test",title, character, genre, keyword, lesson, page, voice, voiceId);
+        console.log("token", token)
+        
+
+        if (title === '') {
+            alert('제목을 입력해주세요');
+            return; // 제목이 비어있으면 여기서 함수 실행을 중단
+        } else if (genre === '') {
+            alert('장르를 선택해주세요');
+            return; // 장르가 비어있으면 여기서 함수 실행을 중단
+        }else{
+            const makeData = {
+                title: title,
+                character: character,
+                genre: genre,
+                keyword:keyword,
+                lesson:lesson,
+                page:'7',
+                voice:voice,
+                userId:userId,
+                userCode:userCode,
+                token:token,
+                voiceId:voiceId
+        };
+        Swal.fire({
+            icon: 'success',
+            title: "동화 생성 중입니다...✨",
+            text: "🛎️동화가 생성되면 알람으로 알려드려요!🛎️",
+            confirmButtonText: "확인"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigate("/"); // 사용자가 확인 버튼을 클릭하면 메인 페이지로 이동
+            }
+        });
+        dispatch(MakeAPI({
+            makeData, navigate
+    }));
     }
+}
 
     return (
         <>
