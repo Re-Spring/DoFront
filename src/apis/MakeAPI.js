@@ -5,8 +5,10 @@ import { postMake } from '../modules/MakeModule';
 export const MakeAPI = ({ makeData, navigate }) => {
     console.log("makeData : " + makeData)
     const requestURL = `http://${process.env.REACT_APP_API_IP}:8002/generateStory`;
+    console.log(makeData);
 
     return async (dispatch, getState) => {
+        console.log(makeData);
         await axios.post(requestURL, makeData)
             .then(function (response) {
                 console.log("test",response);
