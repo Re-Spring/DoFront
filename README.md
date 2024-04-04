@@ -1,21 +1,19 @@
-# DoFront
-
-<div align="center">
 
 # 🔥 Do-Rering FRONT
 
-</div>
+
 <br/>
-<a align="middle" href="https://github.com/Re-Spring/Do-Rering_AI">🔎 [AI 레포지토리]
+🔎 <a align="middle" href="https://github.com/Re-Spring/Do-Rering_AI">[PYTHON BACK(FastAPI) Repository]
 </a>
 <br/>
-<a align="middle" href="https://github.com/Re-Spring/Do-Rering_JAVA">🔎 [JAVA 레포지토리]
+🔎 <a align="middle" href="https://github.com/Re-Spring/Do-Rering_JAVA">[JAVA BACK(RestAPI) Repository]
 </a>
 <br/>
 
-## 🎤 프로젝트
+## 🎤 소개
 
 >AI를 활용한 동화 생성과 인공지능 및 부모 목소리를 이용한 더빙을 통해 육아 및 아이들의 성장을 도와주는 서비스
+<br/>
 
 ## 🎬 시연 영상
 
@@ -27,7 +25,7 @@
 > 🎙️ 목소리 등록
 
 > 📖 동화 생성
-
+<br/>
 
 ## 🧑‍🤝‍🧑 팀원 소개
 </hr>
