@@ -1,7 +1,7 @@
 # Do-Rering
 
 
-<img width="957" alt="banner" src="https://github.com/Re-Spring/DoFront/assets/140992400/0d3a6aff-9538-4859-a89f-0a6922219cbb">
+<img alt="banner" src="https://github.com/Re-Spring/DoFront/assets/140992400/0d3a6aff-9538-4859-a89f-0a6922219cbb">
 
 <div align="middle">
 	
@@ -23,16 +23,17 @@
 
 ## 📖 레포지토리
 
-> <a align="middle" href="https://github.com/Re-Spring/Do-Rering_AI">[PYTHON BACK(FastAPI) Repository]</a>
+<a align="middle" href="https://github.com/Re-Spring/Do-Rering_AI">[PYTHON BACK(FastAPI) Repository]</a>
+<br/><br/>
+<a align="middle" href="https://github.com/Re-Spring/Do-Rering_JAVA">[JAVA BACK(RestAPI) Repository]</a>
+<br/><br/>
 
-> <a align="middle" href="https://github.com/Re-Spring/Do-Rering_JAVA">[JAVA BACK(RestAPI) Repository]</a>
-<br/>
+## 💡주요 기능
 
-## 💡주요 기능 소개
+| 🎙️ 목소리 등록  |  📖 동화 생성   |
+| :-------------------------------------------: | :------------: |
+|  <img width="333" src="https://github.com/Re-Spring/DoFront/assets/140992400/f88fe788-90dd-4e8f-a878-45872ae4421f"/> |  <img width="333" src="https://github.com/Re-Spring/DoFront/assets/140992400/b4c09f3e-6a79-4312-a49a-63e1d8400921"/>|
 
-> 🎙️ 목소리 등록
-
-> 📖 동화 생성
 <br/>
 
 ## 🔧 기술 스택
